@@ -15,9 +15,9 @@ const screens = {
     fields: true,
     checklist: [
       "Destination name is required",
-      "Area / city / prefecture is recommended",
-      "Place type is optional",
-      "Next place for this section"
+      "Add area / city / prefecture to avoid same-name mistakes",
+      "Add place type if it helps, like temple, hotel, station, or park",
+      "Use the place shown in Google Maps"
     ],
     actions: [
       ["Choose transport", "transport", "primary"],
@@ -96,11 +96,11 @@ const screens = {
     summary: "Prepare before going to the bus stop.",
     warning: "Prepare cash and coins first.",
     checklist: [
-      "Cash and coins",
-      "Bus route number or destination",
-      "Stop to get off",
-      "Google Maps route screen",
-      "Direction of this bus stop"
+      "Prepare cash and coins",
+      "Check the bus route number or destination",
+      "Check the stop to get off",
+      "Save the Google Maps route screen",
+      "Confirm the direction of this bus stop"
     ],
     note: "Note: Some bus companies may accept transit IC cards.",
     actions: [
@@ -174,9 +174,9 @@ const screens = {
     title: "Taxi preparation",
     summary: "Choose where this taxi should go.",
     checklist: [
-      "Final destination",
-      "Next station or bus stop only",
-      "Large luggage or airport transfer"
+      "Choose the final destination if taking taxi all the way",
+      "Choose the next station or bus stop if using taxi only for this section",
+      "Tell staff if you have large luggage or need airport transfer"
     ],
     actions: [
       ["Go to final destination", "taxi-driver", "primary"],
@@ -219,10 +219,10 @@ const screens = {
     title: "Train preparation",
     summary: "Confirm before entering the platform.",
     checklist: [
-      "Ticket or IC card",
-      "Station and gate",
-      "Platform and direction",
-      "Train stops at your station"
+      "Prepare ticket or IC card",
+      "Check the station and ticket gate",
+      "Confirm platform and direction",
+      "Confirm the train stops at your station"
     ],
     actions: [
       ["Show Japanese", "train-show", "primary"],
@@ -248,11 +248,11 @@ const screens = {
     title: "Shinkansen / limited express",
     summary: "Confirm ticket type and seat before boarding.",
     checklist: [
-      "Basic fare ticket",
-      "Limited express ticket",
-      "Reserved or non-reserved seat",
-      "Train name, car number, seat",
-      "Luggage space"
+      "Prepare the basic fare ticket",
+      "Prepare the limited express ticket",
+      "Confirm reserved or non-reserved seat",
+      "Confirm train name, car number, and seat",
+      "Check luggage space if needed"
     ],
     actions: [
       ["Reserved seat", "limited-show", "primary"],
@@ -278,11 +278,11 @@ const screens = {
     title: "Highway / airport / night bus",
     summary: "Confirm booking and boarding place.",
     checklist: [
-      "Ticket, QR, email, or booking number",
-      "Bus company and service name",
-      "Boarding place and meeting time",
-      "Departure time and destination",
-      "Luggage drop-off"
+      "Prepare ticket, QR, email, or booking number",
+      "Confirm bus company and service name",
+      "Confirm boarding place and meeting time",
+      "Check departure time and destination",
+      "Check luggage drop-off if needed"
     ],
     actions: [
       ["Show staff", "coach-show", "primary"],
@@ -327,10 +327,10 @@ const screens = {
     title: "Final walking section",
     summary: "Confirm the entrance, reception, or meeting place.",
     checklist: [
-      "Entrance",
-      "Reception",
-      "Meeting place",
-      "Nearby landmark"
+      "Find the entrance",
+      "Find the reception",
+      "Find the meeting place",
+      "Use a nearby landmark if the entrance is unclear"
     ],
     actions: [
       ["I arrived", "done", "primary"],
@@ -365,13 +365,13 @@ function render() {
       <label>Destination name <span class="required">Required</span>
         <input value="${state.destination}" data-field="destination" required>
       </label>
-      <label>Area / city / prefecture <span class="optional">Recommended</span>
+      <label>Add area / city / prefecture <span class="optional">Recommended</span>
         <input value="${state.area}" data-field="area">
       </label>
-      <label>Place type
+      <label>Add place type
         <input value="${state.placeType}" data-field="placeType">
       </label>
-      <label>Next place
+      <label>Set next place to go now
         <input value="${state.nextPlace}" data-field="nextPlace">
       </label>
     </div>

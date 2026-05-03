@@ -19,7 +19,7 @@
 - MVPでは、自サイト内・アプリ内にGoogle Mapsを埋め込まない。`Open Google Maps` は外部のGoogle MapsアプリまたはGoogle Maps Webを開く導線にする。
 - Google Mapsへ渡すパラメータは原則Destinationに限定する。ルート、交通手段、乗換、時刻、徒歩ナビはGoogle Mapsに任せる。
 - Final destination入力前に、利用者はGoogle Mapsで目的地を調べ、場所名と地域情報を確認する。
-- Final destination入力は、`Destination name` だけに必須ラベルを付ける。`Area / city / prefecture` は推奨ラベルを付ける。`Place type` と `Next place` にはOptionalラベルを付けず、入力を促す。
+- Final destination入力は、`Destination name` だけに必須ラベルを付ける。`Area / city / prefecture` は推奨ラベルを付ける。`Place type` と `Next place` にはOptionalラベルを付けず、`Add place type`、`Set next place to go now` のようにDOを含むラベルで入力を促す。
 - Google Mapsへ渡す検索文字列は、原則 `Destination name + Area / city / prefecture` とする。
 - Google Mapsで表示された場所が、実際に行きたい場所と一致しているかをユーザーが必ず目視確認する。同名の別施設、別支店、別地域、入口違いがあり得るため。
 - 本アプリ側ではGoogle Mapsの経路結果を解析しない。
@@ -29,7 +29,8 @@
 - 交通手段を選んだら、Google Mapsで移動を始める前に、その交通手段に必要な事前準備を表示する。
 - UI文言は、丁寧な説明文よりも目的が先に伝わる短文にする。
 - 「〜してください」「〜お願いします」はできるだけ使わず、「目的地: 〇〇」「次に行く場所: △△」「Google Mapsを開く」のようなラベル・行動文を優先する。
-- 人に見せる日本語も、質問口調より「〜か確認したい」型を基本にする。相手が答える内容を絞り、短い会話で済ませるため。
+- 人に見せる日本語は、原則「〇〇へ行きたいです」「〇〇で降りたいです」「〇〇を使いたいです」のように目的を直接伝える。「確認したいです」は支払い可否、券種、返金、変更など、目的だけでは判断できない場面に限る。
+- チェックリストや入力ラベルも、名詞だけにしない。`Ticket`、`Train name`、`Boarding place` ではなく、`Prepare ticket`、`Confirm train name`、`Check boarding place` のように、何をする項目か分かるDOを入れる。
 - ボタンは英語主表示にする。日本語は必要な場合のみ補助表示にする。
 - 例: `Open Google Maps / Google Mapsを開く`, `Show Japanese / 人に見せる`, `I arrived / 目的地に着いた`
 - 理由説明は事前準備画面に置き、乗車直前・運転手向け画面は短い確認文に絞る。
@@ -201,6 +202,7 @@ MVPに含める機能範囲:
 
 表示ルール:
 - チェックリストは最大5個。
+- チェックリスト項目はDOを含める。例: `Prepare cash and coins`、`Confirm train name`、`Check boarding place`。
 - 理由説明は1文まで。
 - 交通手段固有の長い説明は補足へ送る。
 - 主ボタンは `Open Google Maps`、`Show Japanese`、`I checked` のどれかを基本にする。
