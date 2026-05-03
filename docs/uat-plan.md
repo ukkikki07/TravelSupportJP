@@ -86,7 +86,7 @@ UAT対象外:
 - 主ボタンは原則3つ程度に収まっている。
 - 長い説明は補足に回っている。
 - `Open Google Maps` 後に戻った時、次に何を確認するか分かる。
-- 迷った時に `Show destination to staff`、`Open Google Maps`、`Switch to taxi` のいずれかへ進める。
+- 迷った時に `Show destination in JP`、`Open Google Maps`、`Switch to taxi` のいずれかへ進める。
 - 夜間・地方・本数が少ない条件では警告が見える。
 - 収益導線は、旅行前、Google Maps復帰後、警告からの復帰導線、到着後、荷物が多い時に限定される。
 

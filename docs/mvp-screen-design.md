@@ -32,9 +32,9 @@
 - 「〜してください」「〜お願いします」はできるだけ使わず、「目的地: 〇〇」「次に行く場所: △△」「Google Mapsを開く」のようなラベル・行動文を優先する。
 - 人に見せる日本語は、原則「〇〇へ行きたいです」「〇〇で降りたいです」「〇〇を使いたいです」のように目的を直接伝える。「確認したいです」は支払い可否、券種、返金、変更など、目的だけでは判断できない場面に限る。
 - チェックリストや入力ラベルも、名詞だけにしない。`Ticket`、`Train name`、`Boarding place` ではなく、`Prepare ticket`、`Confirm train name`、`Check boarding place` のように、何をする項目か分かるDOを入れる。
-- 人に見せる画面へ進むボタンは、`Show Japanese` のような内部名にしない。`Show destination to staff`、`Show station request to staff`、`Show booking to bus staff` のように、見せる相手と目的が分かる表記にする。
+- 人に見せる画面へ進むボタンは、`Show Japanese` のような内部名にしない。`Show destination in JP`、`Show station request in JP`、`Show booking in JP` のように、何を日本語で見せるかが分かる表記にする。`Show` は他人に見せる行為を含むため、通常は `to someone` を付けない。
 - ボタンは英語主表示にする。日本語は必要な場合のみ補助表示にする。
-- 例: `Open Google Maps / Google Mapsを開く`, `Show destination to staff / 目的地を係員に見せる`, `I arrived / 目的地に着いた`
+- 例: `Open Google Maps / Google Mapsを開く`, `Show destination in JP / 目的地を日本語で見せる`, `I arrived / 目的地に着いた`
 - 理由説明は事前準備画面に置き、乗車直前・運転手向け画面は短い確認文に絞る。
 - 理由: 移動中は画面を読む時間が短く、人にスマホを見せられる時間も短い。目的・現在地・次の行動を先に出す方が、誤解と誤操作を減らせる。
 - 有料アプリ以外の収益導線は [マネタイズ・アフィリエイト設計メモ](monetization-affiliate-plan.md) に分ける。移動中の主画面ではなく、旅行前Webページ、Google Maps復帰後、警告からの復帰導線、到着後、荷物が多い時などに限定する。
@@ -207,7 +207,7 @@ MVPに含める機能範囲:
 - チェックリスト項目はDOを含める。例: `Prepare cash and coins`、`Confirm train name`、`Check boarding place`。
 - 理由説明は1文まで。
 - 交通手段固有の長い説明は補足へ送る。
-- 主ボタンは `Open Google Maps`、`Show destination to staff`、`Show booking to bus staff`、`I checked` のように、行動と目的が分かる文言を基本にする。
+- 主ボタンは `Open Google Maps`、`Show destination in JP`、`Show booking in JP`、`I checked` のように、行動と目的が分かる文言を基本にする。
 
 #### `ChecklistBlock`
 
@@ -358,7 +358,7 @@ Try a taxi app available in this area.
 | 用途 | 標準文言 |
 |---|---|
 | Google Mapsを開く | `Open Google Maps` |
-| 人に見せる | `Show destination to staff` / `Show station request to staff` / `Show booking to bus staff` |
+| 人に見せる | `Show destination in JP` / `Show station request in JP` / `Show booking in JP` |
 | 係員に聞く | `Ask staff` |
 | 周囲の人に聞く | `Ask someone nearby` |
 | タクシーへ切り替える | `Switch to taxi` |
@@ -939,7 +939,7 @@ Is this exit close to my destination?
 この施設の入口は場所を確認したい。
 Where is the entrance to this place?
 
-[Show entrance request to someone]
+[Show entrance request in JP]
 [Open Google Maps]
 [I arrived]
 ```

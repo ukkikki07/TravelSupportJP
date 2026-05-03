@@ -21,7 +21,7 @@ const screens = {
     ],
     actions: [
       ["Choose transport", "transport", "primary"],
-      ["Show destination to someone", "show-place", "secondary"],
+      ["Show destination in JP", "show-place", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ]
   },
@@ -51,7 +51,7 @@ const screens = {
     ],
     actions: [
       ["I arrived here", "arrival-check", "primary"],
-      ["Show destination to staff", "show-place", "secondary"],
+      ["Show destination in JP", "show-place", "secondary"],
       ["Switch to taxi", "taxi-prep", "secondary"]
     ],
     monetized: {
@@ -79,7 +79,7 @@ const screens = {
   },
   "show-place": {
     status: "UAT-03",
-    title: "Show destination in Japanese",
+    title: "Show destination in JP",
     summary: "Show this screen to staff or someone nearby when you need help.",
     show: {
       ja: "この場所へ行きたいです。",
@@ -167,7 +167,7 @@ const screens = {
     actions: [
       ["Open Google Maps", "maps-opened", "primary"],
       ["Switch to taxi", "taxi-prep", "secondary"],
-      ["Show destination to staff", "show-place", "secondary"]
+      ["Show destination in JP", "show-place", "secondary"]
     ]
   },
   "taxi-prep": {
@@ -197,7 +197,7 @@ const screens = {
       en: "I want to go to this place by taxi."
     },
     actions: [
-      ["Show taxi destination to driver", "taxi-driver", "primary"],
+      ["Show taxi destination in JP", "taxi-driver", "primary"],
       ["Back", "taxi-prep", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ]
@@ -226,7 +226,7 @@ const screens = {
       "Confirm the train stops at your station"
     ],
     actions: [
-      ["Show station request to staff", "train-show", "primary"],
+      ["Show station request in JP", "train-show", "primary"],
       ["Open Google Maps", "maps-opened", "secondary"],
       ["Switch to taxi", "taxi-prep", "secondary"]
     ]
@@ -258,7 +258,7 @@ const screens = {
     actions: [
       ["Reserved seat", "limited-show", "primary"],
       ["Non-reserved seat", "limited-show", "secondary"],
-      ["Show ticket to staff", "limited-show", "secondary"]
+      ["Show ticket in JP", "limited-show", "secondary"]
     ]
   },
   "limited-show": {
@@ -286,7 +286,7 @@ const screens = {
       "Check luggage drop-off if needed"
     ],
     actions: [
-      ["Show booking to bus staff", "coach-show", "primary"],
+      ["Show booking in JP", "coach-show", "primary"],
       ["Open Google Maps", "maps-opened", "secondary"],
       ["Switch to taxi", "taxi-prep", "secondary"]
     ]
@@ -315,7 +315,7 @@ const screens = {
     ],
     actions: [
       ["Open Google Maps", "maps-opened", "primary"],
-      ["Show destination to staff", "show-place", "secondary"],
+      ["Show destination in JP", "show-place", "secondary"],
       ["Back", "transport", "secondary"]
     ],
     monetized: {
@@ -335,7 +335,7 @@ const screens = {
     ],
     actions: [
       ["I arrived", "done", "primary"],
-      ["Show destination to someone", "show-place", "secondary"],
+      ["Show destination in JP", "show-place", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ]
   },
