@@ -200,12 +200,14 @@ input {
 }
 
 .section-block,
-.guidance {
+.guidance,
+.jp-help {
   margin: 14px 0;
 }
 
 .section-block h3,
-.guidance h3 {
+.guidance h3,
+.jp-help h3 {
   margin-bottom: 8px;
   color: var(--ink);
 }
@@ -251,6 +253,38 @@ input {
 .guidance li {
   border-color: #d9e6ff;
   background: #ffffff;
+}
+
+.jp-help {
+  padding: 12px;
+  border: 1px solid #cfd8e3;
+  border-radius: var(--radius);
+  background: #fffdf7;
+}
+
+.phrase-list {
+  display: grid;
+  gap: 8px;
+}
+
+.phrase-card {
+  padding: 12px;
+  border: 1px solid #eadfbf;
+  border-radius: var(--radius);
+  background: #ffffff;
+}
+
+.phrase-ja {
+  margin-bottom: 6px;
+  font-size: 1.22rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.phrase-en {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
 }
 
 .actions {

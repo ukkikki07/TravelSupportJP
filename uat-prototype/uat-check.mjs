@@ -15,7 +15,11 @@ function countActions(screenName) {
   if (screenStart === -1) return null;
   const nextScreen = js.indexOf("\n  \"", screenStart + 10);
   const block = js.slice(screenStart, nextScreen === -1 ? js.length : nextScreen);
-  const actions = block.match(/\["[^"]+",\s*"[^"]+"/g) || [];
+  const actionsStart = block.indexOf("actions:");
+  if (actionsStart === -1) return 0;
+  const actionsEnd = block.indexOf("\n    ]", actionsStart);
+  const actionsBlock = block.slice(actionsStart, actionsEnd === -1 ? block.length : actionsEnd);
+  const actions = actionsBlock.match(/\["[^"]+",\s*"[^"]+"/g) || [];
   return actions.length;
 }
 
@@ -58,6 +62,7 @@ record("NO-AFFIL-SHOW", "Critical", "no monetized slot inside show card", js.inc
 record("JAPANESE-EN", "Critical", "Japanese text has English confirmation", js.includes("ja:") && js.includes("en:"), "show text pairs");
 record("GUIDANCE-01", "Critical", "screens include action guidance", js.includes("guidance:") && js.includes('class="guidance"') && css.includes(".guidance"), "if-unsure guidance is rendered");
 record("CONTEXT-01", "High", "trip context is visible", js.includes('class="context-bar"') && css.includes(".context-bar") && js.includes("Next place now"), "destination, area, and next place context");
+record("JPHELP-01", "Critical", "stuck actions include Japanese phrases", js.includes("jpHelp:") && js.includes("Show in JP if stuck") && css.includes(".jp-help"), "action-linked Japanese help phrases");
 
 const failCount = results.filter((r) => r.status === "FAIL").length;
 const criticalFailCount = results.filter((r) => r.status === "FAIL" && r.priority === "Critical").length;

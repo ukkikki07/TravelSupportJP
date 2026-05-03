@@ -23,6 +23,10 @@ const screens = {
       "If Google Maps shows multiple results, add the city or prefecture before continuing.",
       "If the place looks wrong, edit the destination before choosing transport."
     ],
+    jpHelp: [
+      ["この場所へ行きたいです。", "I want to go to this place."],
+      ["この場所で合っていますか。", "Is this the correct place?"]
+    ],
     actions: [
       ["Choose transport", "transport", "primary"],
       ["Show destination in JP", "show-place", "secondary"],
@@ -42,6 +46,10 @@ const screens = {
       "Choose the transport for the next leg shown in Google Maps, not the whole trip.",
       "If the next leg feels too complicated or short, choose taxi."
     ],
+    jpHelp: [
+      ["次に行く場所へ行きたいです。", "I want to go to the next place."],
+      ["タクシーで行きたいです。", "I want to go by taxi."]
+    ],
     actions: [
       ["Local bus / tram", "bus-prep", "primary"],
       ["Train / subway", "train-prep", "secondary"],
@@ -60,6 +68,10 @@ const screens = {
     guidance: [
       "If you reached a station, bus stop, or entrance, continue with arrival confirmation.",
       "If you are still unsure where you are, open Google Maps or show the destination in JP."
+    ],
+    jpHelp: [
+      ["この場所へ行きたいです。", "I want to go to this place."],
+      ["入口へ行きたいです。", "I want to go to the entrance."]
     ],
     actions: [
       ["I arrived here", "arrival-check", "primary"],
@@ -86,6 +98,10 @@ const screens = {
     guidance: [
       "Do not continue if the pin points to a same-name place in another area.",
       "If the entrance is unclear, keep Google Maps open and confirm again near the place."
+    ],
+    jpHelp: [
+      ["Google Mapsのこの場所へ行きたいです。", "I want to go to this place shown on Google Maps."],
+      ["この場所で合っていますか。", "Is this the correct place?"]
     ],
     actions: [
       ["This is correct", "maps-return", "primary"],
@@ -126,6 +142,10 @@ const screens = {
     guidance: [
       "Confirm the bus stop direction before the bus arrives. Asking the driver after the bus arrives may be too late.",
       "Ask a waiting passenger or nearby staff. If no one can help, open Google Maps again or switch to taxi."
+    ],
+    jpHelp: [
+      ["このバス停から清水寺方面へ行きたいです。", "I want to go toward Kiyomizu-dera from this bus stop."],
+      ["小銭を用意したいです。近くにコンビニはありますか。", "I want to prepare coins. Is there a convenience store nearby?"]
     ],
     note: "Note: Some bus companies may accept transit IC cards.",
     actions: [
@@ -184,6 +204,10 @@ const screens = {
       "Waiting is possible, but the next bus may also be full or crowded.",
       "If the destination is not far, taxi is usually safer than waiting."
     ],
+    jpHelp: [
+      ["次の同じ行き先のバスに乗りたいです。", "I want to take the next bus with the same destination."],
+      ["目的地が遠くないです。タクシーで行きたいです。", "My destination is not far. I want to take a taxi."]
+    ],
     actions: [
       ["Wait for next bus", "bus-before-boarding", "primary"],
       ["Switch to taxi", "taxi-prep", "secondary"],
@@ -204,6 +228,10 @@ const screens = {
       "Do not wait without checking. In rural areas, one missed service can mean hours of waiting.",
       "If there may be no later service today, switch to taxi or ask staff immediately."
     ],
+    jpHelp: [
+      ["次の便はまだありますか。", "Is there another service?"],
+      ["最終便は終わりましたか。", "Has the last service already left?"]
+    ],
     actions: [
       ["Open Google Maps", "maps-opened", "primary"],
       ["Switch to taxi", "taxi-prep", "secondary"],
@@ -222,6 +250,10 @@ const screens = {
     guidance: [
       "If the taxi is only for part of the trip, show only the taxi destination to the driver.",
       "Ask hotel staff if you do not know where the taxi should drop you."
+    ],
+    jpHelp: [
+      ["タクシーでこの場所まで行きたいです。", "I want to go to this place by taxi."],
+      ["タクシーを呼びたいです。", "I want to call a taxi."]
     ],
     actions: [
       ["Go to final destination", "taxi-driver", "primary"],
@@ -281,6 +313,10 @@ const screens = {
       "Ask station staff before entering the wrong gate or platform.",
       "If you are unsure about rapid or express trains, show the station request in JP."
     ],
+    jpHelp: [
+      ["目的地の駅へ行きたいです。", "I want to go to my destination station."],
+      ["どのホームですか。", "Which platform should I use?"]
+    ],
     actions: [
       ["Show station request in JP", "train-show", "primary"],
       ["Open Google Maps", "maps-opened", "secondary"],
@@ -318,6 +354,10 @@ const screens = {
     guidance: [
       "Confirm ticket and train details before going through the gate or boarding.",
       "For reserved seats, train name, time, car number, and seat must match."
+    ],
+    jpHelp: [
+      ["この切符でこの列車に乗りたいです。", "I want to take this train with this ticket."],
+      ["この列車名・号数の列車に乗りたいです。", "I want to take the train with this name and number."]
     ],
     actions: [
       ["Reserved seat", "limited-show", "primary"],
@@ -357,6 +397,10 @@ const screens = {
       "Confirm at the counter or with boarding staff before the bus arrives.",
       "If the counter is closed, show the booking to the driver or boarding staff quickly."
     ],
+    jpHelp: [
+      ["この予約でこのバスに乗りたいです。", "I want to take this bus with this booking."],
+      ["乗り場へ行きたいです。", "I want to go to the boarding area."]
+    ],
     actions: [
       ["Show booking in JP", "coach-show", "primary"],
       ["Open Google Maps", "maps-opened", "secondary"],
@@ -393,6 +437,10 @@ const screens = {
       "Rules differ by company and place. Do not guess from bus or train rules.",
       "Use official information, the service app, counter staff, or local staff."
     ],
+    jpHelp: [
+      ["この場所へ行きたいです。", "I want to go to this place."],
+      ["窓口か係員に聞きたいです。", "I want to ask the counter or staff."]
+    ],
     actions: [
       ["Open Google Maps", "maps-opened", "primary"],
       ["Show destination in JP", "show-place", "secondary"],
@@ -416,6 +464,10 @@ const screens = {
     guidance: [
       "Do not finish only because Google Maps says you arrived.",
       "If the entrance or meeting point is unclear, show the destination in JP or open Google Maps again."
+    ],
+    jpHelp: [
+      ["入口へ行きたいです。", "I want to go to the entrance."],
+      ["集合場所へ行きたいです。", "I want to go to the meeting place."]
     ],
     actions: [
       ["I arrived", "done", "primary"],
@@ -498,6 +550,19 @@ function render() {
       </ul>
     </section>
   ` : "";
+  const jpHelp = data.jpHelp ? `
+    <section class="jp-help" aria-label="Japanese phrases to show if stuck">
+      <h3>Show in JP if stuck</h3>
+      <div class="phrase-list">
+        ${data.jpHelp.map(([ja, en]) => `
+          <div class="phrase-card">
+            <p class="phrase-ja">${ja}</p>
+            <p class="phrase-en">${en}</p>
+          </div>
+        `).join("")}
+      </div>
+    </section>
+  ` : "";
   const show = data.show ? `
     <div class="show-card" data-no-monetized="true">
       <p class="ja">${data.show.ja}</p>
@@ -525,6 +590,7 @@ function render() {
     ${warning}
     ${show}
     ${checklist}
+    ${jpHelp}
     ${guidance}
     ${actions}
     ${monetized}
