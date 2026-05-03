@@ -4,7 +4,8 @@
   placeType: "Temple",
   nextPlace: "Gojozaka bus stop",
   scenario: "bus",
-  screen: "start"
+  screen: "start",
+  guideByScreen: {}
 };
 
 const screens = {
@@ -25,7 +26,9 @@ const screens = {
     ],
     jpHelp: [
       ["この場所へ行きたいです。", "I want to go to this place."],
-      ["この場所で合っていますか。", "Is this the correct place?"]
+      ["この場所で合っていますか。", "Is this the correct place?"],
+      ["これは寺・ホテル・駅など、どの種類の場所ですか。", "What type of place is this, such as temple, hotel, or station?"],
+      ["Google Mapsのこの場所へ行きたいです。", "I want to go to this place shown on Google Maps."]
     ],
     actions: [
       ["Choose transport", "transport", "primary"],
@@ -48,6 +51,7 @@ const screens = {
     ],
     jpHelp: [
       ["次に行く場所へ行きたいです。", "I want to go to the next place."],
+      ["Google Mapsでこの場所へ行きたいです。", "I want to go to this place with Google Maps."],
       ["タクシーで行きたいです。", "I want to go by taxi."]
     ],
     actions: [
@@ -71,6 +75,7 @@ const screens = {
     ],
     jpHelp: [
       ["この場所へ行きたいです。", "I want to go to this place."],
+      ["この駅・バス停・入口で合っていますか。", "Is this the correct station, bus stop, or entrance?"],
       ["入口へ行きたいです。", "I want to go to the entrance."]
     ],
     actions: [
@@ -101,6 +106,9 @@ const screens = {
     ],
     jpHelp: [
       ["Google Mapsのこの場所へ行きたいです。", "I want to go to this place shown on Google Maps."],
+      ["この住所の場所へ行きたいです。", "I want to go to the place at this address."],
+      ["これは寺・ホテル・駅など、どの種類の場所ですか。", "What type of place is this, such as temple, hotel, or station?"],
+      ["入口へ行きたいです。", "I want to go to the entrance."],
       ["この場所で合っていますか。", "Is this the correct place?"]
     ],
     actions: [
@@ -144,6 +152,10 @@ const screens = {
       "Ask a waiting passenger or nearby staff. If no one can help, open Google Maps again or switch to taxi."
     ],
     jpHelp: [
+      ["現金と小銭を用意したいです。", "I want to prepare cash and coins."],
+      ["このバスの番号か行き先を知りたいです。", "I want to know this bus route number or destination."],
+      ["このバス停で降りたいです。", "I want to get off at this bus stop."],
+      ["Google Mapsのこのバスに乗りたいです。", "I want to take this bus shown on Google Maps."],
       ["このバス停から清水寺方面へ行きたいです。", "I want to go toward Kiyomizu-dera from this bus stop."],
       ["小銭を用意したいです。近くにコンビニはありますか。", "I want to prepare coins. Is there a convenience store nearby?"]
     ],
@@ -206,7 +218,8 @@ const screens = {
     ],
     jpHelp: [
       ["次の同じ行き先のバスに乗りたいです。", "I want to take the next bus with the same destination."],
-      ["目的地が遠くないです。タクシーで行きたいです。", "My destination is not far. I want to take a taxi."]
+      ["目的地が遠くないです。タクシーで行きたいです。", "My destination is not far. I want to take a taxi."],
+      ["最終バスはまだありますか。", "Is there still a last bus?"]
     ],
     actions: [
       ["Wait for next bus", "bus-before-boarding", "primary"],
@@ -230,7 +243,8 @@ const screens = {
     ],
     jpHelp: [
       ["次の便はまだありますか。", "Is there another service?"],
-      ["最終便は終わりましたか。", "Has the last service already left?"]
+      ["最終便は終わりましたか。", "Has the last service already left?"],
+      ["タクシーで行きたいです。", "I want to go by taxi."]
     ],
     actions: [
       ["Open Google Maps", "maps-opened", "primary"],
@@ -253,7 +267,8 @@ const screens = {
     ],
     jpHelp: [
       ["タクシーでこの場所まで行きたいです。", "I want to go to this place by taxi."],
-      ["タクシーを呼びたいです。", "I want to call a taxi."]
+      ["タクシーでは次の駅・バス停まで行きたいです。", "I want to go only to the next station or bus stop by taxi."],
+      ["大きな荷物があります。タクシーを呼びたいです。", "I have large luggage. I want to call a taxi."]
     ],
     actions: [
       ["Go to final destination", "taxi-driver", "primary"],
@@ -314,8 +329,10 @@ const screens = {
       "If you are unsure about rapid or express trains, show the station request in JP."
     ],
     jpHelp: [
+      ["切符かICカードを用意したいです。", "I want to prepare a ticket or IC card."],
+      ["この駅の改札へ行きたいです。", "I want to go to the ticket gate at this station."],
       ["目的地の駅へ行きたいです。", "I want to go to my destination station."],
-      ["どのホームですか。", "Which platform should I use?"]
+      ["この電車は目的地の駅に止まりますか。", "Does this train stop at my destination station?"]
     ],
     actions: [
       ["Show station request in JP", "train-show", "primary"],
@@ -357,7 +374,10 @@ const screens = {
     ],
     jpHelp: [
       ["この切符でこの列車に乗りたいです。", "I want to take this train with this ticket."],
-      ["この列車名・号数の列車に乗りたいです。", "I want to take the train with this name and number."]
+      ["この特急券で乗りたいです。", "I want to ride with this limited express ticket."],
+      ["指定席ですか、自由席ですか。", "Is this reserved or non-reserved?"],
+      ["この列車名・号数の列車に乗りたいです。", "I want to take the train with this name and number."],
+      ["大きな荷物があります。置き場所を知りたいです。", "I have large luggage. I want to know where to put it."]
     ],
     actions: [
       ["Reserved seat", "limited-show", "primary"],
@@ -399,7 +419,10 @@ const screens = {
     ],
     jpHelp: [
       ["この予約でこのバスに乗りたいです。", "I want to take this bus with this booking."],
-      ["乗り場へ行きたいです。", "I want to go to the boarding area."]
+      ["このバス会社と便名で合っていますか。", "Is this the correct bus company and service name?"],
+      ["乗り場へ行きたいです。", "I want to go to the boarding area."],
+      ["出発時刻と行き先を確認したいです。", "I want to confirm the departure time and destination."],
+      ["大きな荷物を預けたいです。", "I want to check large luggage."]
     ],
     actions: [
       ["Show booking in JP", "coach-show", "primary"],
@@ -439,6 +462,7 @@ const screens = {
     ],
     jpHelp: [
       ["この場所へ行きたいです。", "I want to go to this place."],
+      ["公式情報を確認したいです。", "I want to check official information."],
       ["窓口か係員に聞きたいです。", "I want to ask the counter or staff."]
     ],
     actions: [
@@ -467,7 +491,9 @@ const screens = {
     ],
     jpHelp: [
       ["入口へ行きたいです。", "I want to go to the entrance."],
-      ["集合場所へ行きたいです。", "I want to go to the meeting place."]
+      ["受付へ行きたいです。", "I want to go to the reception."],
+      ["集合場所へ行きたいです。", "I want to go to the meeting place."],
+      ["近くの目印から入口へ行きたいです。", "I want to go to the entrance from a nearby landmark."]
     ],
     actions: [
       ["I arrived", "done", "primary"],
@@ -534,12 +560,17 @@ function render() {
     </div>
   ` : "";
   const warning = data.warning ? `<div class="warning">${data.warning}</div>` : "";
+  const selectedGuide = state.guideByScreen[state.screen] || 0;
   const checklist = data.checklist ? `
     <section class="section-block">
       <h3>Do this now</h3>
-      <ul class="checklist">
-        ${data.checklist.map((item) => `<li>${item}</li>`).join("")}
-      </ul>
+      <div class="action-checklist">
+        ${data.checklist.map((item, index) => `
+          <button type="button" class="${index === selectedGuide ? "selected" : ""}" data-guide="${index}">
+            ${item}
+          </button>
+        `).join("")}
+      </div>
     </section>
   ` : "";
   const guidance = data.guidance ? `
@@ -552,9 +583,11 @@ function render() {
   ` : "";
   const jpHelp = data.jpHelp ? `
     <section class="jp-help" aria-label="Japanese phrases to show if stuck">
-      <h3>Show in JP if stuck</h3>
+      <h3>Show this in JP</h3>
       <div class="phrase-list">
-        ${data.jpHelp.map(([ja, en]) => `
+        ${[
+          data.jpHelp[selectedGuide] || data.jpHelp[0]
+        ].map(([ja, en]) => `
           <div class="phrase-card">
             <p class="phrase-ja">${ja}</p>
             <p class="phrase-en">${en}</p>
@@ -618,6 +651,13 @@ document.addEventListener("click", (event) => {
   const target = event.target.closest("[data-target]");
   if (target) {
     state.screen = target.dataset.target;
+    render();
+    return;
+  }
+
+  const guide = event.target.closest("[data-guide]");
+  if (guide) {
+    state.guideByScreen[state.screen] = Number(guide.dataset.guide);
     render();
   }
 });
