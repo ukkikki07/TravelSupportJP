@@ -563,7 +563,7 @@ function render() {
   const selectedGuide = state.guideByScreen[state.screen] || 0;
   const checklist = data.checklist ? `
     <section class="section-block">
-      <h3>Do this now</h3>
+      <h3>What you should do now</h3>
       <div class="action-checklist">
         ${data.checklist.map((item, index) => `
           <button type="button" class="${index === selectedGuide ? "selected" : ""}" data-guide="${index}">

@@ -200,7 +200,7 @@ MVPに含める機能範囲:
 - `transportType`: 徒歩、タクシー、路線バス、路面電車、高速バス、普通電車、新幹線など。
 - `checklist`: 3〜5個までの確認項目。
 - `guidance`: 迷った時に何をするか、なぜその確認が必要かを短く示す。
-- `jpHelp`: `Do this now` の各行動に対応して、詰まった時に見せる短い日本語文と英語訳。
+- `jpHelp`: `What you should do now` の各行動に対応して、詰まった時に見せる短い日本語文と英語訳。
 - `primaryAction`: 次に押す主ボタン。
 - `secondaryActions`: Google Maps、人に見せる、戻るなど。
 - `warning`: 夜間、本数少ない地域、地方、観光地帰りの場合のみ表示。
@@ -209,8 +209,8 @@ MVPに含める機能範囲:
 - チェックリストは最大5個。
 - チェックリスト項目はDOを含める。例: `Prepare cash and coins`、`Confirm train name`、`Check boarding place`。
 - `guidance` は `If unsure` として表示し、Self質問だけで終わらせず、Google Mapsを開く、人に見せる、タクシーに切り替える、待たないなどの具体行動を含める。
-- `Do this now` は原則ボタン化する。各行動を押すと、対応する `Show this in JP` の文面が切り替わるようにする。
-- `jpHelp` は `Show this in JP` として `Do this now` の近くに表示する。行動で詰まった瞬間に、別画面へ探しに行かなくても見せられるようにする。
+- `What you should do now` は原則ボタン化する。各行動を押すと、対応する `Show this in JP` の文面が切り替わるようにする。
+- `jpHelp` は `Show this in JP` として `What you should do now` の近くに表示する。行動で詰まった瞬間に、別画面へ探しに行かなくても見せられるようにする。
 - 理由説明は1文まで。
 - 交通手段固有の長い説明は補足へ送る。
 - 主ボタンは `Open Google Maps`、`Show destination in JP`、`Show booking in JP`、`I checked` のように、行動と目的が分かる文言を基本にする。

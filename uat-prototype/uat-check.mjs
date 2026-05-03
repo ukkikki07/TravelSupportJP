@@ -63,7 +63,7 @@ record("JAPANESE-EN", "Critical", "Japanese text has English confirmation", js.i
 record("GUIDANCE-01", "Critical", "screens include action guidance", js.includes("guidance:") && js.includes('class="guidance"') && css.includes(".guidance"), "if-unsure guidance is rendered");
 record("CONTEXT-01", "High", "trip context is visible", js.includes('class="context-bar"') && css.includes(".context-bar") && js.includes("Next place now"), "destination, area, and next place context");
 record("JPHELP-01", "Critical", "stuck actions include Japanese phrases", js.includes("jpHelp:") && js.includes("Show this in JP") && css.includes(".jp-help"), "action-linked Japanese help phrases");
-record("ACTIONGUIDE-01", "Critical", "do-this actions are selectable", js.includes("data-guide") && css.includes(".action-checklist button.selected"), "Do this now buttons drive Japanese guidance");
+record("ACTIONGUIDE-01", "Critical", "current-action guidance is selectable", js.includes("What you should do now") && js.includes("data-guide") && css.includes(".action-checklist button.selected"), "current action buttons drive Japanese guidance");
 
 const failCount = results.filter((r) => r.status === "FAIL").length;
 const criticalFailCount = results.filter((r) => r.status === "FAIL" && r.priority === "Critical").length;
