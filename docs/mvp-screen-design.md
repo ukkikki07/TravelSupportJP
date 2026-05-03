@@ -37,6 +37,7 @@
 - 例: `Open Google Maps / Google Mapsを開く`, `Show destination in JP / 目的地を日本語で見せる`, `I arrived / 目的地に着いた`
 - 理由説明は事前準備画面に置き、乗車直前・運転手向け画面は短い確認文に絞る。
 - 理由: 移動中は画面を読む時間が短く、人にスマホを見せられる時間も短い。目的・現在地・次の行動を先に出す方が、誤解と誤操作を減らせる。
+- UATサイトは見た目だけの確認用にしない。本番想定の文言、現在の移動文脈、迷った時の行動、なぜ重要かが読める状態にし、英語しか読めない初回旅行者が画面だけで次の行動を判断できるかを確認する。
 - 有料アプリ以外の収益導線は [マネタイズ・アフィリエイト設計メモ](monetization-affiliate-plan.md) に分ける。移動中の主画面ではなく、旅行前Webページ、Google Maps復帰後、警告からの復帰導線、到着後、荷物が多い時などに限定する。
 
 ## 初期リリース形態
@@ -198,6 +199,7 @@ MVPに含める機能範囲:
 - `nextPlace`: 次に向かう駅、バス停、乗り場、入口。
 - `transportType`: 徒歩、タクシー、路線バス、路面電車、高速バス、普通電車、新幹線など。
 - `checklist`: 3〜5個までの確認項目。
+- `guidance`: 迷った時に何をするか、なぜその確認が必要かを短く示す。
 - `primaryAction`: 次に押す主ボタン。
 - `secondaryActions`: Google Maps、人に見せる、戻るなど。
 - `warning`: 夜間、本数少ない地域、地方、観光地帰りの場合のみ表示。
@@ -205,6 +207,7 @@ MVPに含める機能範囲:
 表示ルール:
 - チェックリストは最大5個。
 - チェックリスト項目はDOを含める。例: `Prepare cash and coins`、`Confirm train name`、`Check boarding place`。
+- `guidance` は `If unsure` として表示し、Self質問だけで終わらせず、Google Mapsを開く、人に見せる、タクシーに切り替える、待たないなどの具体行動を含める。
 - 理由説明は1文まで。
 - 交通手段固有の長い説明は補足へ送る。
 - 主ボタンは `Open Google Maps`、`Show destination in JP`、`Show booking in JP`、`I checked` のように、行動と目的が分かる文言を基本にする。

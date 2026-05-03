@@ -56,6 +56,8 @@ record("LAYOUT-SP", "Critical", "smartphone viewport support", css.includes("@me
 record("A11Y-01", "High", "viewport meta", html.includes('name="viewport"'), "responsive viewport meta");
 record("NO-AFFIL-SHOW", "Critical", "no monetized slot inside show card", js.includes('data-no-monetized="true"') && !js.includes('class="show-card monetized"'), "show screens keep Japanese text separate");
 record("JAPANESE-EN", "Critical", "Japanese text has English confirmation", js.includes("ja:") && js.includes("en:"), "show text pairs");
+record("GUIDANCE-01", "Critical", "screens include action guidance", js.includes("guidance:") && js.includes('class="guidance"') && css.includes(".guidance"), "if-unsure guidance is rendered");
+record("CONTEXT-01", "High", "trip context is visible", js.includes('class="context-bar"') && css.includes(".context-bar") && js.includes("Next place now"), "destination, area, and next place context");
 
 const failCount = results.filter((r) => r.status === "FAIL").length;
 const criticalFailCount = results.filter((r) => r.status === "FAIL" && r.priority === "Critical").length;
