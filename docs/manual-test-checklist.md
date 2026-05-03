@@ -22,7 +22,7 @@
 - [ ] 1画面の主ボタンが3つ程度に収まっている。
 - [ ] 長い説明が主画面を圧迫していない。
 - [ ] `Open Google Maps` の後に `BackFromMapsScreen` へ戻れる。
-- [ ] 迷った時に `Ask staff`、`Open Google Maps`、`Switch to taxi` のいずれかへ進める。
+- [ ] 迷った時に `Show destination to staff`、`Open Google Maps`、`Switch to taxi` のいずれかへ進める。
 - [ ] 夜間・本数少ない地域の警告が補足に隠れていない。
 - [ ] 「その他の移動手段」は詳細Flowに入らず、Google Maps・係員・公式案内へ渡せる。
 
@@ -125,7 +125,7 @@
 ## S14: 日本語を見せる不安
 
 - [ ] 日本語文の下に英語訳がある。
-- [ ] `Show Japanese` が人に見せるためのボタンだと分かる。
+- [ ] 人に見せるボタンは、`Show destination to staff` など、見せる相手と目的が分かる。
 - [ ] 表示対象が分かる。
 
 ## S15: 間違えた交通手段を選んだ
