@@ -211,6 +211,7 @@ MVPに含める機能範囲:
 - `guidance` は `If unsure` として表示し、Self質問だけで終わらせず、Google Mapsを開く、人に見せる、タクシーに切り替える、待たないなどの具体行動を含める。
 - `What you should do now` は原則ボタン化する。各行動を押すと、対応する `Show this in JP` の文面が切り替わるようにする。
 - `jpHelp` は `Show this in JP` として `What you should do now` の近くに表示する。行動で詰まった瞬間に、別画面へ探しに行かなくても見せられるようにする。
+- `jpHelp` の日本語文は、`What you should do now` の直訳に限定しない。英語訳を必ず併記した上で、相手が助けやすくなる補足や具体的な依頼を短く加えてよい。例: `現金と小銭を用意したいです。近くにコンビニやお店はありますか。`
 - 理由説明は1文まで。
 - 交通手段固有の長い説明は補足へ送る。
 - 主ボタンは `Open Google Maps`、`Show destination in JP`、`Show booking in JP`、`I checked` のように、行動と目的が分かる文言を基本にする。
@@ -2128,7 +2129,7 @@ Check the walking route to your destination in Google Maps.
 | 表示文 | 英語訳 | 表示対象 |
 |---|---|---|
 | 次に行く場所: △△△△行きのバス。 | Next, I will take a bus to △△△△. | 周囲の人 |
-| 小銭を用意したいです。近くにコンビニはありますか。 | I want to prepare coins. Is there a convenience store nearby? | 周囲の人 |
+| 小銭を用意したいです。近くにコンビニやお店はありますか。 | I want to prepare coins. Is there a convenience store or any shop nearby? | 周囲の人 |
 | 現金で払いたいですが、小銭がありません。 | I want to pay by cash, but I do not have coins. | 周囲の人 / 係員 |
 | このバスで両替したいです。 | I want to exchange money on this bus. | 周囲の人 / バス運転手 |
 | △△△△へ行きたいです。この列で合っていますか。 | I want to go to △△△△. Is this the correct line? | 並んでいる乗客 |

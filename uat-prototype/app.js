@@ -152,12 +152,12 @@ const screens = {
       "Ask a waiting passenger or nearby staff. If no one can help, open Google Maps again or switch to taxi."
     ],
     jpHelp: [
-      ["現金と小銭を用意したいです。", "I want to prepare cash and coins."],
+      ["現金と小銭を用意したいです。近くにコンビニやお店はありますか。", "I want to prepare cash and coins. Is there a convenience store or any shop nearby?"],
       ["このバスの番号か行き先を知りたいです。", "I want to know this bus route number or destination."],
       ["このバス停で降りたいです。", "I want to get off at this bus stop."],
       ["Google Mapsのこのバスに乗りたいです。", "I want to take this bus shown on Google Maps."],
       ["このバス停から清水寺方面へ行きたいです。", "I want to go toward Kiyomizu-dera from this bus stop."],
-      ["小銭を用意したいです。近くにコンビニはありますか。", "I want to prepare coins. Is there a convenience store nearby?"]
+      ["小銭を用意したいです。近くにコンビニやお店はありますか。", "I want to prepare coins. Is there a convenience store or any shop nearby?"]
     ],
     note: "Note: Some bus companies may accept transit IC cards.",
     actions: [
