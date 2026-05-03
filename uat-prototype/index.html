@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Travel Support JP UAT Prototype</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">UAT Prototype</p>
+        <h1>Travel Support JP</h1>
+      </div>
+      <button class="ghost small" type="button" data-action="reset">Reset</button>
+    </header>
+
+    <section class="scenario-strip" aria-label="UAT scenarios">
+      <button type="button" data-scenario="bus">Local Bus</button>
+      <button type="button" data-scenario="train">Train</button>
+      <button type="button" data-scenario="taxi">Taxi</button>
+      <button type="button" data-scenario="limited">Shinkansen</button>
+      <button type="button" data-scenario="coach">Highway Bus</button>
+      <button type="button" data-scenario="other">Other</button>
+    </section>
+
+    <section class="screen" id="screen" aria-live="polite"></section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
