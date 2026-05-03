@@ -17,7 +17,7 @@ const screens = {
       "Destination name is required",
       "Add area / city / prefecture to avoid same-name mistakes",
       "Add place type if it helps, like temple, hotel, station, or park",
-      "Use the place shown in Google Maps"
+      "Type in the place shown in Google Maps"
     ],
     actions: [
       ["Choose transport", "transport", "primary"],
