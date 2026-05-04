@@ -549,8 +549,8 @@ function render() {
   const fields = data.fields ? `
     <section class="destination-flow" aria-label="Set destination flow">
       <div class="origin-box">
-        <span>Where you are</span>
-        <input value="${state.nextPlace}" data-field="nextPlace" aria-label="Where you are now or next place to start from">
+        <span>Where you are.</span>
+        <input value="${state.nextPlace}" data-field="nextPlace" aria-label="Where you are now or next place to start from" placeholder="Enter place name">
       </div>
       <div class="transport-arrow" aria-hidden="true">
         <span>public<br>transportation</span>

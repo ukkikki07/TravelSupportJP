@@ -197,6 +197,26 @@ h3 {
   font-weight: 800;
 }
 
+.destination-flow .origin-box {
+  width: min(100%, 206px);
+  margin-bottom: 22px;
+}
+
+.destination-flow .origin-box span {
+  margin-bottom: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #000000;
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: underline;
+}
+
+.destination-flow .origin-box input {
+  margin-top: 0;
+}
+
 .transport-arrow {
   position: relative;
   width: 180px;
@@ -207,6 +227,10 @@ h3 {
   font-size: 1rem;
   font-weight: 800;
   line-height: 1.15;
+}
+
+.destination-flow .transport-arrow {
+  margin: 0 0 4px 50px;
 }
 
 .transport-arrow::before {
@@ -238,6 +262,12 @@ h3 {
   gap: 34px;
   align-items: end;
   max-width: 900px;
+}
+
+.destination-flow .destination-row label {
+  color: #000000;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .transit-row {

@@ -468,7 +468,7 @@ Check your destination in Google Maps first.
 
 Many places in Japan have the same name.
 
-Where you are
+Where you are.
 現在地、またはこの区間の開始地点。
 
 ↓ public transportation
