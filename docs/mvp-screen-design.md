@@ -2267,8 +2267,8 @@ I want to take this train shown in Google Maps. Where is the ticket gate?
 I want to buy a ticket or charge my IC card. Where can I do this?
 
 After entering ticket gate
-目的地の駅へ行きたいです。どのホームですか。
-I want to go to my destination station. Which platform should I use?
+目的の駅へ向かいたいです。どのホームで待てばよいですか。
+I want to go toward my destination station. Which platform should I wait at?
 
 この電車は目的地の駅に止まりますか。急行・快速でも大丈夫ですか。
 Does this train stop at my destination station? Is a rapid or express train okay?
