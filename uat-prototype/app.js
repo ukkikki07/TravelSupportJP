@@ -121,12 +121,12 @@ const screens = {
       { text: "Show Google Maps to make sure you are on the route.", helpIndex: 1 }
     ],
     jpHelp: [
-      ["私はこの場所に向かっています。", "I am heading to this place."],
+      ["私は{finalDestinationLabel}に向かっています。", "I am heading to {finalDestinationLabel}."],
       ["Googleマップのガイドは正しいですか。", "Show Google Maps to make sure you are on the route."]
     ],
     show: {
-      ja: "私はこの場所に向かっています。",
-      en: "I am heading to this place."
+      ja: "私は{finalDestinationLabel}に向かっています。",
+      en: "I am heading to {finalDestinationLabel}."
     },
     actions: [
       ["Back", "start", "secondary"],
@@ -538,6 +538,17 @@ function buildGoogleMapsUrl() {
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`;
 }
 
+function buildFinalDestinationLabel() {
+  return [state.destination, state.area]
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .join(" / ");
+}
+
+function fillTemplate(text) {
+  return text.replaceAll("{finalDestinationLabel}", buildFinalDestinationLabel() || state.destination);
+}
+
 function maybeOpenGoogleMaps() {
   const url = buildGoogleMapsUrl();
   if (typeof window !== "undefined" && typeof window.open === "function") {
@@ -654,8 +665,8 @@ function render() {
       <div class="phrase-list">
         ${[selectedPhrase].map(([ja, en]) => `
           <div class="phrase-card">
-            <p class="phrase-ja">${ja}</p>
-            <p class="phrase-en">${en}</p>
+            <p class="phrase-ja">${fillTemplate(ja)}</p>
+            <p class="phrase-en">${fillTemplate(en)}</p>
           </div>
         `).join("")}
         ${inlineNoteHelp}
@@ -684,8 +695,8 @@ function render() {
           ${state.area ? `<em>${state.area}</em>` : ""}
         </div>
       ` : ""}
-      <p class="ja">${data.show.ja}</p>
-      <p class="en">${data.show.en}</p>
+      <p class="ja">${fillTemplate(data.show.ja)}</p>
+      <p class="en">${fillTemplate(data.show.en)}</p>
     </div>
   ` : "";
   const monetized = data.monetized ? `

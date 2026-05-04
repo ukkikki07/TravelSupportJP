@@ -13,9 +13,9 @@ Google Mapsは経路検索と地図上のナビゲーションに使う。この
 
 画面下段ボタンは、原則として `Select transportation`、`Show Final Destination in JP`、`Open Google Maps` の3つに統一する。`Select transportation` は交通手段選択へ、`Show Final Destination in JP` はSet destinationの同名ボタンと同じ画面へ進める。タクシー切り替え、予約表示、乗車券表示、係員向けの細かな確認は、常時表示の下段ボタンではなく、画面内の `What you should do now`、`If unsure`、または例外画面に置く。
 
-`Show Final Destination in JP` で見せる日本語は `私はこの場所に向かっています。` を基本にする。交通手段ページ上部では、通過ポイントではなく、Set Destinationで入力した `Final Destination` と `Area of the place` を引き継いで表示する。
+`Show Final Destination in JP` で見せる日本語は、Set Destinationから引き継いだFinal DestinationとAreaを文中に入れた `私は〇〇〇〇に向かっています。` を基本にする。交通手段ページ上部では、通過ポイントではなく、Set Destinationで入力した `Final Destination` と `Area of the place` を引き継いで表示する。
 
-`Show Final Destination in JP` の `If unsure` はタップ可能にする。`Use this when you cannot explain the destination in Japanese.` は `私はこの場所に向かっています。` を展開する。`Show Google Maps to make sure you are on the route.` は `Googleマップのガイドは正しいですか。` を展開する。
+`Show Final Destination in JP` の `If unsure` はタップ可能にする。`Use this when you cannot explain the destination in Japanese.` は、Set Destinationから引き継いだFinal DestinationとAreaを文中に入れて `私は〇〇〇〇に向かっています。` を展開する。例: `私はKiyomizu-dera / Kyotoに向かっています。`。`Show Google Maps to make sure you are on the route.` は `Googleマップのガイドは正しいですか。` を展開する。
 
 `Show Final Destination in JP` 画面では、見せる日本語文だけでなく、Set Destinationから引き継いだFinal DestinationとAreaを大きく表示する。見てもらう相手に確認してほしい対象は、曖昧な「この場所」ではなく、実際の場所名と地域である。
 

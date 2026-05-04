@@ -526,7 +526,7 @@ Google Mapsで正しい目的地を確認。
 - 交通手段選択ページには、文脈バー、長い説明、If unsure、日本語ヘルプを置かない。基本的に交通手段を選ぶリンク/ボタンだけを表示する。
 - 各ページの最下段ボタンは、原則 `Select transportation`、`Show Final Destination in JP`、`Open Google Maps` の3つに統一する。
 - `Select transportation` は、次の交通手段を選ぶ場合、または今の交通手段選択を変えたい場合に、交通手段選択へ戻るボタンとする。
-- `Show Final Destination in JP` の `If unsure` はタップ可能にする。`Use this when you cannot explain the destination in Japanese.` は `私はこの場所に向かっています。` を展開する。`Show Google Maps to make sure you are on the route.` は `Googleマップのガイドは正しいですか。` を展開する。
+- `Show Final Destination in JP` の `If unsure` はタップ可能にする。`Use this when you cannot explain the destination in Japanese.` は、Set Destinationから引き継いだFinal DestinationとAreaを文中に入れて `私は〇〇〇〇に向かっています。` を展開する。例: `私はKiyomizu-dera / Kyotoに向かっています。`。`Show Google Maps to make sure you are on the route.` は `Googleマップのガイドは正しいですか。` を展開する。
 - `Show Final Destination in JP` 画面では、見せる日本語文だけでなく、Set Destinationから引き継いだFinal DestinationとAreaを大きく表示する。見てもらう相手が確認すべき対象は「この場所」ではなく、実際の場所名と地域であるため、場所名は日本語文より先に目に入る大きさにする。
 
 ### 各区間で保存する情報
@@ -1298,7 +1298,7 @@ I want to go to △△△△.
 | この駅の場所を知りたい。 | Where is this station? | 周囲の人 |
 | このバス停の場所を知りたい。 | Where is this bus stop? | 周囲の人 |
 | △△△△へ行きたいです。 | I want to go to △△△△. | 周囲の人 |
-| 私はこの場所に向かっています。 | I am heading to this place. | 周囲の人 |
+| 私は〇〇〇〇に向かっています。 | I am heading to 〇〇〇〇. | 周囲の人 |
 
 ## 7. バス利用画面案（MVP対象: 路線バスの利用前準備）
 このセクションのうち、路線バスの注意、現金・小銭準備、Google Mapsバスルート確認、バス系統番号入力、バス停確認、バスが来ない時、バスが満員で乗れない時、バス乗車直前確認、バス支払い確認、高速・空港・夜行バスの利用前準備はMVP対象とする。路線バスの乗車中、降車準備、乗り過ごし、降車後確認は後続拡張とする。
