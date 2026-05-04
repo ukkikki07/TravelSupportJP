@@ -527,19 +527,23 @@ function render() {
   const data = screens[state.screen] || screens.start;
   const screen = document.querySelector("#screen");
   const context = data.fields ? "" : `
-    <section class="context-bar" aria-label="Current trip context">
-      <div>
-        <span>Destination</span>
-        <strong>${state.destination}</strong>
+    <section class="context-bar transit-flow" aria-label="Current trip context">
+      <div class="origin-box context-origin">
+        <span>Where you are</span>
+        <strong>Current location</strong>
       </div>
-      <div>
-        <span>Area</span>
-        <strong>${state.area}</strong>
+      <div class="transport-arrow" aria-hidden="true">
+        <span>public<br>transportation</span>
       </div>
-      <div>
-        <span>Next place now</span>
-        <strong>${state.nextPlace}</strong>
+      <div class="transit-row">
+        <label>Next Transit point
+          <input value="${state.nextPlace}" data-field="nextPlace" placeholder="Enter place name">
+        </label>
+        <label>Area of the place
+          <input value="${state.area}" data-field="area" placeholder="city / town / pref.">
+        </label>
       </div>
+      <p class="final-destination-note">Final destination: <strong>${state.destination}</strong></p>
     </section>
   `;
   const fields = data.fields ? `

@@ -133,7 +133,11 @@ h3 {
   margin: 12px 0 16px;
 }
 
-.context-bar div {
+.context-bar.transit-flow {
+  display: block;
+}
+
+.context-bar:not(.transit-flow) div {
   min-height: 64px;
   padding: 10px;
   border: 1px solid var(--line);
@@ -141,7 +145,7 @@ h3 {
   background: #fbfcfe;
 }
 
-.context-bar span {
+.context-bar:not(.transit-flow) span {
   display: block;
   margin-bottom: 4px;
   color: var(--muted);
@@ -149,10 +153,21 @@ h3 {
   font-weight: 700;
 }
 
-.context-bar strong {
+.context-bar:not(.transit-flow) strong {
   display: block;
   overflow-wrap: anywhere;
   font-size: 0.98rem;
+}
+
+.context-origin strong {
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid #000000;
+  border-radius: 0;
+  background: #ffffff;
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .field-grid {
@@ -225,11 +240,21 @@ h3 {
   max-width: 900px;
 }
 
-.destination-row label {
+.transit-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 34px;
+  align-items: end;
+  max-width: 680px;
+}
+
+.destination-row label,
+.transit-row label {
   position: relative;
 }
 
-.destination-row label + label::before {
+.destination-row label + label::before,
+.transit-row label + label::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -240,6 +265,7 @@ h3 {
 }
 
 .destination-row input,
+.transit-row input,
 .origin-box input {
   min-height: 70px;
   border-color: #000000;
@@ -247,8 +273,15 @@ h3 {
   font-size: 1rem;
 }
 
-.destination-row input::placeholder {
+.destination-row input::placeholder,
+.transit-row input::placeholder {
   color: #9aa1aa;
+}
+
+.final-destination-note {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 label {
@@ -493,6 +526,7 @@ input {
   .field-grid,
   .context-bar,
   .destination-row,
+  .transit-row,
   .actions {
     grid-template-columns: 1fr;
   }
@@ -505,11 +539,13 @@ input {
     margin-left: 18px;
   }
 
-  .destination-row {
+  .destination-row,
+  .transit-row {
     gap: 10px;
   }
 
-  .destination-row label + label::before {
+  .destination-row label + label::before,
+  .transit-row label + label::before {
     display: none;
   }
 
