@@ -51,7 +51,7 @@ const screens = {
       "If the next leg feels too complicated or short, choose taxi."
     ],
     jpHelp: [
-      ["次に行く場所へ行きたいです。どの移動手段がよいですか。", "I want to go to the next place. Which transport should I use?"],
+      ["次の場所へ行きたいです。どの移動手段がよいですか。", "I want to go to the next place. Which transport should I use?"],
       ["Google Mapsでこの場所へ行きたいです。ここからの行き方を見たいです。", "I want to go to this place with Google Maps. I want to see how to get there from here."],
       ["タクシーで行きたいです。近くで乗れる場所はありますか。", "I want to go by taxi. Is there a nearby place to take one?"]
     ],
