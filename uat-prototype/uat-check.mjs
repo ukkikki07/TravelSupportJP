@@ -64,6 +64,7 @@ record("GUIDANCE-01", "Critical", "screens include action guidance", js.includes
 record("CONTEXT-01", "High", "trip context is visible", js.includes('class="context-bar transit-flow"') && css.includes(".context-bar") && js.includes("Next Transit point"), "destination, area, and next transit point context");
 record("TRANSPORT-CHOICE-01", "Critical", "public transportation choice page", js.includes("transportChoices:") && js.includes('class="transport-choice-page"') && css.includes(".transport-choice-grid"), "transport choices are shown on a standalone page");
 record("JOURNEY-FOOTER-01", "Critical", "transport pages include journey footer", js.includes("Arrived at next point") && js.includes("Change transport") && css.includes(".journey-footer"), "bottom actions continue or change transport");
+record("NOTEHELP-01", "High", "tap note can show Japanese help", js.includes("noteHelp:") && js.includes("data-note-help") && css.includes(".note-help"), "supplemental notes can reveal a show-in-JP phrase");
 record("JPHELP-01", "Critical", "stuck actions include Japanese phrases", js.includes("jpHelp:") && js.includes("Show this in JP") && css.includes(".jp-help"), "action-linked Japanese help phrases");
 record("ACTIONGUIDE-01", "Critical", "current-action guidance is selectable", js.includes("What you should do now") && js.includes("data-guide") && css.includes(".action-checklist button.selected"), "current action buttons drive Japanese guidance");
 

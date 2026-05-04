@@ -216,6 +216,7 @@ MVPに含める機能範囲:
 - `jpHelp` は「目的 + 相手にしてほしいこと」の順にする。例: `このバス停から清水寺方面へ行きたいです。道路のこちら側で合っていますか。`
 - 人に見せる日本語では、旅行者本人の意思表示と、アプリ側の推奨・操作指示を混ぜない。例: `タクシーでこの場所まで行きたいです。` はよいが、同じ文内に `ここを目的地として伝えてください。` のようなアプリからの指示を足さない。
 - 相手に見せる文は、相手が答える・案内するための確認に絞る。アプリ上の説明、注意、推奨、次に押すボタンの案内は英語UI側や `If unsure` に置く。
+- 控えめな注意が必要な場合は、主文に混ぜず `Note` として分ける。Noteをタップした時だけ、対応する見せる日本語を表示してよい。例: 新幹線の大きな荷物置き場予約。
 - 理由説明は1文まで。
 - 交通手段固有の長い説明は補足へ送る。
 - 主ボタンは `Open Google Maps`、`Show destination in JP`、`Show booking in JP`、`I checked` のように、行動と目的が分かる文言を基本にする。
@@ -3234,8 +3235,12 @@ I sat in the wrong seat by mistake. What should I do?
 
 ### 指定席の荷物確認
 ```text
-大きな荷物あり。置き場所を確認したい。
-I have large luggage. Where should I put it?
+大きな荷物があります。置き場所はありますか？
+I have large luggage. Is there a place to put it?
+
+Note:
+予め置き場の予約が必要な場合があります。
+Some luggage spaces may require advance reservation.
 
 この荷物置き場を使えるか確認したい。
 Can I use this luggage space?
@@ -3284,9 +3289,9 @@ Does this seat include space for large luggage?
 | 私の席に別の人が座っている。次の行動を確認したい。 | Someone is sitting in my seat. What should I do? | 車掌 / 係員 |
 | 間違って別の席に座ってしまった。次の行動を確認したい。 | I sat in the wrong seat by mistake. What should I do? | 車掌 / 係員 |
 | 車掌さんに聞きたいです。 | I want to ask the conductor. | 周囲の人 |
-| 大きな荷物あり。置き場所を知りたいです。 | I have large luggage. Where should I put it? | 駅員 / 係員 / 車掌 |
+| 大きな荷物があります。置き場所はありますか？ | I have large luggage. Is there a place to put it? | 駅員 / 係員 / 車掌 |
 | この荷物置き場を使いたいです。 | I want to use this luggage space. | 駅員 / 係員 / 車掌 |
-| 荷物置き場の予約が必要か確認したい。 | Do I need a reservation for the luggage space? | 駅員 / 係員 |
+| 車掌さんへ: 予約が必要な荷物スペースは空いていますか？料金はいくらですか？ | For the conductor: Is there any available luggage space that requires reservation? How much is the fee? | 車掌 |
 | この席に大きな荷物スペースが付くか確認したい。 | Does this seat include space for large luggage? | 駅員 / 係員 / 車掌 |
 
 ## 12. 券売機・切符購入サポート（横断機能）画面案

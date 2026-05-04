@@ -545,6 +545,25 @@ input {
   font-size: 0.9rem;
 }
 
+.note-help {
+  margin-top: 12px;
+}
+
+.note-help-button {
+  min-height: 34px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.86rem;
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.note-help-card {
+  margin-top: 8px;
+}
+
 @media (max-width: 640px) {
   .app-shell {
     padding: 10px;

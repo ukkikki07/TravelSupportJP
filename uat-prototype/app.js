@@ -6,7 +6,8 @@ const state = {
   nextPlace: "Gojozaka bus stop",
   scenario: "bus",
   screen: "start",
-  guideByScreen: {}
+  guideByScreen: {},
+  noteByScreen: {}
 };
 
 const screens = {
@@ -360,12 +361,17 @@ const screens = {
       "Confirm ticket and train details before going through the gate or boarding.",
       "For reserved seats, train name, time, car number, and seat must match."
     ],
+    noteHelp: {
+      note: "Note: Some Shinkansen luggage spaces may require advance reservation.",
+      ja: "車掌さんへ: 予約が必要な荷物スペースは空いていますか？料金はいくらですか？",
+      en: "For the conductor: Is there any available luggage space that requires reservation? How much is the fee?"
+    },
     jpHelp: [
       ["この切符でこの列車に乗りたいです。改札に通す切符はどれですか。", "I want to take this train with this ticket. Which ticket should I put through the gate?"],
       ["この特急券で乗りたいです。乗車券も必要ですか。", "I want to ride with this limited express ticket. Do I also need a basic fare ticket?"],
       ["この切符は指定席ですか、自由席ですか。座る場所を知りたいです。", "Is this ticket for a reserved seat or non-reserved seat? I want to know where to sit."],
       ["この列車名・号数の列車に乗りたいです。案内表示(LED掲示)板に表示されていますか。", "I want to take the train with this name and number. Is it shown on the information display / LED board?"],
-      ["大きな荷物があります。置き場所や予約が必要ですか。", "I have large luggage. Do I need a luggage space or reservation?"]
+      ["大きな荷物があります。置き場所はありますか？", "I have large luggage. Is there a place to put it?"]
     ],
     actions: [
       ["Reserved seat", "limited-show", "primary"],
@@ -580,19 +586,31 @@ function render() {
       </div>
     </section>
   ` : "";
+  const selectedPhrase = data.jpHelp?.[selectedGuide] || data.jpHelp?.[0];
   const jpHelp = data.jpHelp ? `
     <section class="jp-help" aria-label="Japanese phrases to show if stuck">
       <h3>Show this in JP</h3>
       <div class="phrase-list">
-        ${[
-          data.jpHelp[selectedGuide] || data.jpHelp[0]
-        ].map(([ja, en]) => `
+        ${[selectedPhrase].map(([ja, en]) => `
           <div class="phrase-card">
             <p class="phrase-ja">${ja}</p>
             <p class="phrase-en">${en}</p>
           </div>
         `).join("")}
       </div>
+    </section>
+  ` : "";
+  const noteHelp = data.noteHelp ? `
+    <section class="note-help" aria-label="Additional note">
+      <button type="button" class="note-help-button" data-note-help>
+        ${data.noteHelp.note}
+      </button>
+      ${state.noteByScreen[state.screen] ? `
+        <div class="phrase-card note-help-card">
+          <p class="phrase-ja">${data.noteHelp.ja}</p>
+          <p class="phrase-en">${data.noteHelp.en}</p>
+        </div>
+      ` : ""}
     </section>
   ` : "";
   const show = data.show ? `
@@ -633,6 +651,7 @@ function render() {
     ${guidance}
     ${actions}
     ${monetized}
+    ${noteHelp}
     ${data.note ? `<p class="note">${data.note}</p>` : ""}
     ${journeyFooter}
     <p class="note">Prototype for PC and smartphone UAT. Not production UI.</p>
@@ -649,6 +668,13 @@ document.addEventListener("click", (event) => {
   if (action?.dataset.action === "arrived-next") {
     state.currentPlace = state.nextPlace;
     state.screen = "transport";
+    render();
+    return;
+  }
+
+  const noteHelp = event.target.closest("[data-note-help]");
+  if (noteHelp) {
+    state.noteByScreen[state.screen] = !state.noteByScreen[state.screen];
     render();
     return;
   }
