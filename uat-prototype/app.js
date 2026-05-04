@@ -407,7 +407,7 @@ const screens = {
     ],
     jpHelp: [
       ["この予約でこのバスに乗りたいです。予約画面だけで乗れますか。", "I want to take this bus with this booking. Can I board with only this booking screen?"],
-      ["このバス会社と便名で合っていますか。乗るバスを間違えたくありません。", "Is this the correct bus company and service name? I do not want to take the wrong bus."],
+      ["このバス会社と便名で合っていますか。", "Is this the correct bus company and service name?"],
       ["乗り場へ行きたいです。建物・階・番号を教えてください。", "I want to go to the boarding area. Please tell me the building, floor, or number."],
       ["出発時刻と行き先を知りたいです。集合時刻も教えてください。", "I want to know the departure time and destination. Please also tell me the meeting time."],
       ["大きな荷物を預けたいです。どこで、いつ預けますか。", "I want to check in large luggage. Where and when should I leave it?"]
