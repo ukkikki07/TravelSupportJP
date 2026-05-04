@@ -24,8 +24,9 @@ const screens = {
       "Type in the place shown in Google Maps"
     ],
     guidance: [
-      "If Google Maps shows multiple results, add the city or prefecture before continuing.",
-      "If the place looks wrong, edit the destination before choosing transport."
+      { text: "If Google Maps shows multiple results, ask someone to check the area or address.", helpIndex: 1 },
+      { text: "If you are unsure what type of place it is, ask for the place type.", helpIndex: 2 },
+      { text: "If the place looks wrong, check it is not a same-name place before choosing transport.", helpIndex: 3 }
     ],
     jpHelp: [
       ["この場所へ行きたいです。Google Mapsではこの名前で表示されています。", "I want to go to this place. Google Maps shows this name."],
