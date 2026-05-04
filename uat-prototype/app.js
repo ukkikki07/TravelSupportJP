@@ -36,7 +36,7 @@ const screens = {
     ],
     actions: [
       ["Select transportation", "transport", "primary"],
-      ["Show destination in JP", "show-place", "secondary"],
+      ["Show Final Destination in JP", "show-place", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ]
   },
