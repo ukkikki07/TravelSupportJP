@@ -264,7 +264,7 @@ const screens = {
     guidance: [
       { text: "If the taxi is only for part of the trip, show only the taxi destination to the driver.", helpIndex: 1 },
       { text: "If you have large luggage or do not know where to board, ask staff before getting in.", helpIndex: 2 },
-      { text: "If taking taxi all the way, show the final destination after the taxi stops.", helpIndex: 0 }
+      { text: "Take a taxi to the final destination.", helpIndex: 0 }
     ],
     jpHelp: [
       ["タクシーで{finalDestinationLabel}まで行きたいです。", "I want to go to {finalDestinationLabel} by taxi."],
