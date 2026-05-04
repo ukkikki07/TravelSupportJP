@@ -314,8 +314,9 @@ const screens = {
       { timing: "After entering ticket gate", text: "Confirm the train stops at your station" }
     ],
     guidance: [
-      "Ask station staff or gate staff before entering the wrong railway gate or platform.",
-      "If you are unsure about rapid or express trains, show the station request in JP."
+      { text: "Ask station staff or gate staff before entering the wrong railway gate or platform.", helpIndex: 0 },
+      { text: "If you are unsure about platform or direction, show the platform request in JP.", helpIndex: 2 },
+      { text: "If you are unsure about rapid or express trains, show the train stop request in JP.", helpIndex: 3 }
     ],
     jpHelp: [
       ["Google Mapsのこの電車に乗りたいです。改札はどこですか？", "I want to take this train shown in Google Maps. Where is the ticket gate?"],
@@ -579,7 +580,12 @@ function render() {
     <section class="guidance" aria-label="What to do if unsure">
       <h3>If unsure</h3>
       <ul>
-        ${data.guidance.map((item) => `<li>${item}</li>`).join("")}
+        ${data.guidance.map((item) => {
+          const text = typeof item === "string" ? item : item.text;
+          return typeof item === "object" && Number.isInteger(item.helpIndex)
+            ? `<li><button type="button" class="guidance-button" data-help-index="${item.helpIndex}">${text}</button></li>`
+            : `<li>${text}</li>`;
+        }).join("")}
       </ul>
     </section>
   ` : "";
@@ -694,6 +700,13 @@ document.addEventListener("click", (event) => {
   const noteHelp = event.target.closest("[data-note-help]");
   if (noteHelp) {
     state.noteByScreen[state.screen] = !state.noteByScreen[state.screen];
+    render();
+    return;
+  }
+
+  const helpIndex = event.target.closest("[data-help-index]");
+  if (helpIndex) {
+    state.guideByScreen[state.screen] = Number(helpIndex.dataset.helpIndex);
     render();
     return;
   }

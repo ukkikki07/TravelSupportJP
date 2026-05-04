@@ -412,6 +412,18 @@ input {
   background: #ffffff;
 }
 
+.guidance-button {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .jp-help {
   padding: 12px;
   border: 1px solid #cfd8e3;
