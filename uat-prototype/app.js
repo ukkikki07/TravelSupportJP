@@ -530,7 +530,7 @@ function render() {
     <section class="context-bar transit-flow" aria-label="Current trip context">
       <div class="origin-box context-origin">
         <span>Where you are.</span>
-        <input value="${state.currentPlace}" data-field="currentPlace" aria-label="Where you are now" placeholder="Enter place name">
+        <div class="where-display">Where you are</div>
       </div>
       <button type="button" class="transport-arrow" data-target="transport" aria-label="Choose public transportation">
         <span>public<br>transportation</span>
@@ -550,7 +550,7 @@ function render() {
     <section class="destination-flow" aria-label="Set destination flow">
       <div class="origin-box">
         <span>Where you are.</span>
-        <input value="${state.nextPlace}" data-field="nextPlace" aria-label="Where you are now or next place to start from" placeholder="Enter place name">
+        <div class="where-display">Where you are</div>
       </div>
       <button type="button" class="transport-arrow" data-target="transport" aria-label="Choose public transportation">
         <span>public<br>transportation</span>

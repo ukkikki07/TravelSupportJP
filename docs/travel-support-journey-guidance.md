@@ -13,6 +13,8 @@ Google Mapsは経路検索と地図上のナビゲーションに使う。この
 
 画面下段ボタンは、原則として `Select transportation`、`Show Final Destination in JP`、`Open Google Maps` の3つに統一する。`Select transportation` は交通手段選択へ、`Show Final Destination in JP` はSet destinationの同名ボタンと同じ画面へ進める。タクシー切り替え、予約表示、乗車券表示、係員向けの細かな確認は、常時表示の下段ボタンではなく、画面内の `What you should do now`、`If unsure`、または例外画面に置く。
 
+`Where you are.` は入力用フォームではなく、現在地確認のための表示Boxとして扱う。Google Mapsで開く場合は、出発地をアプリから渡さず、Google Maps側の現在地を利用者自身に確認してもらう。このアプリがGoogle Mapsから現在地名や駅名を自動取得する前提にはしない。
+
 ## 文言とUI/Flowの指針
 UI文言は、丁寧な説明文ではなく、目的を先に伝える短文に統一する。
 

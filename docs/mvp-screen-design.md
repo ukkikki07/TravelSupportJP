@@ -483,7 +483,7 @@ Check your destination in Google Maps first.
 Many places in Japan have the same name.
 
 Where you are.
-現在地、またはこの区間の開始地点。
+現在地を示す表示Box。入力欄にはしない。
 
 ↓ public transportation
 
@@ -508,6 +508,7 @@ Google Mapsで目的地を確認。
 
 配置ルール:
 - `Where you are.`、交通手段、`Final Destination` の順に視線が流れる配置にする。
+- `Where you are.` は入力用フォームではなく、現在地確認のための表示Boxにする。Google Mapsで開く場合は、出発地をアプリから渡さず、Google Maps側の現在地を利用者自身に確認してもらう。Google Mapsから現在地名や駅名を自動で受け取る前提にはしない。
 - `Destination name`、`Area of the place`、`Type of the place` は横並びまたは縦積みで近接させ、3つが目的地の選別情報だと分かるようにする。
 - `Destination name` だけを必須にする。地域と種別は、同名施設を避けるための補足情報として見せる。
 - Set Destination以外の交通手段ページでは、`Where you are.`、交通手段、`Next Transit point` の順に視線が流れる配置にする。
