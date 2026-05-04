@@ -333,9 +333,8 @@ const screens = {
       ["この電車は目的地の駅に止まりますか。急行・快速でも大丈夫ですか。", "Does this train stop at my destination station? Is a rapid or express train okay?"]
     ],
     actions: [
-      ["Show station request in JP", "train-show", "primary"],
-      ["Open Google Maps", "maps-opened", "secondary"],
-      ["Switch to taxi", "taxi-prep", "secondary"]
+      ["Show destination in JP", "show-place", "primary"],
+      ["Open Google Maps", "maps-opened", "secondary"]
     ]
   },
   "train-show": {

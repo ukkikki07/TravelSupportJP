@@ -35,7 +35,7 @@
 - 「〜してください」「〜お願いします」はできるだけ使わず、「目的地: 〇〇」「次に行く場所: △△」「Google Mapsを開く」のようなラベル・行動文を優先する。
 - 人に見せる日本語は、原則「〇〇へ行きたいです」「〇〇で降りたいです」「〇〇を使いたいです」のように目的を直接伝える。「確認したいです」は支払い可否、券種、返金、変更など、目的だけでは判断できない場面に限る。
 - チェックリストや入力ラベルも、名詞だけにしない。`Ticket`、`Train name`、`Boarding place` ではなく、`Prepare ticket`、`Confirm train name`、`Check boarding place` のように、何をする項目か分かるDOを入れる。
-- 人に見せる画面へ進むボタンは、`Show Japanese` のような内部名にしない。`Show destination in JP`、`Show station request in JP`、`Show booking in JP` のように、何を日本語で見せるかが分かる表記にする。`Show` は他人に見せる行為を含むため、通常は `to someone` を付けない。
+- 人に見せる画面へ進むボタンは、`Show Japanese` のような内部名にしない。基本は `Show destination in JP` に統一し、予約・乗車券など目的地以外のものを見せる時だけ `Show booking in JP` のように対象を明記する。`Show` は他人に見せる行為を含むため、通常は `to someone` を付けない。
 - ボタンは英語主表示にする。日本語は必要な場合のみ補助表示にする。
 - 例: `Open Google Maps / Google Mapsを開く`, `Show destination in JP / 目的地を日本語で見せる`, `I arrived / 目的地に着いた`
 - 理由説明は事前準備画面に置き、乗車直前・運転手向け画面は短い確認文に絞る。
@@ -374,7 +374,7 @@ Try a taxi app available in this area.
 | 用途 | 標準文言 |
 |---|---|
 | Google Mapsを開く | `Open Google Maps` |
-| 人に見せる | `Show destination in JP` / `Show station request in JP` / `Show booking in JP` |
+| 人に見せる | `Show destination in JP` / `Show booking in JP` |
 | 係員に聞く | `Ask staff` |
 | 周囲の人に聞く | `Ask someone nearby` |
 | タクシーへ切り替える | `Switch to taxi` |
@@ -2280,9 +2280,10 @@ I want to go toward my destination station. Which platform should I wait at?
 Does this train stop at my destination station? Is a rapid or express train okay?
 
 [Google Mapsを開く]
-[人に見せる]
-[タクシーに切り替える]
+[Show destination in JP]
 ```
+
+普通電車画面では、`Show station request in JP` のような専用画面を別に作らず、Set destinationと同じ `Show destination in JP` を使う。タクシー切り替えはGoogle Maps確認後に利用者が判断するため、通常の普通電車準備画面の最下段には置かない。
 
 ### 普通電車の混雑注意
 ```text
