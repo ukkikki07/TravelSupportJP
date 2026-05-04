@@ -20,7 +20,7 @@
 - Google Mapsへ渡すパラメータは原則Destinationに限定する。ルート、交通手段、乗換、時刻、徒歩ナビはGoogle Mapsに任せる。
 - Final destination入力前に、利用者はGoogle Mapsで目的地を調べ、場所名と地域情報を確認する。
 - Set destination画面では、Google Mapsで表示された場所名を入力するDOとして `Type in the place shown in Google Maps` を表示する。
-- 通信不安定時の保険としてスクショを薦める場合は、バス画面ではなくSet destination段階で説明する。主導線はGoogle Mapsオンライン利用のままとし、スクショは「正しいGoogle Maps目的地を後で確認するためのバックアップ」に限る。
+- 通信不安定時や、移動開始後に現在地・時刻によってGoogle Mapsの案内や交通手段候補が変わる場合の保険としてスクショを薦める場合は、バス画面ではなくSet destination段階のDO Listで説明する。主導線はGoogle Mapsオンライン利用のままとし、スクショは「正しいGoogle Maps目的地と最初に確認した案内を後で見返すためのバックアップ」に限る。
 - スクショを撮る場合は、撮影直前にGoogle Maps上の目的地が正しいことを確認させる。バス停到着後に「撮ったスクショが正しいか」を確認させる導線にはしない。
 - Final destination入力は、`Destination name` だけに必須ラベルを付ける。`Area / city / prefecture` は推奨ラベルを付ける。`Place type` と `Next place` にはOptionalラベルを付けず、`Add place type`、`Set next place to go now` のようにDOを含むラベルで入力を促す。
 - Google Mapsへ渡す検索文字列は、原則 `Destination name + Area / city / prefecture` とする。
@@ -588,7 +588,7 @@ I want to go to △△△△.
 | 次の交通手段を選ぶ | 徒歩、タクシー、路線バス、路面電車、高速・空港・夜行バス、普通電車・地下鉄・モノレール、新幹線・特急、その他へ分岐する |
 | 徒歩準備 | Google Mapsで徒歩ルートを開き、次に向かう場所を人に見せられるようにする |
 | タクシー準備 | 最終目的地まで行くか途中地点まで行くかを分け、表示先を選ぶ |
-| 路線バス準備 | 現金・小銭、降りるバス停、系統番号、Google Maps画面保存を確認する |
+| 路線バス準備 | 現金・小銭、降りるバス停、系統番号、Google Mapsバスルートを再表示できる状態を確認する |
 | 路面電車準備 | 路線バス簡易フローで、方向、降りる停留所、支払い方法を確認する |
 | 高速・空港・夜行バス準備 | 予約、乗車券、便名、乗り場、集合時刻、出発時刻、到着地、荷物を確認する |
 | 普通電車・地下鉄・モノレール準備 | ICカード・切符の有無、駅、改札、ホーム、方向、停車駅を確認する |
@@ -1454,7 +1454,7 @@ Google Mapsの系統番号。
 Does this bus stop at the bus stop shown on Google Maps?
 ```
 
-Google Mapsの画面またはスクショを見せる前提で確認する。
+Google Mapsの画面を見せる前提で確認する。スクショを使う場合も、Set destination段階で正しい目的地を確認した後のバックアップに限る。
 
 ### 高速・空港・夜行バス利用
 この画面はMVP対象とする。路線バスとは分け、予約、乗車券、便名、乗り場、集合時刻、出発時刻、到着地、荷物預けを先に確認する。
