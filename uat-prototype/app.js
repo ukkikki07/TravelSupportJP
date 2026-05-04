@@ -134,7 +134,7 @@ const screens = {
     warning: "Local buses are difficult for first-time travelers. Use this only if you can carefully check the route, direction, cash, and stop. If unsure, choose taxi or train.",
     checklist: [
       { timing: "Before going to the bus stop", text: "Prepare cash and coins", helpIndex: 0 },
-      { timing: "Before going to the bus stop", text: "Save the Google Maps route screen", helpIndex: 3 },
+      { timing: "Before going to the bus stop", text: "Keep the Google Maps bus route ready to show", helpIndex: 3 },
       { timing: "At the bus stop, before the bus arrives", text: "Confirm the direction of this bus stop", helpIndex: 4 },
       { timing: "At the bus stop, before the bus arrives", text: "Check the bus route number or destination", helpIndex: 1 },
       { timing: "At the bus stop, before the bus arrives", text: "Check the stop to get off", helpIndex: 2 }
@@ -142,7 +142,7 @@ const screens = {
     guidance: [
       { text: "If the bus stop direction is unclear, ask before the bus arrives.", helpIndex: 4 },
       { text: "If the route number or destination is unclear, show the Google Maps bus screen.", helpIndex: 1 },
-      { text: "If no one can help, show the Google Maps route screen or switch to taxi.", helpIndex: 3 }
+      { text: "If no one can help, reopen the Google Maps bus route or switch to taxi.", helpIndex: 3 }
     ],
     jpHelp: [
       ["現金と小銭を用意したいです。近くにコンビニやお店はありますか。", "I want to prepare cash and coins. Is there a convenience store or any shop nearby?"],
