@@ -353,8 +353,8 @@ const screens = {
     checklist: [
       { timing: "Before entering ticket gate", text: "Prepare the basic fare ticket" },
       { timing: "Before entering ticket gate", text: "Prepare the limited express ticket" },
-      { timing: "Before entering ticket gate", text: "Confirm reserved or non-reserved seat" },
-      { timing: "Before boarding", text: "Confirm train name, car number, and seat" },
+      { timing: "After entering ticket gate", text: "Confirm reserved or non-reserved seat" },
+      { timing: "After entering ticket gate", text: "Confirm train name, car number, and seat" },
       { timing: "Before boarding", text: "Check luggage space if needed" }
     ],
     guidance: [
