@@ -7,6 +7,7 @@ const state = {
   scenario: "bus",
   screen: "start",
   guideByScreen: {},
+  helpByScreen: {},
   noteByScreen: {}
 };
 
@@ -138,8 +139,9 @@ const screens = {
       { timing: "At the bus stop, before the bus arrives", text: "Check the stop to get off", helpIndex: 2 }
     ],
     guidance: [
-      "Confirm the bus stop direction before the bus arrives. Asking the driver after the bus arrives may be too late.",
-      "Ask a waiting passenger or nearby staff. If no one can help, open Google Maps again or switch to taxi."
+      { text: "If the bus stop direction is unclear, ask before the bus arrives.", helpIndex: 4 },
+      { text: "If the route number or destination is unclear, show the Google Maps bus screen.", helpIndex: 1 },
+      { text: "If no one can help, show the Google Maps route screen or switch to taxi.", helpIndex: 3 }
     ],
     jpHelp: [
       ["現金と小銭を用意したいです。近くにコンビニやお店はありますか。", "I want to prepare cash and coins. Is there a convenience store or any shop nearby?"],
@@ -251,8 +253,9 @@ const screens = {
       { timing: "After taxi stops, ask driver before it starts", text: "Show the next station or bus stop if using taxi only for this section", helpIndex: 1 }
     ],
     guidance: [
-      "If the taxi is only for part of the trip, show only the taxi destination to the driver.",
-      "Ask hotel staff if you do not know where the taxi should drop you."
+      { text: "If the taxi is only for part of the trip, show only the taxi destination to the driver.", helpIndex: 1 },
+      { text: "If you have large luggage or do not know where to board, ask staff before getting in.", helpIndex: 2 },
+      { text: "If taking taxi all the way, show the final destination after the taxi stops.", helpIndex: 0 }
     ],
     jpHelp: [
       ["タクシーでこの場所まで行きたいです。", "I want to go to this place by taxi."],
@@ -359,8 +362,10 @@ const screens = {
       { timing: "After on Board", text: "Check luggage space if needed" }
     ],
     guidance: [
-      "Confirm ticket and train details before going through the gate or boarding.",
-      "For reserved seats, train name, time, car number, and seat must match."
+      { text: "If you are unsure which ticket to put through the gate, show the ticket request in JP.", helpIndex: 0 },
+      { text: "If you are unsure whether this is reserved or non-reserved, show the seat request in JP.", helpIndex: 2 },
+      { text: "If the train name or number is unclear, show the display board request in JP.", helpIndex: 3 },
+      { text: "If you have large luggage, show the luggage request after boarding.", helpIndex: 4 }
     ],
     noteHelp: {
       note: "Note: Some Shinkansen luggage spaces may require advance reservation.",
@@ -409,8 +414,10 @@ const screens = {
       { timing: "At the boarding place", text: "Check luggage drop-off if needed", helpIndex: 4 }
     ],
     guidance: [
-      "Confirm at the counter or with boarding staff before the bus arrives.",
-      "If the counter is closed, show the booking to the driver or boarding staff quickly."
+      { text: "If the boarding place is unclear, ask for the building, floor, or number.", helpIndex: 2 },
+      { text: "If the bus company or service name is unclear, show the company and service request.", helpIndex: 1 },
+      { text: "If the booking screen may not be enough, show the booking request.", helpIndex: 0 },
+      { text: "If you have large luggage, ask where and when to drop it off.", helpIndex: 4 }
     ],
     jpHelp: [
       ["この予約でこのバスに乗りたいです。予約画面だけで乗れますか。", "I want to take this bus with this booking. Can I board with only this booking screen?"],
@@ -602,8 +609,10 @@ function render() {
   const selectedHelpIndex = typeof selectedChecklistItem === "object" && Number.isInteger(selectedChecklistItem.helpIndex)
     ? selectedChecklistItem.helpIndex
     : selectedGuide;
-  const selectedPhrase = data.jpHelp?.[selectedHelpIndex] || data.jpHelp?.[0];
-  const showInlineNoteHelp = Boolean(data.noteHelp && state.screen === "limited-prep" && selectedHelpIndex === 4);
+  const explicitHelpIndex = state.helpByScreen[state.screen];
+  const activeHelpIndex = Number.isInteger(explicitHelpIndex) ? explicitHelpIndex : selectedHelpIndex;
+  const selectedPhrase = data.jpHelp?.[activeHelpIndex] || data.jpHelp?.[0];
+  const showInlineNoteHelp = Boolean(data.noteHelp && state.screen === "limited-prep" && activeHelpIndex === 4);
   const inlineNoteHelp = showInlineNoteHelp ? `
     <div class="phrase-card note-help-card">
       <p class="phrase-ja">${data.noteHelp.ja}</p>
@@ -706,7 +715,7 @@ document.addEventListener("click", (event) => {
 
   const helpIndex = event.target.closest("[data-help-index]");
   if (helpIndex) {
-    state.guideByScreen[state.screen] = Number(helpIndex.dataset.helpIndex);
+    state.helpByScreen[state.screen] = Number(helpIndex.dataset.helpIndex);
     render();
     return;
   }
@@ -721,6 +730,7 @@ document.addEventListener("click", (event) => {
   const guide = event.target.closest("[data-guide]");
   if (guide) {
     state.guideByScreen[state.screen] = Number(guide.dataset.guide);
+    delete state.helpByScreen[state.screen];
     render();
   }
 });
