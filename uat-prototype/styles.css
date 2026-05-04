@@ -480,11 +480,19 @@ input {
 
 .journey-footer {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
   margin-top: 20px;
   padding-top: 14px;
   border-top: 1px solid var(--line);
+}
+
+.actions button,
+.journey-footer button {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 14px;
+  white-space: nowrap;
 }
 
 .primary {
