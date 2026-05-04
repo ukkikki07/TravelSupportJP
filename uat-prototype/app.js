@@ -249,7 +249,7 @@ const screens = {
     title: "Taxi preparation",
     summary: "Choose where this taxi should go.",
     checklist: [
-      { timing: "Before getting in taxi", text: "Tell staff if you have large luggage or need airport transfer", helpIndex: 2 },
+      { timing: "Before getting in taxi", text: "Tell staff if you have large luggage and need to call a taxi", helpIndex: 2 },
       { timing: "After taxi stops, ask driver before it starts", text: "Show the final destination if taking taxi all the way", helpIndex: 0 },
       { timing: "After taxi stops, ask driver before it starts", text: "Show the next station or bus stop if using taxi only for this section", helpIndex: 1 }
     ],
