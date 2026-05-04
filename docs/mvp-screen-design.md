@@ -3256,6 +3256,7 @@ I sat in the wrong seat by mistake. What should I do?
 
 ### 指定席の荷物確認
 ```text
+Just After on Board
 大きな荷物があります。置き場所はありますか？
 I have large luggage. Is there a place to put it?
 
