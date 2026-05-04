@@ -3263,6 +3263,9 @@ Note:
 予め置き場の予約が必要な場合があります。
 Some luggage spaces may require advance reservation.
 
+車掌さんへ: 予約が必要な荷物スペースは空いていますか？料金はいくらですか？
+For the conductor: Is there any available luggage space that requires reservation? How much is the fee?
+
 この荷物置き場を使えるか確認したい。
 Can I use this luggage space?
 

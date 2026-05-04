@@ -597,6 +597,14 @@ function render() {
     ? selectedChecklistItem.helpIndex
     : selectedGuide;
   const selectedPhrase = data.jpHelp?.[selectedHelpIndex] || data.jpHelp?.[0];
+  const showInlineNoteHelp = Boolean(data.noteHelp && state.screen === "limited-prep" && selectedHelpIndex === 4);
+  const inlineNoteHelp = showInlineNoteHelp ? `
+    <div class="phrase-card note-help-card">
+      <p class="phrase-ja">${data.noteHelp.ja}</p>
+      <p class="phrase-en">${data.noteHelp.en}</p>
+      <p class="note">${data.noteHelp.note}</p>
+    </div>
+  ` : "";
   const jpHelp = selectedPhrase ? `
     <section class="jp-help" aria-label="Japanese phrases to show if stuck">
       <h3>Show this in JP</h3>
@@ -607,10 +615,11 @@ function render() {
             <p class="phrase-en">${en}</p>
           </div>
         `).join("")}
+        ${inlineNoteHelp}
       </div>
     </section>
   ` : "";
-  const noteHelp = data.noteHelp ? `
+  const noteHelp = data.noteHelp && !showInlineNoteHelp ? `
     <section class="note-help" aria-label="Additional note">
       <button type="button" class="note-help-button" data-note-help>
         ${data.noteHelp.note}
