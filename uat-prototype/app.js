@@ -318,7 +318,7 @@ const screens = {
     title: "Train preparation",
     summary: "Confirm before entering the platform.",
     checklist: [
-      "Prepare ticket or IC card",
+      "Buy a ticket or charge an IC card",
       "Check the station and ticket gate",
       "Confirm platform and direction",
       "Confirm the train stops at your station"
@@ -328,7 +328,7 @@ const screens = {
       "If you are unsure about rapid or express trains, show the station request in JP."
     ],
     jpHelp: [
-      ["切符かICカードを用意したいです。この駅から目的地まで乗れますか。", "I want to prepare a ticket or IC card. Can I go from this station to my destination?"],
+      ["切符の購入、またはICカードをチャージしたいです。この駅から目的地まで乗れますか。", "I want to buy a ticket or charge an IC card. Can I go from this station to my destination?"],
       ["この駅の改札へ行きたいです。どの改札ですか。", "I want to go to the ticket gate at this station. Which gate should I use?"],
       ["目的地の駅へ行きたいです。どのホームですか。", "I want to go to my destination station. Which platform should I use?"],
       ["この電車は目的地の駅に止まりますか。急行・快速でも大丈夫ですか。", "Does this train stop at my destination station? Is a rapid or express train okay?"]
