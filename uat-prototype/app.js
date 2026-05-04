@@ -39,7 +39,7 @@ const screens = {
       ["Show Final Destination in JP", "show-place", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ],
-    note: "Backup only: this app expects you to use Google Maps online. If mobile data may be unstable later, take a screenshot of the correct Google Maps destination now and use it only as a backup."
+    note: "Backup only: this app expects you to use Google Maps online. If mobile data may be unstable later, confirm the Google Maps destination first, then take a screenshot and use it only as a backup."
   },
   "transport": {
     status: "UAT-02",
@@ -149,7 +149,7 @@ const screens = {
       ["現金と小銭を用意したいです。近くにコンビニやお店はありますか。", "I want to prepare cash and coins. Is there a convenience store or any shop nearby?"],
       ["このバスの番号か行き先を知りたいです。Google Mapsではこのバスです。", "I want to know this bus route number or destination. Google Maps shows this bus."],
       ["このバス停で降りたいです。近づいたら教えてもらえますか。", "I want to get off at this bus stop. Can you tell me when it is close?"],
-      ["Google Mapsのこのバスに乗りたいです。この画面で合っていますか。", "I want to take this bus shown on Google Maps. Is this screen correct?"],
+      ["Google Mapsのこのバスに乗りたいです。このバス停と方向で合っていますか。", "I want to take this bus shown on Google Maps. Is this the correct bus stop and direction?"],
       ["このバス停から清水寺方面へ行きたいです。道路のこちら側で合っていますか。", "I want to go toward Kiyomizu-dera from this bus stop. Is this the correct side of the road?"]
     ],
     note: "Note: Some bus companies may accept transit IC cards.",
