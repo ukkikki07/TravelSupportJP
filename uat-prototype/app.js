@@ -526,7 +526,7 @@ const scenarioStart = {
 function render() {
   const data = screens[state.screen] || screens.start;
   const screen = document.querySelector("#screen");
-  const context = `
+  const context = data.fields ? "" : `
     <section class="context-bar" aria-label="Current trip context">
       <div>
         <span>Destination</span>
@@ -543,20 +543,26 @@ function render() {
     </section>
   `;
   const fields = data.fields ? `
-    <div class="field-grid">
-      <label>Destination name <span class="required">Required</span>
-        <input value="${state.destination}" data-field="destination" required>
-      </label>
-      <label>Add area / city / prefecture <span class="optional">Recommended</span>
-        <input value="${state.area}" data-field="area">
-      </label>
-      <label>Add place type
-        <input value="${state.placeType}" data-field="placeType">
-      </label>
-      <label>Set next place to go now
-        <input value="${state.nextPlace}" data-field="nextPlace">
-      </label>
-    </div>
+    <section class="destination-flow" aria-label="Set destination flow">
+      <div class="origin-box">
+        <span>Where you are</span>
+        <input value="${state.nextPlace}" data-field="nextPlace" aria-label="Where you are now or next place to start from">
+      </div>
+      <div class="transport-arrow" aria-hidden="true">
+        <span>public<br>transportation</span>
+      </div>
+      <div class="destination-row">
+        <label class="destination-name">Final Destination <span class="required">Required</span>
+          <input value="${state.destination}" data-field="destination" required placeholder="Enter place name">
+        </label>
+        <label>Area of the place <span class="optional">Recommended</span>
+          <input value="${state.area}" data-field="area" placeholder="city / town / pref.">
+        </label>
+        <label>Type of the place
+          <input value="${state.placeType}" data-field="placeType" placeholder="temple, shrine, castle, park, beach, etc.">
+        </label>
+      </div>
+    </section>
   ` : "";
   const warning = data.warning ? `<div class="warning">${data.warning}</div>` : "";
   const selectedGuide = state.guideByScreen[state.screen] || 0;

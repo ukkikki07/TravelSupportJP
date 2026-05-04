@@ -162,6 +162,95 @@ h3 {
   margin: 16px 0;
 }
 
+.destination-flow {
+  margin: 18px 0;
+}
+
+.origin-box {
+  width: min(100%, 260px);
+  margin-bottom: 10px;
+}
+
+.origin-box span {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 4px 10px;
+  border: 1px solid var(--ink);
+  background: #ffffff;
+  color: #000000;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.transport-arrow {
+  position: relative;
+  width: 180px;
+  height: 82px;
+  margin: 0 0 6px 48px;
+  color: #000000;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.transport-arrow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(26% 0, 74% 0, 74% 52%, 100% 52%, 50% 100%, 0 52%, 26% 52%);
+  background: #7b3515;
+}
+
+.transport-arrow::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  clip-path: polygon(26% 0, 74% 0, 74% 52%, 100% 52%, 50% 100%, 0 52%, 26% 52%);
+  background: #ffffff;
+}
+
+.transport-arrow span {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding-top: 4px;
+}
+
+.destination-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 34px;
+  align-items: end;
+  max-width: 900px;
+}
+
+.destination-row label {
+  position: relative;
+}
+
+.destination-row label + label::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: calc(100% + 1px);
+  width: 34px;
+  height: 2px;
+  background: var(--primary);
+}
+
+.destination-row input,
+.origin-box input {
+  min-height: 70px;
+  border-color: #000000;
+  border-radius: 0;
+  font-size: 1rem;
+}
+
+.destination-row input::placeholder {
+  color: #9aa1aa;
+}
+
 label {
   display: grid;
   gap: 6px;
@@ -403,8 +492,25 @@ input {
 
   .field-grid,
   .context-bar,
+  .destination-row,
   .actions {
     grid-template-columns: 1fr;
+  }
+
+  .origin-box {
+    width: 100%;
+  }
+
+  .transport-arrow {
+    margin-left: 18px;
+  }
+
+  .destination-row {
+    gap: 10px;
+  }
+
+  .destination-row label + label::before {
+    display: none;
   }
 
   h2 {

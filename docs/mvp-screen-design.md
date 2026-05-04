@@ -468,13 +468,20 @@ Check your destination in Google Maps first.
 
 Many places in Japan have the same name.
 
+Where you are
+現在地、またはこの区間の開始地点。
+
+↓ public transportation
+
+Final Destination
+
 Destination name: 〇〇〇〇
 Required
 
-Area / city / prefecture: △△△△
+Area of the place: city / town / pref.
 Recommended
 
-Place type: Temple / Hotel / Station / ...
+Type of the place: temple, shrine, castle, park, beach, etc.
 
 Google Mapsで目的地を確認。
 
@@ -484,6 +491,11 @@ Google Mapsで目的地を確認。
 [目的地名を直す]
 [地域を追加する]
 ```
+
+配置ルール:
+- `Where you are`、交通手段、`Final Destination` の順に視線が流れる配置にする。
+- `Destination name`、`Area of the place`、`Type of the place` は横並びまたは縦積みで近接させ、3つが目的地の選別情報だと分かるようにする。
+- `Destination name` だけを必須にする。地域と種別は、同名施設を避けるための補足情報として見せる。
 
 ### 各区間で保存する情報
 - 次に向かう場所
