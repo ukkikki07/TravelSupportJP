@@ -667,7 +667,7 @@ function render() {
   ` : "";
   const journeyFooter = (!data.fields && state.screen !== "transport" && state.screen !== "done") ? `
     <nav class="journey-footer" aria-label="Journey navigation">
-      <button type="button" class="primary" data-action="arrived-next">Arrived at next point</button>
+      <button type="button" class="primary" data-action="arrived-next">Arrived</button>
       <button type="button" class="secondary" data-target="transport">Change transport</button>
     </nav>
   ` : "";
