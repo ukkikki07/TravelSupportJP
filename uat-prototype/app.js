@@ -32,7 +32,7 @@ const screens = {
       ["Google Mapsのこの場所へ行きたいです。同じ名前の別の場所ではないか見てもらえますか。", "I want to go to this place shown on Google Maps. Can you check it is not a different place with the same name?"]
     ],
     actions: [
-      ["Public transportation", "transport", "primary"],
+      ["Select Public transportation", "transport", "primary"],
       ["Show destination in JP", "show-place", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ]
