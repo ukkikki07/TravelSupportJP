@@ -20,7 +20,7 @@
 - Google Mapsへ渡すパラメータは原則Destinationに限定する。ルート、交通手段、乗換、時刻、徒歩ナビはGoogle Mapsに任せる。
 - Final destination入力前に、利用者はGoogle Mapsで目的地を調べ、場所名と地域情報を確認する。
 - Set destination画面では、Google Mapsで表示された場所名を入力するDOとして `Type in the place shown in Google Maps` を表示する。
-- 通信不安定時や、移動開始後に現在地・時刻によってGoogle Mapsの案内や交通手段候補が変わる場合の保険としてスクショを薦める場合は、バス画面ではなくSet destination段階のDO Listで説明する。主導線はGoogle Mapsオンライン利用のままとし、スクショは「正しいGoogle Maps目的地と最初に確認した案内を後で見返すためのバックアップ」に限る。
+- Set destination段階のDO Listでは、スクショは「目的地名・場所を後で確認するための保険」としてだけ扱う。ルート、交通手段、時刻、次の便はライブのGoogle Mapsを優先する。地方・過疎地・本数が少ない地域では、1本逃すだけで案内全体が変わるため、スクショ時点の交通手段に沿って進ませない。
 - スクショを撮る場合は、撮影直前にGoogle Maps上の目的地が正しいことを確認させる。バス停到着後に「撮ったスクショが正しいか」を確認させる導線にはしない。
 - Final destination入力は、`Destination name` だけに必須ラベルを付ける。`Area / city / prefecture` は推奨ラベルを付ける。`Place type` と `Next place` にはOptionalラベルを付けず、`Add place type`、`Set next place to go now` のようにDOを含むラベルで入力を促す。
 - Google Mapsへ渡す検索文字列は、原則 `Destination name + Area / city / prefecture` とする。

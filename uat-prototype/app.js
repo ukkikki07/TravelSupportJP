@@ -22,7 +22,7 @@ const screens = {
       "Add area / city / prefecture to avoid same-name mistakes",
       "Add place type if it helps, like temple, hotel, station, or park",
       "Type in the place shown in Google Maps",
-      "Take a Google Maps screenshot as a backup after checking the place"
+      "Save a screenshot only as a place backup"
     ],
     guidance: [
       { text: "If Google Maps shows multiple results, ask someone to check the area or address.", helpIndex: 1 },
@@ -40,7 +40,7 @@ const screens = {
       ["Show Final Destination in JP", "show-place", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ],
-    note: "Backup only: Google Maps may change routes or transport options as your location and time change. After confirming the correct destination, keep one screenshot as a reference. This app still expects you to use Google Maps online."
+    note: "Use live Google Maps for routes, transport times, and the next bus or train. A screenshot is only a backup for the destination name/place. In rural areas, one missed bus or train can change the whole route."
   },
   "transport": {
     status: "UAT-02",
