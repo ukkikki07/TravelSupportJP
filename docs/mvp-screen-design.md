@@ -493,11 +493,14 @@ Google Mapsで目的地を確認。
 ```
 
 配置ルール:
-- `Where you are`、交通手段、`Final Destination` の順に視線が流れる配置にする。
+- `Where you are.`、交通手段、`Final Destination` の順に視線が流れる配置にする。
 - `Destination name`、`Area of the place`、`Type of the place` は横並びまたは縦積みで近接させ、3つが目的地の選別情報だと分かるようにする。
 - `Destination name` だけを必須にする。地域と種別は、同名施設を避けるための補足情報として見せる。
 - Set Destination以外の交通手段ページでは、`Where you are.`、交通手段、`Next Transit point` の順に視線が流れる配置にする。
 - 交通手段ページの主文脈は `Next Transit point` とその地域に置く。最終目的地は補助表示にし、今向かう場所と最終目的地を混同させない。
+- 交通手段メニューは常時画面上部に固定しない。最初の起点は必ずSet Destinationにし、下向き矢印の `public transportation` をボタン化して交通手段メニューへ進ませる。
+- Set Destination画面では、交通手段選択へ進む導線を `public transportation` ボタンに集約する。別の `Choose transport` ボタンを重複して置かない。
+- 各交通手段ページでも、同じ `public transportation` ボタンから交通手段メニューへ戻れるようにする。
 
 ### 各区間で保存する情報
 - 次に向かう場所

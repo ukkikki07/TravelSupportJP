@@ -76,14 +76,6 @@ h3 {
   font-size: 1rem;
 }
 
-.scenario-strip {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.scenario-strip button,
 .primary,
 .secondary,
 .ghost {
@@ -93,10 +85,6 @@ h3 {
   background: var(--panel);
   color: var(--ink);
   cursor: pointer;
-}
-
-.scenario-strip button {
-  padding: 8px;
 }
 
 .screen {
@@ -214,11 +202,15 @@ h3 {
   width: 180px;
   height: 82px;
   margin: 0 0 6px 48px;
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: #000000;
   text-align: center;
   font-size: 1rem;
   font-weight: 800;
   line-height: 1.15;
+  cursor: pointer;
 }
 
 .destination-flow .transport-arrow,
@@ -247,6 +239,7 @@ h3 {
   z-index: 1;
   display: block;
   padding-top: 4px;
+  pointer-events: none;
 }
 
 .destination-row {
@@ -458,6 +451,10 @@ input {
   margin-top: 18px;
 }
 
+.actions.transport-menu {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
 .primary {
   border-color: var(--primary);
   background: var(--primary);
@@ -537,10 +534,6 @@ input {
     align-items: flex-start;
   }
 
-  .scenario-strip {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .screen {
     min-height: calc(100vh - 152px);
     padding: 14px;
@@ -550,7 +543,8 @@ input {
   .context-bar,
   .destination-row,
   .transit-row,
-  .actions {
+  .actions,
+  .actions.transport-menu {
     grid-template-columns: 1fr;
   }
 

@@ -55,7 +55,7 @@ for (const [id, priority, screen] of requiredScreens) {
   record(id, priority, screen, exists && actionPass, exists ? `actions=${actions ?? "n/a"}` : "screen missing");
 }
 
-record("LAYOUT-PC", "Critical", "desktop viewport support", css.includes("width: min(100%, 960px)") && css.includes("grid-template-columns: repeat(6"), "max width and 6-column scenario strip");
+record("LAYOUT-PC", "Critical", "desktop viewport support", css.includes("width: min(100%, 960px)") && js.includes('class="transport-arrow" data-target="transport"'), "max width and transport arrow menu button");
 record("LAYOUT-SP", "Critical", "smartphone viewport support", css.includes("@media (max-width: 640px)") && css.includes("grid-template-columns: 1fr"), "mobile media query");
 record("A11Y-01", "High", "viewport meta", html.includes('name="viewport"'), "responsive viewport meta");
 record("NO-AFFIL-SHOW", "Critical", "no monetized slot inside show card", js.includes('data-no-monetized="true"') && !js.includes('class="show-card monetized"'), "show screens keep Japanese text separate");

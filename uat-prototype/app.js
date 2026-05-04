@@ -32,8 +32,7 @@ const screens = {
       ["Google Mapsのこの場所へ行きたいです。同じ名前の別の場所ではないか見てもらえますか。", "I want to go to this place shown on Google Maps. Can you check it is not a different place with the same name?"]
     ],
     actions: [
-      ["Choose transport", "transport", "primary"],
-      ["Show destination in JP", "show-place", "secondary"],
+      ["Show destination in JP", "show-place", "primary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ]
   },
@@ -56,9 +55,12 @@ const screens = {
       ["タクシーで行きたいです。近くで乗れる場所はありますか。", "I want to go by taxi. Is there a nearby place to take one?"]
     ],
     actions: [
-      ["Local bus / tram", "bus-prep", "primary"],
-      ["Train / subway", "train-prep", "secondary"],
-      ["Taxi", "taxi-prep", "secondary"]
+      ["Local Bus", "bus-prep", "secondary"],
+      ["Train", "train-prep", "secondary"],
+      ["Taxi", "taxi-prep", "secondary"],
+      ["Shinkansen", "limited-prep", "secondary"],
+      ["Highway Bus", "coach-prep", "secondary"],
+      ["Other", "other-prep", "secondary"]
     ]
   },
   "maps-return": {
@@ -515,15 +517,6 @@ const screens = {
   }
 };
 
-const scenarioStart = {
-  bus: "bus-prep",
-  train: "train-prep",
-  taxi: "taxi-prep",
-  limited: "limited-prep",
-  coach: "coach-prep",
-  other: "other-prep"
-};
-
 function render() {
   const data = screens[state.screen] || screens.start;
   const screen = document.querySelector("#screen");
@@ -533,9 +526,9 @@ function render() {
         <span>Where you are.</span>
         <input value="${state.currentPlace}" data-field="currentPlace" aria-label="Where you are now" placeholder="Enter place name">
       </div>
-      <div class="transport-arrow" aria-hidden="true">
+      <button type="button" class="transport-arrow" data-target="transport" aria-label="Choose public transportation">
         <span>public<br>transportation</span>
-      </div>
+      </button>
       <div class="transit-row">
         <label>Next Transit point
           <input value="${state.nextPlace}" data-field="nextPlace" placeholder="Enter place name">
@@ -553,9 +546,9 @@ function render() {
         <span>Where you are.</span>
         <input value="${state.nextPlace}" data-field="nextPlace" aria-label="Where you are now or next place to start from" placeholder="Enter place name">
       </div>
-      <div class="transport-arrow" aria-hidden="true">
+      <button type="button" class="transport-arrow" data-target="transport" aria-label="Choose public transportation">
         <span>public<br>transportation</span>
-      </div>
+      </button>
       <div class="destination-row">
         <label class="destination-name">Final Destination <span class="required">Required</span>
           <input value="${state.destination}" data-field="destination" required placeholder="Enter place name">
@@ -619,7 +612,7 @@ function render() {
     </aside>
   ` : "";
   const actions = data.actions ? `
-    <div class="actions">
+    <div class="actions ${state.screen === "transport" ? "transport-menu" : ""}">
       ${data.actions.map(([label, target, kind]) => `<button type="button" class="${kind || "secondary"}" data-target="${target}">${label}</button>`).join("")}
     </div>
   ` : "";
@@ -646,14 +639,6 @@ document.addEventListener("click", (event) => {
   const action = event.target.closest("[data-action]");
   if (action?.dataset.action === "reset") {
     state.screen = "start";
-    render();
-    return;
-  }
-
-  const scenario = event.target.closest("[data-scenario]");
-  if (scenario) {
-    state.scenario = scenario.dataset.scenario;
-    state.screen = scenarioStart[state.scenario] || "start";
     render();
     return;
   }
