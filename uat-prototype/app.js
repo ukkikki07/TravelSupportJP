@@ -1,4 +1,5 @@
-﻿const state = {
+const state = {
+  currentPlace: "",
   destination: "Kiyomizu-dera",
   area: "Kyoto",
   placeType: "Temple",
@@ -529,8 +530,8 @@ function render() {
   const context = data.fields ? "" : `
     <section class="context-bar transit-flow" aria-label="Current trip context">
       <div class="origin-box context-origin">
-        <span>Where you are</span>
-        <strong>Current location</strong>
+        <span>Where you are.</span>
+        <input value="${state.currentPlace}" data-field="currentPlace" aria-label="Where you are now" placeholder="Enter place name">
       </div>
       <div class="transport-arrow" aria-hidden="true">
         <span>public<br>transportation</span>

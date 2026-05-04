@@ -159,17 +159,6 @@ h3 {
   font-size: 0.98rem;
 }
 
-.context-origin strong {
-  min-height: 44px;
-  padding: 8px 10px;
-  border: 1px solid #000000;
-  border-radius: 0;
-  background: #ffffff;
-  color: var(--muted);
-  font-size: 1rem;
-  font-weight: 400;
-}
-
 .field-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -197,12 +186,14 @@ h3 {
   font-weight: 800;
 }
 
-.destination-flow .origin-box {
+.destination-flow .origin-box,
+.transit-flow .origin-box {
   width: min(100%, 206px);
   margin-bottom: 22px;
 }
 
-.destination-flow .origin-box span {
+.destination-flow .origin-box span,
+.transit-flow .origin-box span {
   margin-bottom: 0;
   padding: 0;
   border: 0;
@@ -213,7 +204,8 @@ h3 {
   text-decoration: underline;
 }
 
-.destination-flow .origin-box input {
+.destination-flow .origin-box input,
+.transit-flow .origin-box input {
   margin-top: 0;
 }
 
@@ -229,7 +221,8 @@ h3 {
   line-height: 1.15;
 }
 
-.destination-flow .transport-arrow {
+.destination-flow .transport-arrow,
+.transit-flow .transport-arrow {
   margin: 0 0 4px 50px;
 }
 
