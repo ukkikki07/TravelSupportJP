@@ -267,7 +267,7 @@ const screens = {
       { text: "If taking taxi all the way, show the final destination after the taxi stops.", helpIndex: 0 }
     ],
     jpHelp: [
-      ["タクシーでこの場所まで行きたいです。", "I want to go to this place by taxi."],
+      ["タクシーで{finalDestinationLabel}まで行きたいです。", "I want to go to {finalDestinationLabel} by taxi."],
       ["タクシーでは次の駅・バス停まで行きたいです。最終目的地ではありません。", "I want to go only to the next station or bus stop by taxi. It is not my final destination."],
       ["大きな荷物があります。タクシーを呼びたいです。乗る場所も知りたいです。", "I have large luggage. I want to call a taxi and know where to board."],
       ["タクシーを拾いたいです。タクシーに向かって片手をまっすぐ上に挙げます。", "I want to hail a taxi. I will raise one arm straight up toward the taxi."]
@@ -290,8 +290,8 @@ const screens = {
       "Hotel staff can understand both the final destination and the taxi destination."
     ],
     show: {
-      ja: "タクシーでこの場所まで行きたいです。",
-      en: "I want to go to this place by taxi."
+      ja: "タクシーで{finalDestinationLabel}まで行きたいです。",
+      en: "I want to go to {finalDestinationLabel} by taxi."
     },
     actions: [
       ["Show taxi destination in JP", "taxi-driver", "primary"],
