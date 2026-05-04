@@ -252,6 +252,7 @@ const screens = {
     summary: "Choose where this taxi should go.",
     checklist: [
       { timing: "Before getting in taxi", text: "Tell staff if you have large luggage and need to call a taxi", helpIndex: 2 },
+      { timing: "Before getting in taxi", text: "Raise one arm straight up toward an available taxi", helpIndex: 3 },
       { timing: "After taxi stops, ask driver before it starts", text: "Show the final destination if taking taxi all the way", helpIndex: 0 },
       { timing: "After taxi stops, ask driver before it starts", text: "Show the next station or bus stop if using taxi only for this section", helpIndex: 1 }
     ],
@@ -263,7 +264,8 @@ const screens = {
     jpHelp: [
       ["タクシーでこの場所まで行きたいです。", "I want to go to this place by taxi."],
       ["タクシーでは次の駅・バス停まで行きたいです。最終目的地ではありません。", "I want to go only to the next station or bus stop by taxi. It is not my final destination."],
-      ["大きな荷物があります。タクシーを呼びたいです。乗る場所も知りたいです。", "I have large luggage. I want to call a taxi and know where to board."]
+      ["大きな荷物があります。タクシーを呼びたいです。乗る場所も知りたいです。", "I have large luggage. I want to call a taxi and know where to board."],
+      ["タクシーを拾いたいです。タクシーに向かって片手をまっすぐ上に挙げます。", "I want to hail a taxi. I will raise one arm straight up toward the taxi."]
     ],
     actions: [
       ["Go to final destination", "taxi-driver", "primary"],
