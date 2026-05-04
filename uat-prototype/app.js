@@ -39,7 +39,6 @@ const screens = {
   "transport": {
     status: "UAT-02",
     title: "Public transportation",
-    summary: "Choose the transport for this section.",
     transportChoices: [
       ["Local Bus", "bus-prep"],
       ["Train", "train-prep"],
@@ -47,12 +46,9 @@ const screens = {
       ["Shinkansen", "limited-prep"],
       ["Highway Bus", "coach-prep"],
       ["Other", "other-prep"]
-    ],
-    guidance: [
-      "Choose the transport for the next leg shown in Google Maps, not the whole trip.",
-      "If the next leg feels too complicated or short, choose taxi."
     ]
-  },  "maps-return": {
+  },
+  "maps-return": {
     status: "UAT-02",
     title: "Back from Google Maps",
     summary: "Now confirm the next action.",
@@ -509,7 +505,8 @@ const screens = {
 function render() {
   const data = screens[state.screen] || screens.start;
   const screen = document.querySelector("#screen");
-  const context = data.fields ? "" : `
+  const isTransportChoice = state.screen === "transport";
+  const context = (data.fields || isTransportChoice) ? "" : `
     <section class="context-bar transit-flow" aria-label="Current trip context">
       <div class="origin-box context-origin">
         <span>Where you are.</span>
@@ -565,7 +562,7 @@ function render() {
       </div>
     </section>
   ` : "";
-  const guidance = data.guidance ? `
+  const guidance = (data.guidance && !isTransportChoice) ? `
     <section class="guidance" aria-label="What to do if unsure">
       <h3>If unsure</h3>
       <ul>
@@ -575,7 +572,6 @@ function render() {
   ` : "";
   const transportChoices = data.transportChoices ? `
     <section class="transport-choice-page" aria-label="Public transportation choices">
-      <h3>Choose public transportation</h3>
       <div class="transport-choice-grid">
         ${data.transportChoices.map(([label, target]) => `
           <button type="button" class="secondary" data-target="${target}">${label}</button>
@@ -623,9 +619,9 @@ function render() {
   ` : "";
 
   screen.innerHTML = `
-    <div class="status">${data.status}</div>
-    <h2>${data.title}</h2>
-    ${data.summary ? `<p class="summary">${data.summary}</p>` : ""}
+    ${isTransportChoice ? "" : `<div class="status">${data.status}</div>`}
+    ${isTransportChoice ? "" : `<h2>${data.title}</h2>`}
+    ${(!isTransportChoice && data.summary) ? `<p class="summary">${data.summary}</p>` : ""}
     ${context}
     ${fields}
     ${warning}

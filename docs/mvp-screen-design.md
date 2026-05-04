@@ -503,6 +503,7 @@ Google Mapsで目的地を確認。
 - 各交通手段ページでも、同じ `public transportation` ボタンから交通手段メニューへ戻れるようにする。
 - `public transportation` ボタンを押した後は、下段の汎用アクション列ではなく、単独の交通手段選択ページを表示する。
 - 交通手段選択ページでは、Local Bus、Train、Taxi、Shinkansen、Highway Bus、Otherを主コンテンツとして並べる。
+- 交通手段選択ページには、文脈バー、長い説明、If unsure、日本語ヘルプを置かない。基本的に交通手段を選ぶリンク/ボタンだけを表示する。
 - 各交通手段ページの最下段には、`Arrived at next point` と `Change transport` を置く。
 - `Arrived at next point` は、次の駅・バス停・乗り場・入口などに着いた後、次の交通手段選択へ進むボタンとする。
 - `Change transport` は、今の交通手段選択が違った、または途中で変更したい時に交通手段選択へ戻るボタンとする。
