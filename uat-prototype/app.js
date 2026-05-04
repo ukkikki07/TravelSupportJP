@@ -254,7 +254,7 @@ const screens = {
       "Ask hotel staff if you do not know where the taxi should drop you."
     ],
     jpHelp: [
-      ["タクシーでこの場所まで行きたいです。ここを目的地として伝えてください。", "I want to go to this place by taxi. Please use this as the taxi destination."],
+      ["タクシーでこの場所まで行きたいです。", "I want to go to this place by taxi."],
       ["タクシーでは次の駅・バス停まで行きたいです。最終目的地ではありません。", "I want to go only to the next station or bus stop by taxi. It is not my final destination."],
       ["大きな荷物があります。タクシーを呼びたいです。乗る場所も知りたいです。", "I have large luggage. I want to call a taxi and know where to board."]
     ],
