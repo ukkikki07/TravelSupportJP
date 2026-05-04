@@ -549,25 +549,6 @@ input {
   margin-top: 12px;
 }
 
-.timeline-notes {
-  margin-top: 12px;
-}
-
-.timeline-notes h3 {
-  margin: 0 0 8px;
-  font-size: 1rem;
-}
-
-.timeline-note-list {
-  display: grid;
-  gap: 8px;
-}
-
-.timeline-note-item {
-  border-top: 1px solid var(--border);
-  padding-top: 6px;
-}
-
 .note-help-button {
   min-height: 34px;
   border: 0;
@@ -577,6 +558,12 @@ input {
   text-align: left;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.action-timing {
+  margin: 6px 0 -2px;
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
 .note-help-card {

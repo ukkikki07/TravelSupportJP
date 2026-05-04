@@ -308,40 +308,18 @@ const screens = {
     title: "Train preparation",
     summary: "Use this after you reach the station area. Check the gate before entering.",
     checklist: [
-      "Find the ticket gate for the train shown in Google Maps",
-      "Buy a ticket or charge an IC card before entering",
-      "Confirm platform and direction",
-      "Confirm the train stops at your station"
+      { timing: "Before entering ticket gate", text: "Find the ticket gate for the train shown in Google Maps" },
+      { timing: "Before entering ticket gate", text: "Buy a ticket or charge an IC card before entering" },
+      { timing: "After entering ticket gate", text: "Confirm platform and direction" },
+      { timing: "After entering ticket gate", text: "Confirm the train stops at your station" }
     ],
     guidance: [
       "Ask station staff or gate staff before entering the wrong railway gate or platform.",
       "If you are unsure about rapid or express trains, show the station request in JP."
     ],
-    timelineNotes: [
-      {
-        note: "1. At the station, show Google Maps and ask for the railway gate.",
-        ja: "Google Mapsのこの電車に乗りたいです。改札はどこですか？",
-        en: "I want to take this train shown in Google Maps. Where is the ticket gate?"
-      },
-      {
-        note: "2. Before entering the gate, prepare ticket or IC card balance.",
-        ja: "切符の購入、またはICカードをチャージしたいです。どこでできますか。",
-        en: "I want to buy a ticket or charge my IC card. Where can I do this?"
-      },
-      {
-        note: "3. After the gate, check platform and direction.",
-        ja: "目的地の駅へ行きたいです。どのホームですか。",
-        en: "I want to go to my destination station. Which platform should I use?"
-      },
-      {
-        note: "4. Before boarding, check the train type and stop.",
-        ja: "この電車は目的地の駅に止まりますか。急行・快速でも大丈夫ですか。",
-        en: "Does this train stop at my destination station? Is a rapid or express train okay?"
-      }
-    ],
     jpHelp: [
-      ["切符の購入、またはICカードをチャージしたいです。この駅から目的地まで乗れますか。", "I want to buy a ticket or charge an IC card. Can I go from this station to my destination?"],
       ["Google Mapsのこの電車に乗りたいです。改札はどこですか？", "I want to take this train shown in Google Maps. Where is the ticket gate?"],
+      ["切符の購入、またはICカードをチャージしたいです。どこでできますか。", "I want to buy a ticket or charge my IC card. Where can I do this?"],
       ["目的地の駅へ行きたいです。どのホームですか。", "I want to go to my destination station. Which platform should I use?"],
       ["この電車は目的地の駅に止まりますか。急行・快速でも大丈夫ですか。", "Does this train stop at my destination station? Is a rapid or express train okay?"]
     ],
@@ -583,11 +561,17 @@ function render() {
     <section class="section-block">
       <h3>What you should do now</h3>
       <div class="action-checklist">
-        ${data.checklist.map((item, index) => `
-          <button type="button" class="${index === selectedGuide ? "selected" : ""}" data-guide="${index}">
-            ${item}
-          </button>
-        `).join("")}
+        ${data.checklist.map((item, index, list) => {
+          const text = typeof item === "string" ? item : item.text;
+          const timing = typeof item === "string" ? "" : item.timing;
+          const previousTiming = index > 0 && typeof list[index - 1] !== "string" ? list[index - 1].timing : "";
+          return `
+            ${timing && timing !== previousTiming ? `<p class="action-timing">${timing}</p>` : ""}
+            <button type="button" class="${index === selectedGuide ? "selected" : ""}" data-guide="${index}">
+              ${text}
+            </button>
+          `;
+        }).join("")}
       </div>
     </section>
   ` : "";
@@ -608,31 +592,7 @@ function render() {
       </div>
     </section>
   ` : "";
-  const selectedTimelineNote = data.timelineNotes?.[selectedGuide] || data.timelineNotes?.[0];
-  const selectedPhrase = selectedTimelineNote ? [selectedTimelineNote.ja, selectedTimelineNote.en] : (data.jpHelp?.[selectedGuide] || data.jpHelp?.[0]);
-  const timelineNotes = data.timelineNotes ? `
-    <section class="timeline-notes" aria-label="Station steps with Japanese help">
-      <h3>Station notes</h3>
-      <div class="timeline-note-list">
-        ${data.timelineNotes.map((item, index) => {
-          const key = `${state.screen}:${index}`;
-          return `
-            <div class="timeline-note-item">
-              <button type="button" class="note-help-button" data-timeline-note="${index}">
-                ${item.note}
-              </button>
-              ${state.noteByScreen[key] ? `
-                <div class="phrase-card note-help-card">
-                  <p class="phrase-ja">${item.ja}</p>
-                  <p class="phrase-en">${item.en}</p>
-                </div>
-              ` : ""}
-            </div>
-          `;
-        }).join("")}
-      </div>
-    </section>
-  ` : "";
+  const selectedPhrase = data.jpHelp?.[selectedGuide] || data.jpHelp?.[0];
   const jpHelp = selectedPhrase ? `
     <section class="jp-help" aria-label="Japanese phrases to show if stuck">
       <h3>Show this in JP</h3>
@@ -693,7 +653,6 @@ function render() {
     ${show}
     ${transportChoices}
     ${checklist}
-    ${timelineNotes}
     ${jpHelp}
     ${guidance}
     ${actions}
@@ -722,14 +681,6 @@ document.addEventListener("click", (event) => {
   const noteHelp = event.target.closest("[data-note-help]");
   if (noteHelp) {
     state.noteByScreen[state.screen] = !state.noteByScreen[state.screen];
-    render();
-    return;
-  }
-
-  const timelineNote = event.target.closest("[data-timeline-note]");
-  if (timelineNote) {
-    const key = `${state.screen}:${timelineNote.dataset.timelineNote}`;
-    state.noteByScreen[key] = !state.noteByScreen[key];
     render();
     return;
   }
