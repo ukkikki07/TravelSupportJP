@@ -355,7 +355,7 @@ const screens = {
       { timing: "Before entering ticket gate", text: "Prepare the limited express ticket" },
       { timing: "After entering ticket gate", text: "Confirm reserved or non-reserved seat" },
       { timing: "After entering ticket gate", text: "Confirm train name, car number, and seat" },
-      { timing: "Just After on Board", text: "Check luggage space if needed" }
+      { timing: "After on Board", text: "Check luggage space if needed" }
     ],
     guidance: [
       "Confirm ticket and train details before going through the gate or boarding.",
