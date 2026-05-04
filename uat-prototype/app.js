@@ -678,7 +678,11 @@ function render() {
   const show = data.show ? `
     <div class="show-card" data-no-monetized="true">
       ${state.screen === "show-place" ? `
-        <p class="show-meta">Final Destination: <strong>${state.destination}</strong>${state.area ? ` / ${state.area}` : ""}</p>
+        <div class="show-destination-block">
+          <span>Final Destination</span>
+          <strong>${state.destination}</strong>
+          ${state.area ? `<em>${state.area}</em>` : ""}
+        </div>
       ` : ""}
       <p class="ja">${data.show.ja}</p>
       <p class="en">${data.show.en}</p>
