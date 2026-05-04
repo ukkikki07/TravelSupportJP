@@ -74,7 +74,7 @@ const screens = {
     ],
     actions: [
       ["I arrived here", "arrival-check", "primary"],
-      ["Show destination in JP", "show-place", "secondary"],
+      ["Show Final Destination in JP", "show-place", "secondary"],
       ["Switch to taxi", "taxi-prep", "secondary"]
     ],
     monetized: {
@@ -113,7 +113,7 @@ const screens = {
   },
   "show-place": {
     status: "UAT-03",
-    title: "Show destination in JP",
+    title: "Show Final Destination in JP",
     summary: "Show this screen to staff or someone nearby when you need help.",
     guidance: [
       "Show the full screen. The large Japanese line is for the other person.",
@@ -243,7 +243,7 @@ const screens = {
     actions: [
       ["Open Google Maps", "maps-opened", "primary"],
       ["Switch to taxi", "taxi-prep", "secondary"],
-      ["Show destination in JP", "show-place", "secondary"]
+      ["Show Final Destination in JP", "show-place", "secondary"]
     ]
   },
   "taxi-prep": {
@@ -333,7 +333,7 @@ const screens = {
       ["この電車は目的地の駅に止まりますか。急行・快速でも大丈夫ですか。", "Does this train stop at my destination station? Is a rapid or express train okay?"]
     ],
     actions: [
-      ["Show destination in JP", "show-place", "primary"],
+      ["Show Final Destination in JP", "show-place", "primary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ]
   },
@@ -473,7 +473,7 @@ const screens = {
     ],
     actions: [
       ["Open Google Maps", "maps-opened", "primary"],
-      ["Show destination in JP", "show-place", "secondary"],
+      ["Show Final Destination in JP", "show-place", "secondary"],
       ["Back", "transport", "secondary"]
     ],
     monetized: {
@@ -503,7 +503,7 @@ const screens = {
     ],
     actions: [
       ["I arrived", "done", "primary"],
-      ["Show destination in JP", "show-place", "secondary"],
+      ["Show Final Destination in JP", "show-place", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ]
   },
@@ -521,10 +521,21 @@ const screens = {
   }
 };
 
+const commonTransportActionScreens = new Set([
+  "bus-prep",
+  "taxi-prep",
+  "train-prep",
+  "limited-prep",
+  "coach-prep",
+  "other-prep",
+  "arrival-check"
+]);
+
 function render() {
   const data = screens[state.screen] || screens.start;
   const screen = document.querySelector("#screen");
   const isTransportChoice = state.screen === "transport";
+  const usesCommonTransportActions = commonTransportActionScreens.has(state.screen);
   const context = (data.fields || isTransportChoice) ? "" : `
     <section class="context-bar transit-flow" aria-label="Current trip context">
       <div class="origin-box context-origin">
@@ -663,12 +674,19 @@ function render() {
       <span>${data.monetized.body}</span>
     </aside>
   ` : "";
-  const actions = data.actions ? `
+  const commonTransportActions = usesCommonTransportActions ? `
+    <nav class="journey-footer" aria-label="Journey navigation">
+      <button type="button" class="secondary" data-target="maps-opened">Open Google Maps</button>
+      <button type="button" class="secondary" data-target="show-place">Show Final Destination in JP</button>
+      <button type="button" class="primary" data-action="arrived-next">Arrived / Change transport</button>
+    </nav>
+  ` : "";
+  const actions = (!usesCommonTransportActions && data.actions) ? `
     <div class="actions">
       ${data.actions.map(([label, target, kind]) => `<button type="button" class="${kind || "secondary"}" data-target="${target}">${label}</button>`).join("")}
     </div>
   ` : "";
-  const journeyFooter = (!data.fields && state.screen !== "transport" && state.screen !== "done") ? `
+  const journeyFooter = (!usesCommonTransportActions && !data.fields && state.screen !== "transport" && state.screen !== "done") ? `
     <nav class="journey-footer" aria-label="Journey navigation">
       <button type="button" class="primary" data-action="arrived-next">Arrived / Change transport</button>
     </nav>
@@ -687,6 +705,7 @@ function render() {
     ${jpHelp}
     ${guidance}
     ${actions}
+    ${commonTransportActions}
     ${monetized}
     ${noteHelp}
     ${data.note ? `<p class="note">${data.note}</p>` : ""}

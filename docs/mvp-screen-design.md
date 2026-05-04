@@ -35,9 +35,9 @@
 - 「〜してください」「〜お願いします」はできるだけ使わず、「目的地: 〇〇」「次に行く場所: △△」「Google Mapsを開く」のようなラベル・行動文を優先する。
 - 人に見せる日本語は、原則「〇〇へ行きたいです」「〇〇で降りたいです」「〇〇を使いたいです」のように目的を直接伝える。「確認したいです」は支払い可否、券種、返金、変更など、目的だけでは判断できない場面に限る。
 - チェックリストや入力ラベルも、名詞だけにしない。`Ticket`、`Train name`、`Boarding place` ではなく、`Prepare ticket`、`Confirm train name`、`Check boarding place` のように、何をする項目か分かるDOを入れる。
-- 人に見せる画面へ進むボタンは、`Show Japanese` のような内部名にしない。基本は `Show destination in JP` に統一し、予約・乗車券など目的地以外のものを見せる時だけ `Show booking in JP` のように対象を明記する。`Show` は他人に見せる行為を含むため、通常は `to someone` を付けない。
+- 人に見せる画面へ進むボタンは、`Show Japanese` のような内部名にしない。基本は `Show Final Destination in JP` に統一し、予約・乗車券など目的地以外のものを見せる時だけ `Show booking in JP` のように対象を明記する。`Show` は他人に見せる行為を含むため、通常は `to someone` を付けない。
 - ボタンは英語主表示にする。日本語は必要な場合のみ補助表示にする。
-- 例: `Open Google Maps / Google Mapsを開く`, `Show destination in JP / 目的地を日本語で見せる`, `I arrived / 目的地に着いた`
+- 例: `Open Google Maps / Google Mapsを開く`, `Show Final Destination in JP / 最終目的地を日本語で見せる`, `I arrived / 目的地に着いた`
 - 理由説明は事前準備画面に置き、乗車直前・運転手向け画面は短い確認文に絞る。
 - 理由: 移動中は画面を読む時間が短く、人にスマホを見せられる時間も短い。目的・現在地・次の行動を先に出す方が、誤解と誤操作を減らせる。
 - UATサイトは見た目だけの確認用にしない。本番想定の文言、現在の移動文脈、迷った時の行動、なぜ重要かが読める状態にし、英語しか読めない初回旅行者が画面だけで次の行動を判断できるかを確認する。
@@ -223,7 +223,7 @@ MVPに含める機能範囲:
 - 控えめな注意が必要な場合は、主文に混ぜず `Note` として分ける。Noteをタップした時だけ、対応する見せる日本語を表示してよい。例: 新幹線の大きな荷物置き場予約。
 - 理由説明は1文まで。
 - 交通手段固有の長い説明は補足へ送る。
-- 主ボタンは `Open Google Maps`、`Show destination in JP`、`Show booking in JP`、`I checked` のように、行動と目的が分かる文言を基本にする。
+- 主ボタンは `Open Google Maps`、`Show Final Destination in JP`、`Show booking in JP`、`I checked` のように、行動と目的が分かる文言を基本にする。
 
 #### `ChecklistBlock`
 
@@ -280,7 +280,7 @@ Google Mapsから戻った後の復帰画面。
 
 表示ルール:
 - 補足に隠さない。
-- `Switch to taxi` を近くに置く。
+- `Switch to taxi` を常時の下段ナビには置かず、警告本文、If unsure、または例外条件の案内として出す。
 - 「1本逃すと、次が数時間後、または今日中に移動できないことがある」を必要時に表示する。
 
 #### `FallbackActions`
@@ -296,6 +296,13 @@ Google Mapsから戻った後の復帰画面。
 - 迷った時の画面では必ず出す。
 - 交通手段ごとの差でボタンを増やしすぎない。
 - `Switch to taxi` は夜間、本数少ない地域、荷物が多い時に優先表示する。
+
+交通手段メイン画面の下段ナビ:
+- `Open Google Maps`
+- `Show Final Destination in JP`
+- `Arrived / Change transport`
+
+交通手段メイン画面では、基本的に下段ナビを上記3つに統一する。タクシー切り替え、予約表示、乗車券表示、係員向けの細かな確認は、必要な画面内の `What you should do now`、`If unsure`、または例外画面に置き、常時表示の下段ボタンにはしない。
 
 #### `TaxiProviderResolver`
 
@@ -374,7 +381,7 @@ Try a taxi app available in this area.
 | 用途 | 標準文言 |
 |---|---|
 | Google Mapsを開く | `Open Google Maps` |
-| 人に見せる | `Show destination in JP` / `Show booking in JP` |
+| 人に見せる | `Show Final Destination in JP` / `Show booking in JP` |
 | 係員に聞く | `Ask staff` |
 | 周囲の人に聞く | `Ask someone nearby` |
 | タクシーへ切り替える | `Switch to taxi` |
@@ -514,6 +521,7 @@ Google Mapsで目的地を確認。
 - 交通手段選択ページには、文脈バー、長い説明、If unsure、日本語ヘルプを置かない。基本的に交通手段を選ぶリンク/ボタンだけを表示する。
 - 各交通手段ページの最下段には、`Arrived / Change transport` を置く。
 - `Arrived / Change transport` は、次の駅・バス停・乗り場・入口などに着いた後、または今の交通手段選択を変えたい時に、交通手段選択へ戻るボタンとする。
+- 各交通手段ページの最下段ボタンは、原則 `Open Google Maps`、`Show Final Destination in JP`、`Arrived / Change transport` の3つに統一する。
 
 ### 各区間で保存する情報
 - 次に向かう場所
@@ -2280,10 +2288,10 @@ I want to go toward my destination station. Which platform should I wait at?
 Does this train stop at my destination station? Is a rapid or express train okay?
 
 [Google Mapsを開く]
-[Show destination in JP]
+[Show Final Destination in JP]
 ```
 
-普通電車画面では、`Show station request in JP` のような専用画面を別に作らず、Set destinationと同じ `Show destination in JP` を使う。タクシー切り替えはGoogle Maps確認後に利用者が判断するため、通常の普通電車準備画面の最下段には置かない。
+普通電車画面では、`Show station request in JP` のような専用画面を別に作らず、Set destinationと同じ `Show Final Destination in JP` を使う。タクシー切り替えはGoogle Maps確認後に利用者が判断するため、通常の普通電車準備画面の最下段には置かない。
 
 ### 普通電車の混雑注意
 ```text

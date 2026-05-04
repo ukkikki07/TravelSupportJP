@@ -11,6 +11,8 @@ Google Mapsは経路検索と地図上のナビゲーションに使う。この
 
 補完ツールとして使うため、交通手段ごとの画面に細かな逃げ道リンクを増やしすぎない。Google Mapsを確認した上で利用者が判断できるものは、通常画面の下部リンクに置かず、迷った時の説明や例外条件に留める。
 
+交通手段メイン画面の下段ボタンは、原則として `Open Google Maps`、`Show Final Destination in JP`、`Arrived / Change transport` の3つに統一し、`Show Final Destination in JP` はSet destinationの同名ボタンと同じ画面へ進める。タクシー切り替え、予約表示、乗車券表示、係員向けの細かな確認は、常時表示の下段ボタンではなく、画面内の `What you should do now`、`If unsure`、または例外画面に置く。
+
 ## 文言とUI/Flowの指針
 UI文言は、丁寧な説明文ではなく、目的を先に伝える短文に統一する。
 
