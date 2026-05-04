@@ -465,6 +465,15 @@ input {
   margin-top: 18px;
 }
 
+.journey-footer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
 .primary {
   border-color: var(--primary);
   background: var(--primary);
@@ -554,7 +563,8 @@ input {
   .destination-row,
   .transit-row,
   .transport-choice-grid,
-  .actions {
+  .actions,
+  .journey-footer {
     grid-template-columns: 1fr;
   }
 

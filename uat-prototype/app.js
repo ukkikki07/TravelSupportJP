@@ -615,6 +615,12 @@ function render() {
       ${data.actions.map(([label, target, kind]) => `<button type="button" class="${kind || "secondary"}" data-target="${target}">${label}</button>`).join("")}
     </div>
   ` : "";
+  const journeyFooter = (!data.fields && state.screen !== "transport" && state.screen !== "done") ? `
+    <nav class="journey-footer" aria-label="Journey navigation">
+      <button type="button" class="primary" data-action="arrived-next">Arrived at next point</button>
+      <button type="button" class="secondary" data-target="transport">Change transport</button>
+    </nav>
+  ` : "";
 
   screen.innerHTML = `
     <div class="status">${data.status}</div>
@@ -631,6 +637,7 @@ function render() {
     ${actions}
     ${monetized}
     ${data.note ? `<p class="note">${data.note}</p>` : ""}
+    ${journeyFooter}
     <p class="note">Prototype for PC and smartphone UAT. Not production UI.</p>
   `;
 }
@@ -639,6 +646,12 @@ document.addEventListener("click", (event) => {
   const action = event.target.closest("[data-action]");
   if (action?.dataset.action === "reset") {
     state.screen = "start";
+    render();
+    return;
+  }
+  if (action?.dataset.action === "arrived-next") {
+    state.currentPlace = state.nextPlace;
+    state.screen = "transport";
     render();
     return;
   }
