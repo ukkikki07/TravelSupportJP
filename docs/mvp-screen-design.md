@@ -20,6 +20,7 @@
 - Google Mapsへ渡すパラメータは原則Destinationに限定する。ルート、交通手段、乗換、時刻、徒歩ナビはGoogle Mapsに任せる。
 - Final destination入力前に、利用者はGoogle Mapsで目的地を調べ、場所名と地域情報を確認する。
 - Set destination画面では、Google Mapsで表示された場所名を入力するDOとして `Type in the place shown in Google Maps` を表示する。
+- 通信不安定時の保険としてスクショを薦める場合は、バス画面ではなくSet destination段階で説明する。主導線はGoogle Mapsオンライン利用のままとし、スクショは「正しいGoogle Maps目的地を後で確認するためのバックアップ」に限る。
 - Final destination入力は、`Destination name` だけに必須ラベルを付ける。`Area / city / prefecture` は推奨ラベルを付ける。`Place type` と `Next place` にはOptionalラベルを付けず、`Add place type`、`Set next place to go now` のようにDOを含むラベルで入力を促す。
 - Google Mapsへ渡す検索文字列は、原則 `Destination name + Area / city / prefecture` とする。
 - Google Mapsで表示された場所が、実際に行きたい場所と一致しているかをユーザーが必ず目視確認する。同名の別施設、別支店、別地域、入口違いがあり得るため。
@@ -1403,7 +1404,7 @@ Google Mapsでバスルートを開く。
 [戻る]
 ```
 
-路線バスはGoogle Mapsでの確認と連携する前提にする。オフライン利用を主導線にせず、スクショ撮影を必須Actionにしない。通信不安定時の保険としてスクショを撮ることは否定しないが、MVPではGoogle Mapsのバスルートを再表示し、必要に応じてその画面を人に見せる導線を優先する。
+路線バスはGoogle Mapsでの確認と連携する前提にする。オフライン利用を主導線にせず、スクショ撮影をバス画面のActionにしない。MVPではGoogle Mapsのバスルートを再表示し、必要に応じてその画面を人に見せる導線を優先する。
 
 ### Google Mapsバスルート確認後
 ```text

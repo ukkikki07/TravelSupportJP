@@ -38,7 +38,8 @@ const screens = {
       ["Select transportation", "transport", "primary"],
       ["Show Final Destination in JP", "show-place", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
-    ]
+    ],
+    note: "Backup only: this app expects you to use Google Maps online. If mobile data may be unstable later, take a screenshot of the correct Google Maps destination now and use it only as a backup."
   },
   "transport": {
     status: "UAT-02",
