@@ -526,6 +526,7 @@ Google Mapsで正しい目的地を確認。
 - 交通手段選択ページには、文脈バー、長い説明、If unsure、日本語ヘルプを置かない。基本的に交通手段を選ぶリンク/ボタンだけを表示する。
 - 各ページの最下段ボタンは、原則 `Select transportation`、`Show Final Destination in JP`、`Open Google Maps` の3つに統一する。
 - `Select transportation` は、次の交通手段を選ぶ場合、または今の交通手段選択を変えたい場合に、交通手段選択へ戻るボタンとする。
+- `Show Final Destination in JP` の `If unsure` はタップ可能にする。`Use this when you cannot explain the destination in Japanese.` は `私はこの場所に向かっています。` を展開する。`Show Google Maps to make sure you are on the route.` は `Googleマップのガイドは正しいですか。` を展開する。
 
 ### 各区間で保存する情報
 - 次に向かう場所

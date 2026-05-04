@@ -15,6 +15,8 @@ Google Mapsは経路検索と地図上のナビゲーションに使う。この
 
 `Show Final Destination in JP` で見せる日本語は `私はこの場所に向かっています。` を基本にする。交通手段ページ上部では、通過ポイントではなく、Set Destinationで入力した `Final Destination` と `Area of the place` を引き継いで表示する。
 
+`Show Final Destination in JP` の `If unsure` はタップ可能にする。`Use this when you cannot explain the destination in Japanese.` は `私はこの場所に向かっています。` を展開する。`Show Google Maps to make sure you are on the route.` は `Googleマップのガイドは正しいですか。` を展開する。
+
 `Where you are` は入力用フォームではなく、現在地確認のための表示Boxとして扱う。ラベルは付けず、Box内に黒単色Boldで表示する。Google Mapsで開く場合は、出発地をアプリから渡さず、Google Maps側の現在地を利用者自身に確認してもらう。このアプリがGoogle Mapsから現在地名や駅名を自動取得する前提にはしない。
 
 入力が必要なフォーム、押せるボタン、読むだけの表示Boxは、全ページで視覚的に区別できるようにする。入力欄は入力面、ボタンは押せる面、表示Boxは操作できない情報として見えることを優先する。

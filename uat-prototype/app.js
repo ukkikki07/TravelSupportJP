@@ -117,8 +117,12 @@ const screens = {
     title: "Show Final Destination in JP",
     summary: "Show this screen to staff or someone nearby when you need help.",
     guidance: [
-      "Show the full screen. The large Japanese line is for the other person.",
-      "Use this when you cannot explain the destination in Japanese."
+      { text: "Use this when you cannot explain the destination in Japanese.", helpIndex: 0 },
+      { text: "Show Google Maps to make sure you are on the route.", helpIndex: 1 }
+    ],
+    jpHelp: [
+      ["私はこの場所に向かっています。", "I am heading to this place."],
+      ["Googleマップのガイドは正しいですか。", "Show Google Maps to make sure you are on the route."]
     ],
     show: {
       ja: "私はこの場所に向かっています。",

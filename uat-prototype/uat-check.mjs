@@ -75,6 +75,7 @@ record("GMAPS-01", "Critical", "open maps passes final destination", js.includes
 record("GMAPS-02", "High", "maps URL does not force origin or travel mode", !js.includes("&origin=") && !js.includes("travelmode="), "current location and transport mode stay in Google Maps");
 record("VISUAL-01", "High", "inputs buttons and read-only boxes are visually distinct", css.includes("--input-bg") && css.includes(".where-display") && css.includes("font-weight: 800") && css.includes("input:focus") && css.includes(".primary:hover") && !js.includes("<span>Where you are."), "Where you are is a bold read-only box, not a labeled input");
 record("SHOWDEST-01", "Critical", "show final destination phrase is heading state", js.includes("私はこの場所に向かっています。") && js.includes("I am heading to this place.") && js.includes("show-meta"), "Show Final Destination uses heading-to-place phrasing with destination context");
+record("SHOWDEST-02", "Critical", "show final destination unsure choices are tappable", js.includes("Use this when you cannot explain the destination in Japanese.") && js.includes("Show Google Maps to make sure you are on the route.") && js.includes("Googleマップのガイドは正しいですか。"), "Final destination page If unsure expands matching Japanese phrases");
 
 const failCount = results.filter((r) => r.status === "FAIL").length;
 const criticalFailCount = results.filter((r) => r.status === "FAIL" && r.priority === "Critical").length;
