@@ -499,7 +499,7 @@ Google Mapsで目的地を確認。
 - Set Destination以外の交通手段ページでは、`Where you are.`、交通手段、`Next Transit point` の順に視線が流れる配置にする。
 - 交通手段ページの主文脈は `Next Transit point` とその地域に置く。最終目的地は補助表示にし、今向かう場所と最終目的地を混同させない。
 - 交通手段メニューは常時画面上部に固定しない。最初の起点は必ずSet Destinationにし、下向き矢印の `public transportation` をボタン化して交通手段メニューへ進ませる。
-- Set Destination画面では、交通手段選択へ進む導線を `public transportation` ボタンに集約する。別の `Choose transport` ボタンを重複して置かない。
+- Set Destination画面では、下向き矢印の `public transportation` に加えて、画面最下段の左端にも `Public transportation` ボタンを置く。目的地入力後の次の主行動として迷わず進めるようにする。
 - 各交通手段ページでも、同じ `public transportation` ボタンから交通手段メニューへ戻れるようにする。
 - `public transportation` ボタンを押した後は、下段の汎用アクション列ではなく、単独の交通手段選択ページを表示する。
 - 交通手段選択ページでは、Train、Taxi、Shinkansen、Highway Bus、Local Bus、Otherを主コンテンツとして縦並びにする。スマホで押しやすく、サイト表示でも選択肢として読みやすい形を優先する。
