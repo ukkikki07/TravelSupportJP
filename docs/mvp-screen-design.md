@@ -18,13 +18,13 @@
 - 本アプリ・サイトは、目的地までたどり着くために、それぞれの交通手段に合った質問や日本独自のルールを明示する補完ツールとする。常に次の正解を自動判定するのではなく、利用者がGoogle Mapsで確認した内容を、現場で人に見せる・確認する・迷った時に戻るための補助レイヤーとして機能する。
 - Google Mapsは経路検索・地図表示・現在地確認に使い、本アプリはGoogle Mapsで見ている情報を現場で人に伝える補助レイヤーとして使う。
 - MVPでは、自サイト内・アプリ内にGoogle Mapsを埋め込まない。`Open Google Maps` は外部のGoogle MapsアプリまたはGoogle Maps Webを開く導線にする。
-- Google Mapsへ渡すパラメータは原則Destinationに限定する。ルート、交通手段、乗換、時刻、徒歩ナビはGoogle Mapsに任せる。
+- Google Mapsへ渡すパラメータは原則Destinationに限定する。`Open Google Maps` を押すたびに、その時点のFinal DestinationをGoogle Mapsへ渡す。出発地、ルート、交通手段、乗換、時刻、徒歩ナビは渡さず、Google Maps側の現在地と最新案内を利用者が見て判断する。
 - Final destination入力前に、利用者はGoogle Mapsで目的地を調べ、場所名と地域情報を確認する。
 - Set destination画面では、Google Mapsで表示された場所名を入力するDOとして `Type in the place shown in Google Maps` を表示する。
 - Set destination段階のDO Listでは、スクショは「目的地名・場所を後で確認するための保険」としてだけ扱う。ルート、交通手段、時刻、次の便はライブのGoogle Mapsを優先する。地方・過疎地・本数が少ない地域では、1本逃すだけで案内全体が変わるため、スクショ時点の交通手段に沿って進ませない。
 - スクショを撮る場合は、撮影直前にGoogle Maps上の目的地が正しいことを確認させる。バス停到着後に「撮ったスクショが正しいか」を確認させる導線にはしない。
 - Final destination入力は、`Destination name` だけに必須ラベルを付ける。`Area / city / prefecture` は推奨ラベルを付ける。`Place type` と `Next place` にはOptionalラベルを付けず、`Add place type`、`Set next place to go now` のようにDOを含むラベルで入力を促す。
-- Google Mapsへ渡す検索文字列は、原則 `Destination name + Area / city / prefecture` とする。
+- Google Mapsへ渡す検索文字列は、原則 `Destination name + Area / city / prefecture + Place type` とする。必須は `Destination name` のみだが、同名地点の誤指定を避けるため、地域と種別が入力されていれば一緒に渡す。
 - Google Mapsで表示された場所が、実際に行きたい場所と一致しているかをユーザーが必ず目視確認する。同名の別施設、別支店、別地域、入口違いがあり得るため。
 - 本アプリ側ではGoogle Mapsの経路結果を解析しない。
 - 必要な場面では、Google Mapsの画面と本アプリの日本語文を組み合わせて見せる。

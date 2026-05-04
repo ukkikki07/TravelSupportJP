@@ -521,6 +521,25 @@ const screens = {
   }
 };
 
+function buildDestinationQuery() {
+  return [state.destination, state.area, state.placeType]
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .join(" ");
+}
+
+function buildGoogleMapsUrl() {
+  const destination = buildDestinationQuery() || state.destination;
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`;
+}
+
+function maybeOpenGoogleMaps() {
+  const url = buildGoogleMapsUrl();
+  if (typeof window !== "undefined" && typeof window.open === "function") {
+    window.open(url, "_blank", "noopener");
+  }
+}
+
 function render() {
   const data = screens[state.screen] || screens.start;
   const screen = document.querySelector("#screen");
@@ -668,12 +687,15 @@ function render() {
     <nav class="journey-footer" aria-label="Journey navigation">
       <button type="button" class="primary" data-target="transport">Select transportation</button>
       <button type="button" class="secondary" data-target="show-place">Show Final Destination in JP</button>
-      <button type="button" class="secondary" data-target="maps-opened">Open Google Maps</button>
+      <button type="button" class="secondary" data-target="maps-opened" data-open-maps="true">Open Google Maps</button>
     </nav>
   ` : "";
   const actions = (!usesCommonBottomActions && data.actions) ? `
     <div class="actions">
-      ${data.actions.map(([label, target, kind]) => `<button type="button" class="${kind || "secondary"}" data-target="${target}">${label}</button>`).join("")}
+      ${data.actions.map(([label, target, kind]) => {
+        const mapsAttr = target === "maps-opened" ? ' data-open-maps="true"' : "";
+        return `<button type="button" class="${kind || "secondary"}" data-target="${target}"${mapsAttr}>${label}</button>`;
+      }).join("")}
     </div>
   ` : "";
 
@@ -721,6 +743,9 @@ document.addEventListener("click", (event) => {
 
   const target = event.target.closest("[data-target]");
   if (target) {
+    if (target.dataset.openMaps === "true") {
+      maybeOpenGoogleMaps();
+    }
     state.screen = target.dataset.target;
     render();
     return;
