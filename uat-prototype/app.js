@@ -247,8 +247,8 @@ const screens = {
     summary: "Choose where this taxi should go.",
     checklist: [
       { timing: "Before getting in taxi", text: "Tell staff if you have large luggage or need airport transfer", helpIndex: 2 },
-      { timing: "Before getting in taxi", text: "Choose the final destination if taking taxi all the way", helpIndex: 0 },
-      { timing: "Before getting in taxi", text: "Choose the next station or bus stop if using taxi only for this section", helpIndex: 1 }
+      { timing: "After taxi stops, ask driver before it starts", text: "Show the final destination if taking taxi all the way", helpIndex: 0 },
+      { timing: "After taxi stops, ask driver before it starts", text: "Show the next station or bus stop if using taxi only for this section", helpIndex: 1 }
     ],
     guidance: [
       "If the taxi is only for part of the trip, show only the taxi destination to the driver.",
