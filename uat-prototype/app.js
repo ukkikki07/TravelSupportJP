@@ -521,21 +521,11 @@ const screens = {
   }
 };
 
-const commonTransportActionScreens = new Set([
-  "bus-prep",
-  "taxi-prep",
-  "train-prep",
-  "limited-prep",
-  "coach-prep",
-  "other-prep",
-  "arrival-check"
-]);
-
 function render() {
   const data = screens[state.screen] || screens.start;
   const screen = document.querySelector("#screen");
   const isTransportChoice = state.screen === "transport";
-  const usesCommonTransportActions = commonTransportActionScreens.has(state.screen);
+  const usesCommonBottomActions = !data.fields && state.screen !== "transport" && state.screen !== "done";
   const context = (data.fields || isTransportChoice) ? "" : `
     <section class="context-bar transit-flow" aria-label="Current trip context">
       <div class="origin-box context-origin">
@@ -674,22 +664,17 @@ function render() {
       <span>${data.monetized.body}</span>
     </aside>
   ` : "";
-  const commonTransportActions = usesCommonTransportActions ? `
+  const commonBottomActions = usesCommonBottomActions ? `
     <nav class="journey-footer" aria-label="Journey navigation">
-      <button type="button" class="secondary" data-target="maps-opened">Open Google Maps</button>
+      <button type="button" class="primary" data-target="transport">Select transportation</button>
       <button type="button" class="secondary" data-target="show-place">Show Final Destination in JP</button>
-      <button type="button" class="primary" data-action="arrived-next">Arrived / Change transport</button>
+      <button type="button" class="secondary" data-target="maps-opened">Open Google Maps</button>
     </nav>
   ` : "";
-  const actions = (!usesCommonTransportActions && data.actions) ? `
+  const actions = (!usesCommonBottomActions && data.actions) ? `
     <div class="actions">
       ${data.actions.map(([label, target, kind]) => `<button type="button" class="${kind || "secondary"}" data-target="${target}">${label}</button>`).join("")}
     </div>
-  ` : "";
-  const journeyFooter = (!usesCommonTransportActions && !data.fields && state.screen !== "transport" && state.screen !== "done") ? `
-    <nav class="journey-footer" aria-label="Journey navigation">
-      <button type="button" class="primary" data-action="arrived-next">Arrived / Change transport</button>
-    </nav>
   ` : "";
 
   screen.innerHTML = `
@@ -705,11 +690,10 @@ function render() {
     ${jpHelp}
     ${guidance}
     ${actions}
-    ${commonTransportActions}
+    ${commonBottomActions}
     ${monetized}
     ${noteHelp}
     ${data.note ? `<p class="note">${data.note}</p>` : ""}
-    ${journeyFooter}
     <p class="note">Prototype for PC and smartphone UAT. Not production UI.</p>
   `;
 }
@@ -721,13 +705,6 @@ document.addEventListener("click", (event) => {
     render();
     return;
   }
-  if (action?.dataset.action === "arrived-next") {
-    state.currentPlace = state.nextPlace;
-    state.screen = "transport";
-    render();
-    return;
-  }
-
   const noteHelp = event.target.closest("[data-note-help]");
   if (noteHelp) {
     state.noteByScreen[state.screen] = !state.noteByScreen[state.screen];

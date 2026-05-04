@@ -297,12 +297,12 @@ Google Mapsから戻った後の復帰画面。
 - 交通手段ごとの差でボタンを増やしすぎない。
 - `Switch to taxi` は夜間、本数少ない地域、荷物が多い時に優先表示する。
 
-交通手段メイン画面の下段ナビ:
-- `Open Google Maps`
+画面下段ナビ:
+- `Select transportation`
 - `Show Final Destination in JP`
-- `Arrived / Change transport`
+- `Open Google Maps`
 
-交通手段メイン画面では、基本的に下段ナビを上記3つに統一する。タクシー切り替え、予約表示、乗車券表示、係員向けの細かな確認は、必要な画面内の `What you should do now`、`If unsure`、または例外画面に置き、常時表示の下段ボタンにはしない。
+画面下段ナビは、基本的に上記3つに統一する。タクシー切り替え、予約表示、乗車券表示、係員向けの細かな確認は、必要な画面内の `What you should do now`、`If unsure`、または例外画面に置き、常時表示の下段ボタンにはしない。
 
 #### `TaxiProviderResolver`
 
@@ -519,9 +519,8 @@ Google Mapsで目的地を確認。
 - 交通手段選択ページでは、Taxi、Train、Shinkansen、Highway Bus、Local Bus、Otherを主コンテンツとして縦並びにする。ホテル・駅・荷物がある場面ではTaxiを使う確率が高いため、最初に置く。スマホで押しやすく、サイト表示でも選択肢として読みやすい形を優先する。
 - Local Busは交通手段として難度が高いため、Otherの手前に置く。Local Busを選んだ後は、初回旅行者には難しい交通手段であり、経路・方向・現金・降車停留所を慎重に確認する必要があることを警告する。
 - 交通手段選択ページには、文脈バー、長い説明、If unsure、日本語ヘルプを置かない。基本的に交通手段を選ぶリンク/ボタンだけを表示する。
-- 各交通手段ページの最下段には、`Arrived / Change transport` を置く。
-- `Arrived / Change transport` は、次の駅・バス停・乗り場・入口などに着いた後、または今の交通手段選択を変えたい時に、交通手段選択へ戻るボタンとする。
-- 各交通手段ページの最下段ボタンは、原則 `Open Google Maps`、`Show Final Destination in JP`、`Arrived / Change transport` の3つに統一する。
+- 各ページの最下段ボタンは、原則 `Select transportation`、`Show Final Destination in JP`、`Open Google Maps` の3つに統一する。
+- `Select transportation` は、次の交通手段を選ぶ場合、または今の交通手段選択を変えたい場合に、交通手段選択へ戻るボタンとする。
 
 ### 各区間で保存する情報
 - 次に向かう場所
