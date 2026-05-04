@@ -23,6 +23,7 @@
 - [ ] 迷った時に何をするかが `If unsure` で分かる。
 - [ ] `What you should do now` の各行動を押すと、対応する `Show this in JP` の日本語文が同じ画面に出る。
 - [ ] `Show this in JP` は直訳だけでなく、英語訳付きで、相手が助けやすい補足や依頼を含んでいる。
+- [ ] `Show this in JP` は、目的地、地域、Google Maps画面、方向、乗り場、最終便、荷物など、画面の状況に合う手がかりを短く含んでいる。
 - [ ] 1画面の主ボタンが3つ程度に収まっている。
 - [ ] 長い説明が主画面を圧迫していない。
 - [ ] `Open Google Maps` の後に `BackFromMapsScreen` へ戻れる。

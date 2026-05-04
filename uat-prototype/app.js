@@ -25,10 +25,10 @@ const screens = {
       "If the place looks wrong, edit the destination before choosing transport."
     ],
     jpHelp: [
-      ["この場所へ行きたいです。", "I want to go to this place."],
-      ["この場所で合っていますか。", "Is this the correct place?"],
+      ["この場所へ行きたいです。Google Mapsではこの名前で表示されています。", "I want to go to this place. Google Maps shows this name."],
+      ["この場所で合っていますか。地域や住所も見てもらえますか。", "Is this the correct place? Can you also check the area or address?"],
       ["これは寺・ホテル・駅など、どの種類の場所ですか。", "What type of place is this, such as temple, hotel, or station?"],
-      ["Google Mapsのこの場所へ行きたいです。", "I want to go to this place shown on Google Maps."]
+      ["Google Mapsのこの場所へ行きたいです。同じ名前の別の場所ではないか見てもらえますか。", "I want to go to this place shown on Google Maps. Can you check it is not a different place with the same name?"]
     ],
     actions: [
       ["Choose transport", "transport", "primary"],
@@ -50,9 +50,9 @@ const screens = {
       "If the next leg feels too complicated or short, choose taxi."
     ],
     jpHelp: [
-      ["次に行く場所へ行きたいです。", "I want to go to the next place."],
-      ["Google Mapsでこの場所へ行きたいです。", "I want to go to this place with Google Maps."],
-      ["タクシーで行きたいです。", "I want to go by taxi."]
+      ["次に行く場所へ行きたいです。どの移動手段がよいですか。", "I want to go to the next place. Which transport should I use?"],
+      ["Google Mapsでこの場所へ行きたいです。ここからの行き方を見たいです。", "I want to go to this place with Google Maps. I want to see how to get there from here."],
+      ["タクシーで行きたいです。近くで乗れる場所はありますか。", "I want to go by taxi. Is there a nearby place to take one?"]
     ],
     actions: [
       ["Local bus / tram", "bus-prep", "primary"],
@@ -74,9 +74,9 @@ const screens = {
       "If you are still unsure where you are, open Google Maps or show the destination in JP."
     ],
     jpHelp: [
-      ["この場所へ行きたいです。", "I want to go to this place."],
-      ["この駅・バス停・入口で合っていますか。", "Is this the correct station, bus stop, or entrance?"],
-      ["入口へ行きたいです。", "I want to go to the entrance."]
+      ["この場所へ行きたいです。ここから次にどこへ向かえばよいですか。", "I want to go to this place. Where should I go next from here?"],
+      ["この駅・バス停・入口で合っていますか。Google Mapsではここです。", "Is this the correct station, bus stop, or entrance? Google Maps shows this place."],
+      ["入口へ行きたいです。近くまで来ています。", "I want to go to the entrance. I am nearby."]
     ],
     actions: [
       ["I arrived here", "arrival-check", "primary"],
@@ -105,11 +105,11 @@ const screens = {
       "If the entrance is unclear, keep Google Maps open and confirm again near the place."
     ],
     jpHelp: [
-      ["Google Mapsのこの場所へ行きたいです。", "I want to go to this place shown on Google Maps."],
-      ["この住所の場所へ行きたいです。", "I want to go to the place at this address."],
+      ["Google Mapsのこの場所へ行きたいです。同じ名前の別の場所ではないですか。", "I want to go to this place shown on Google Maps. Is it not a different place with the same name?"],
+      ["この住所の場所へ行きたいです。地域は合っていますか。", "I want to go to the place at this address. Is the area correct?"],
       ["これは寺・ホテル・駅など、どの種類の場所ですか。", "What type of place is this, such as temple, hotel, or station?"],
-      ["入口へ行きたいです。", "I want to go to the entrance."],
-      ["この場所で合っていますか。", "Is this the correct place?"]
+      ["入口へ行きたいです。ピンではなく入口を知りたいです。", "I want to go to the entrance. I need the entrance, not only the map pin."],
+      ["この場所で合っていますか。違う場合は教えてください。", "Is this the correct place? Please tell me if it is wrong."]
     ],
     actions: [
       ["This is correct", "maps-return", "primary"],
@@ -153,11 +153,10 @@ const screens = {
     ],
     jpHelp: [
       ["現金と小銭を用意したいです。近くにコンビニやお店はありますか。", "I want to prepare cash and coins. Is there a convenience store or any shop nearby?"],
-      ["このバスの番号か行き先を知りたいです。", "I want to know this bus route number or destination."],
-      ["このバス停で降りたいです。", "I want to get off at this bus stop."],
-      ["Google Mapsのこのバスに乗りたいです。", "I want to take this bus shown on Google Maps."],
-      ["このバス停から清水寺方面へ行きたいです。", "I want to go toward Kiyomizu-dera from this bus stop."],
-      ["小銭を用意したいです。近くにコンビニやお店はありますか。", "I want to prepare coins. Is there a convenience store or any shop nearby?"]
+      ["このバスの番号か行き先を知りたいです。Google Mapsではこのバスです。", "I want to know this bus route number or destination. Google Maps shows this bus."],
+      ["このバス停で降りたいです。近づいたら教えてもらえますか。", "I want to get off at this bus stop. Can you tell me when it is close?"],
+      ["Google Mapsのこのバスに乗りたいです。この画面で合っていますか。", "I want to take this bus shown on Google Maps. Is this screen correct?"],
+      ["このバス停から清水寺方面へ行きたいです。道路のこちら側で合っていますか。", "I want to go toward Kiyomizu-dera from this bus stop. Is this the correct side of the road?"]
     ],
     note: "Note: Some bus companies may accept transit IC cards.",
     actions: [
@@ -217,9 +216,9 @@ const screens = {
       "If the destination is not far, taxi is usually safer than waiting."
     ],
     jpHelp: [
-      ["次の同じ行き先のバスに乗りたいです。", "I want to take the next bus with the same destination."],
-      ["目的地が遠くないです。タクシーで行きたいです。", "My destination is not far. I want to take a taxi."],
-      ["最終バスはまだありますか。", "Is there still a last bus?"]
+      ["次の同じ行き先のバスに乗りたいです。ここで待てばよいですか。", "I want to take the next bus with the same destination. Should I wait here?"],
+      ["目的地が遠くないです。タクシーで行きたいです。近くで乗れますか。", "My destination is not far. I want to take a taxi. Can I take one nearby?"],
+      ["最終バスはまだありますか。待っても大丈夫ですか。", "Is there still a last bus? Is it okay to wait?"]
     ],
     actions: [
       ["Wait for next bus", "bus-before-boarding", "primary"],
@@ -242,9 +241,9 @@ const screens = {
       "If there may be no later service today, switch to taxi or ask staff immediately."
     ],
     jpHelp: [
-      ["次の便はまだありますか。", "Is there another service?"],
-      ["最終便は終わりましたか。", "Has the last service already left?"],
-      ["タクシーで行きたいです。", "I want to go by taxi."]
+      ["次の便はまだありますか。長く待つ必要がありますか。", "Is there another service? Will I need to wait a long time?"],
+      ["最終便は終わりましたか。今日中に移動できますか。", "Has the last service already left? Can I still travel today?"],
+      ["タクシーで行きたいです。ここから呼べますか。", "I want to go by taxi. Can I call one from here?"]
     ],
     actions: [
       ["Open Google Maps", "maps-opened", "primary"],
@@ -266,9 +265,9 @@ const screens = {
       "Ask hotel staff if you do not know where the taxi should drop you."
     ],
     jpHelp: [
-      ["タクシーでこの場所まで行きたいです。", "I want to go to this place by taxi."],
-      ["タクシーでは次の駅・バス停まで行きたいです。", "I want to go only to the next station or bus stop by taxi."],
-      ["大きな荷物があります。タクシーを呼びたいです。", "I have large luggage. I want to call a taxi."]
+      ["タクシーでこの場所まで行きたいです。ここを目的地として伝えてください。", "I want to go to this place by taxi. Please use this as the taxi destination."],
+      ["タクシーでは次の駅・バス停まで行きたいです。最終目的地ではありません。", "I want to go only to the next station or bus stop by taxi. It is not my final destination."],
+      ["大きな荷物があります。タクシーを呼びたいです。乗る場所も知りたいです。", "I have large luggage. I want to call a taxi and know where to board."]
     ],
     actions: [
       ["Go to final destination", "taxi-driver", "primary"],
@@ -329,10 +328,10 @@ const screens = {
       "If you are unsure about rapid or express trains, show the station request in JP."
     ],
     jpHelp: [
-      ["切符かICカードを用意したいです。", "I want to prepare a ticket or IC card."],
-      ["この駅の改札へ行きたいです。", "I want to go to the ticket gate at this station."],
-      ["目的地の駅へ行きたいです。", "I want to go to my destination station."],
-      ["この電車は目的地の駅に止まりますか。", "Does this train stop at my destination station?"]
+      ["切符かICカードを用意したいです。この駅から目的地まで乗れますか。", "I want to prepare a ticket or IC card. Can I go from this station to my destination?"],
+      ["この駅の改札へ行きたいです。どの改札ですか。", "I want to go to the ticket gate at this station. Which gate should I use?"],
+      ["目的地の駅へ行きたいです。どのホームですか。", "I want to go to my destination station. Which platform should I use?"],
+      ["この電車は目的地の駅に止まりますか。急行・快速でも大丈夫ですか。", "Does this train stop at my destination station? Is a rapid or express train okay?"]
     ],
     actions: [
       ["Show station request in JP", "train-show", "primary"],
@@ -373,11 +372,11 @@ const screens = {
       "For reserved seats, train name, time, car number, and seat must match."
     ],
     jpHelp: [
-      ["この切符でこの列車に乗りたいです。", "I want to take this train with this ticket."],
-      ["この特急券で乗りたいです。", "I want to ride with this limited express ticket."],
-      ["指定席ですか、自由席ですか。", "Is this reserved or non-reserved?"],
-      ["この列車名・号数の列車に乗りたいです。", "I want to take the train with this name and number."],
-      ["大きな荷物があります。置き場所を知りたいです。", "I have large luggage. I want to know where to put it."]
+      ["この切符でこの列車に乗りたいです。改札に通す切符はどれですか。", "I want to take this train with this ticket. Which ticket should I put through the gate?"],
+      ["この特急券で乗りたいです。乗車券も必要ですか。", "I want to ride with this limited express ticket. Do I also need a basic fare ticket?"],
+      ["指定席ですか、自由席ですか。座る場所を知りたいです。", "Is this reserved or non-reserved? I want to know where to sit."],
+      ["この列車名・号数の列車に乗りたいです。電光掲示板のどれですか。", "I want to take the train with this name and number. Which one is it on the departure board?"],
+      ["大きな荷物があります。置き場所や予約が必要ですか。", "I have large luggage. Do I need a luggage space or reservation?"]
     ],
     actions: [
       ["Reserved seat", "limited-show", "primary"],
@@ -418,11 +417,11 @@ const screens = {
       "If the counter is closed, show the booking to the driver or boarding staff quickly."
     ],
     jpHelp: [
-      ["この予約でこのバスに乗りたいです。", "I want to take this bus with this booking."],
-      ["このバス会社と便名で合っていますか。", "Is this the correct bus company and service name?"],
-      ["乗り場へ行きたいです。", "I want to go to the boarding area."],
-      ["出発時刻と行き先を確認したいです。", "I want to confirm the departure time and destination."],
-      ["大きな荷物を預けたいです。", "I want to check large luggage."]
+      ["この予約でこのバスに乗りたいです。予約画面だけで乗れますか。", "I want to take this bus with this booking. Can I board with only this booking screen?"],
+      ["このバス会社と便名で合っていますか。乗るバスを間違えたくありません。", "Is this the correct bus company and service name? I do not want to take the wrong bus."],
+      ["乗り場へ行きたいです。建物・階・番号を教えてください。", "I want to go to the boarding area. Please tell me the building, floor, or number."],
+      ["出発時刻と行き先を知りたいです。集合時刻も教えてください。", "I want to know the departure time and destination. Please also tell me the meeting time."],
+      ["大きな荷物を預けたいです。どこで、いつ預けますか。", "I want to check in large luggage. Where and when should I leave it?"]
     ],
     actions: [
       ["Show booking in JP", "coach-show", "primary"],
@@ -461,9 +460,9 @@ const screens = {
       "Use official information, the service app, counter staff, or local staff."
     ],
     jpHelp: [
-      ["この場所へ行きたいです。", "I want to go to this place."],
-      ["公式情報を確認したいです。", "I want to check official information."],
-      ["窓口か係員に聞きたいです。", "I want to ask the counter or staff."]
+      ["この場所へ行きたいです。公式の乗り場や入口はどこですか。", "I want to go to this place. Where is the official boarding area or entrance?"],
+      ["公式情報を見たいです。運休や最終便はありますか。", "I want to see official information. Is there any suspension or last service?"],
+      ["窓口か係員に聞きたいです。どこへ行けばよいですか。", "I want to ask the counter or staff. Where should I go?"]
     ],
     actions: [
       ["Open Google Maps", "maps-opened", "primary"],
@@ -490,10 +489,10 @@ const screens = {
       "If the entrance or meeting point is unclear, show the destination in JP or open Google Maps again."
     ],
     jpHelp: [
-      ["入口へ行きたいです。", "I want to go to the entrance."],
-      ["受付へ行きたいです。", "I want to go to the reception."],
-      ["集合場所へ行きたいです。", "I want to go to the meeting place."],
-      ["近くの目印から入口へ行きたいです。", "I want to go to the entrance from a nearby landmark."]
+      ["入口へ行きたいです。Google Mapsのピンではなく入口を知りたいです。", "I want to go to the entrance. I need the entrance, not only the Google Maps pin."],
+      ["受付へ行きたいです。この建物で合っていますか。", "I want to go to the reception. Is this the correct building?"],
+      ["集合場所へ行きたいです。ここで合っていますか。", "I want to go to the meeting place. Is this the correct place?"],
+      ["近くの目印から入口へ行きたいです。道を教えてください。", "I want to go to the entrance from a nearby landmark. Please tell me the way."]
     ],
     actions: [
       ["I arrived", "done", "primary"],
