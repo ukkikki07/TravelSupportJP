@@ -73,6 +73,7 @@ record("JPHELP-01", "Critical", "stuck actions include Japanese phrases", js.inc
 record("ACTIONGUIDE-01", "Critical", "current-action guidance is selectable", js.includes("What you should do now") && js.includes("data-guide") && css.includes(".action-checklist button.selected"), "current action buttons drive Japanese guidance");
 record("GMAPS-01", "Critical", "open maps passes final destination", js.includes("function buildGoogleMapsUrl") && js.includes("https://www.google.com/maps/dir/?api=1&destination=") && js.includes("encodeURIComponent(destination)") && js.includes("data-open-maps"), "Open Google Maps builds a destination-only directions URL");
 record("GMAPS-02", "High", "maps URL does not force origin or travel mode", !js.includes("&origin=") && !js.includes("travelmode="), "current location and transport mode stay in Google Maps");
+record("VISUAL-01", "High", "inputs buttons and read-only boxes are visually distinct", css.includes("--input-bg") && css.includes(".where-display") && css.includes("font-weight: 800") && css.includes("input:focus") && css.includes(".primary:hover") && !js.includes("<span>Where you are."), "Where you are is a bold read-only box, not a labeled input");
 
 const failCount = results.filter((r) => r.status === "FAIL").length;
 const criticalFailCount = results.filter((r) => r.status === "FAIL" && r.priority === "Critical").length;

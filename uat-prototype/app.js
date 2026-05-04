@@ -549,7 +549,6 @@ function render() {
   const context = (data.fields || isTransportChoice) ? "" : `
     <section class="context-bar transit-flow" aria-label="Current trip context">
       <div class="origin-box context-origin">
-        <span>Where you are.</span>
         <div class="where-display">Where you are</div>
       </div>
       <button type="button" class="transport-arrow" data-target="transport" aria-label="Choose public transportation">
@@ -569,7 +568,6 @@ function render() {
   const fields = data.fields ? `
     <section class="destination-flow" aria-label="Set destination flow">
       <div class="origin-box">
-        <span>Where you are.</span>
         <div class="where-display">Where you are</div>
       </div>
       <button type="button" class="transport-arrow" data-target="transport" aria-label="Choose public transportation">

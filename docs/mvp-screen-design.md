@@ -485,8 +485,8 @@ Many places in Japan have the same name.
 
 Take time here. Ask someone or prepare it before travel if needed.
 
-Where you are.
-現在地を示す表示Box。入力欄にはしない。
+Where you are
+現在地を示す表示Box。入力欄にはしない。ラベルは付けず、Box内に黒単色Boldで表示する。
 
 ↓ public transportation
 
@@ -510,11 +510,12 @@ Google Mapsで正しい目的地を確認。
 ```
 
 配置ルール:
-- `Where you are.`、交通手段、`Final Destination` の順に視線が流れる配置にする。
-- `Where you are.` は入力用フォームではなく、現在地確認のための表示Boxにする。Google Mapsで開く場合は、出発地をアプリから渡さず、Google Maps側の現在地を利用者自身に確認してもらう。Google Mapsから現在地名や駅名を自動で受け取る前提にはしない。
+- `Where you are`、交通手段、`Final Destination` の順に視線が流れる配置にする。
+- `Where you are` は入力用フォームではなく、現在地確認のための表示Boxにする。ラベルは不要で、Box内に黒単色Boldで表示する。Google Mapsで開く場合は、出発地をアプリから渡さず、Google Maps側の現在地を利用者自身に確認してもらう。Google Mapsから現在地名や駅名を自動で受け取る前提にはしない。
 - `Destination name`、`Area of the place`、`Type of the place` は横並びまたは縦積みで近接させ、3つが目的地の選別情報だと分かるようにする。
 - `Destination name` だけを必須にする。地域と種別は、同名施設を避けるための補足情報として見せる。
-- Set Destination以外の交通手段ページでは、`Where you are.`、交通手段、`Next Transit point` の順に視線が流れる配置にする。
+- Set Destination以外の交通手段ページでは、`Where you are`、交通手段、`Next Transit point` の順に視線が流れる配置にする。
+- 入力が必要なフォーム、押せるボタン、読むだけの表示Boxは、全ページで視覚的に区別できるようにする。入力欄は入力面として強い枠と背景を持たせ、ボタンは押せる面として影・ホバー・押下感を持たせ、表示Boxは操作できない情報として単色の静的表示にする。
 - 交通手段ページの主文脈は `Next Transit point` とその地域に置く。最終目的地は補助表示にし、今向かう場所と最終目的地を混同させない。
 - 交通手段メニューは常時画面上部に固定しない。最初の起点は必ずSet Destinationにし、下向き矢印の `public transportation` をボタン化して交通手段メニューへ進ませる。
 - Set Destination画面では、下向き矢印の `public transportation` に加えて、画面最下段の左端にも `Select transportation` ボタンを置く。目的地入力後の次の主行動として迷わず進めるようにする。
