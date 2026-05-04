@@ -15,7 +15,7 @@ const screens = {
   "start": {
     status: "UAT-01",
     title: "Set destination",
-    summary: "Check the destination in Google Maps first. Many places in Japan have the same name.",
+    summary: "Use Google Maps for live routes. Use this tool to show, confirm, and recover when you are unsure.",
     fields: true,
     checklist: [
       "Destination name is required",
