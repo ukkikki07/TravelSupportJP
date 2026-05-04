@@ -131,11 +131,11 @@ const screens = {
     summary: "Prepare before going to the bus stop.",
     warning: "Local buses are difficult for first-time travelers. Use this only if you can carefully check the route, direction, cash, and stop. If unsure, choose taxi or train.",
     checklist: [
-      "Prepare cash and coins",
-      "Check the bus route number or destination",
-      "Check the stop to get off",
-      "Save the Google Maps route screen",
-      "Confirm the direction of this bus stop"
+      { timing: "Before going to the bus stop", text: "Prepare cash and coins", helpIndex: 0 },
+      { timing: "Before going to the bus stop", text: "Save the Google Maps route screen", helpIndex: 3 },
+      { timing: "At the bus stop, before the bus arrives", text: "Confirm the direction of this bus stop", helpIndex: 4 },
+      { timing: "At the bus stop, before the bus arrives", text: "Check the bus route number or destination", helpIndex: 1 },
+      { timing: "At the bus stop, before the bus arrives", text: "Check the stop to get off", helpIndex: 2 }
     ],
     guidance: [
       "Confirm the bus stop direction before the bus arrives. Asking the driver after the bus arrives may be too late.",
@@ -351,11 +351,11 @@ const screens = {
     title: "Shinkansen / limited express",
     summary: "Confirm ticket type and seat before boarding.",
     checklist: [
-      "Prepare the basic fare ticket",
-      "Prepare the limited express ticket",
-      "Confirm reserved or non-reserved seat",
-      "Confirm train name, car number, and seat",
-      "Check luggage space if needed"
+      { timing: "Before entering ticket gate", text: "Prepare the basic fare ticket" },
+      { timing: "Before entering ticket gate", text: "Prepare the limited express ticket" },
+      { timing: "Before entering ticket gate", text: "Confirm reserved or non-reserved seat" },
+      { timing: "Before boarding", text: "Confirm train name, car number, and seat" },
+      { timing: "Before boarding", text: "Check luggage space if needed" }
     ],
     guidance: [
       "Confirm ticket and train details before going through the gate or boarding.",
@@ -401,11 +401,11 @@ const screens = {
     title: "Highway / airport / night bus",
     summary: "Confirm booking and boarding place.",
     checklist: [
-      "Prepare ticket, QR, email, or booking number",
-      "Confirm bus company and service name",
-      "Confirm boarding place and meeting time",
-      "Check departure time and destination",
-      "Check luggage drop-off if needed"
+      { timing: "Before going to the boarding place", text: "Prepare ticket, QR, email, or booking number", helpIndex: 0 },
+      { timing: "Before going to the boarding place", text: "Confirm boarding place and meeting time", helpIndex: 2 },
+      { timing: "At the boarding place", text: "Confirm bus company and service name", helpIndex: 1 },
+      { timing: "At the boarding place", text: "Check departure time and destination", helpIndex: 3 },
+      { timing: "At the boarding place", text: "Check luggage drop-off if needed", helpIndex: 4 }
     ],
     guidance: [
       "Confirm at the counter or with boarding staff before the bus arrives.",
@@ -592,7 +592,11 @@ function render() {
       </div>
     </section>
   ` : "";
-  const selectedPhrase = data.jpHelp?.[selectedGuide] || data.jpHelp?.[0];
+  const selectedChecklistItem = data.checklist?.[selectedGuide];
+  const selectedHelpIndex = typeof selectedChecklistItem === "object" && Number.isInteger(selectedChecklistItem.helpIndex)
+    ? selectedChecklistItem.helpIndex
+    : selectedGuide;
+  const selectedPhrase = data.jpHelp?.[selectedHelpIndex] || data.jpHelp?.[0];
   const jpHelp = selectedPhrase ? `
     <section class="jp-help" aria-label="Japanese phrases to show if stuck">
       <h3>Show this in JP</h3>
