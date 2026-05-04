@@ -259,16 +259,16 @@ const screens = {
       { timing: "Before getting in taxi", text: "Tell staff if you have large luggage and need to call a taxi", helpIndex: 2 },
       { timing: "Before getting in taxi", text: "Raise one arm straight up toward an available taxi", helpIndex: 3 },
       { timing: "After taxi stops, ask driver before it starts", text: "Show the final destination if taking taxi all the way", helpIndex: 0 },
-      { timing: "After taxi stops, ask driver before it starts", text: "Show the next station or bus stop if using taxi only for this section", helpIndex: 1 }
+      { timing: "After taxi stops, ask driver before it starts", text: "Show only the taxi destination", helpIndex: 1 }
     ],
     guidance: [
-      { text: "If the taxi is only for part of the trip, show only the taxi destination to the driver.", helpIndex: 1 },
+      { text: "Show only the taxi destination.", helpIndex: 1 },
       { text: "If you have large luggage or do not know where to board, ask staff before getting in.", helpIndex: 2 },
       { text: "Take a taxi to the final destination.", helpIndex: 0 }
     ],
     jpHelp: [
       ["タクシーで{finalDestinationLabel}まで行きたいです。", "I want to go to {finalDestinationLabel} by taxi."],
-      ["タクシーでは次の駅・バス停まで行きたいです。最終目的地ではありません。", "I want to go only to the next station or bus stop by taxi. It is not my final destination."],
+      ["タクシーでは{taxiDestinationLabel}まで行きたいです。最終目的地ではありません。", "I want to go only to {taxiDestinationLabel} by taxi. It is not my final destination."],
       ["大きな荷物があります。タクシーを呼びたいです。乗る場所も知りたいです。", "I have large luggage. I want to call a taxi and know where to board."],
       ["タクシーを拾いたいです。タクシーに向かって片手をまっすぐ上に挙げます。", "I want to hail a taxi. I will raise one arm straight up toward the taxi."]
     ],
@@ -304,7 +304,7 @@ const screens = {
     title: "Show taxi driver",
     guidance: [
       "Show only where the taxi should go now.",
-      "If the taxi is only to a station or bus stop, do not show the final tourist destination as the taxi destination."
+      "If the taxi is only for part of the trip, do not show the final tourist destination as the taxi destination."
     ],
     show: {
       ja: "清水寺まで行きたいです。",
@@ -545,8 +545,17 @@ function buildFinalDestinationLabel() {
     .join(" / ");
 }
 
+function buildTaxiDestinationLabel() {
+  return [state.nextPlace, state.area]
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .join(" / ");
+}
+
 function fillTemplate(text) {
-  return text.replaceAll("{finalDestinationLabel}", buildFinalDestinationLabel() || state.destination);
+  return text
+    .replaceAll("{finalDestinationLabel}", buildFinalDestinationLabel() || state.destination)
+    .replaceAll("{taxiDestinationLabel}", buildTaxiDestinationLabel() || state.nextPlace || state.destination);
 }
 
 function maybeOpenGoogleMaps() {
