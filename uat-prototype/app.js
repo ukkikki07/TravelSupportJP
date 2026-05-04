@@ -141,7 +141,7 @@ const screens = {
     warning: "Local buses are difficult for first-time travelers. Use this only if you can carefully check the route, direction, cash, and stop. If unsure, choose taxi or train.",
     checklist: [
       { timing: "Before going to the bus stop", text: "Prepare cash and coins", helpIndex: 0 },
-      { timing: "Before going to the bus stop", text: "Keep the Google Maps bus route ready to show", helpIndex: 3 },
+      { timing: "Before going to the bus stop", text: "Show the bus destination in Google Maps", helpIndex: 3 },
       { timing: "At the bus stop, before the bus arrives", text: "Confirm the direction of this bus stop", helpIndex: 4 },
       { timing: "At the bus stop, before the bus arrives", text: "Check the bus route number or destination", helpIndex: 1 },
       { timing: "At the bus stop, before the bus arrives", text: "Check the stop to get off", helpIndex: 2 }
@@ -149,13 +149,13 @@ const screens = {
     guidance: [
       { text: "If the bus stop direction is unclear, ask before the bus arrives.", helpIndex: 4 },
       { text: "If the route number or destination is unclear, show the Google Maps bus screen.", helpIndex: 1 },
-      { text: "If no one can help, reopen the Google Maps bus route or switch to taxi.", helpIndex: 3 }
+      { text: "Show the Google Maps screen to confirm where this bus should go.", helpIndex: 3 }
     ],
     jpHelp: [
       ["現金と小銭を用意したいです。近くにコンビニやお店はありますか。", "I want to prepare cash and coins. Is there a convenience store or any shop nearby?"],
       ["このバスの番号か行き先を知りたいです。Google Mapsではこのバスです。", "I want to know this bus route number or destination. Google Maps shows this bus."],
       ["このバス停で降りたいです。近づいたら教えてもらえますか。", "I want to get off at this bus stop. Can you tell me when it is close?"],
-      ["Google Mapsのこのバスに乗りたいです。このバス停と方向で合っていますか。", "I want to take this bus shown on Google Maps. Is this the correct bus stop and direction?"],
+      ["Googleマップの{transportDestinationLabel}で降りたいです。このバスで合っていますか。", "I want to get off at {transportDestinationLabel} shown in Google Maps. Is this the correct bus?"],
       ["このバス停から清水寺方面へ行きたいです。道路のこちら側で合っていますか。", "I want to go toward Kiyomizu-dera from this bus stop. Is this the correct side of the road?"]
     ],
     note: "Note: Some bus companies may accept transit IC cards.",
@@ -259,16 +259,16 @@ const screens = {
       { timing: "Before getting in taxi", text: "Tell staff if you have large luggage and need to call a taxi", helpIndex: 2 },
       { timing: "Before getting in taxi", text: "Raise one arm straight up toward an available taxi", helpIndex: 3 },
       { timing: "After taxi stops, ask driver before it starts", text: "Show the final destination if taking taxi all the way", helpIndex: 0 },
-      { timing: "After taxi stops, ask driver before it starts", text: "Show only the taxi destination", helpIndex: 1 }
+      { timing: "After taxi stops, ask driver before it starts", text: "Show the taxi destination in Google Maps", helpIndex: 1 }
     ],
     guidance: [
-      { text: "Show only the taxi destination.", helpIndex: 1 },
+      { text: "Show the taxi destination in Google Maps.", helpIndex: 1 },
       { text: "If you have large luggage or do not know where to board, ask staff before getting in.", helpIndex: 2 },
       { text: "Take a taxi to the final destination.", helpIndex: 0 }
     ],
     jpHelp: [
       ["タクシーで{finalDestinationLabel}まで行きたいです。", "I want to go to {finalDestinationLabel} by taxi."],
-      ["タクシーでは{taxiDestinationLabel}まで行きたいです。最終目的地ではありません。", "I want to go only to {taxiDestinationLabel} by taxi. It is not my final destination."],
+      ["Googleマップの{taxiDestinationLabel}までタクシーで行きたいです。最終目的地ではありません。", "I want to go only to {taxiDestinationLabel} shown in Google Maps by taxi. It is not my final destination."],
       ["大きな荷物があります。タクシーを呼びたいです。乗る場所も知りたいです。", "I have large luggage. I want to call a taxi and know where to board."],
       ["タクシーを拾いたいです。タクシーに向かって片手をまっすぐ上に挙げます。", "I want to hail a taxi. I will raise one arm straight up toward the taxi."]
     ],
@@ -323,18 +323,18 @@ const screens = {
     checklist: [
       { timing: "Before entering ticket gate", text: "Find the ticket gate for the train shown in Google Maps" },
       { timing: "Before entering ticket gate", text: "Buy a ticket or charge an IC card before entering" },
-      { timing: "After entering ticket gate", text: "Confirm platform and direction" },
+      { timing: "After entering ticket gate", text: "Show the train destination in Google Maps" },
       { timing: "After entering ticket gate", text: "Confirm the train stops at your station" }
     ],
     guidance: [
       { text: "Ask station staff or gate staff before entering the wrong railway gate or platform.", helpIndex: 0 },
-      { text: "If you are unsure about platform or direction, show the platform request in JP.", helpIndex: 2 },
+      { text: "Show the Google Maps screen to confirm which station this train should go toward.", helpIndex: 2 },
       { text: "If you are unsure about rapid or express trains, show the train stop request in JP.", helpIndex: 3 }
     ],
     jpHelp: [
       ["Google Mapsのこの電車に乗りたいです。改札はどこですか？", "I want to take this train shown in Google Maps. Where is the ticket gate?"],
       ["切符の購入、またはICカードをチャージしたいです。どこでできますか。", "I want to buy a ticket or charge my IC card. Where can I do this?"],
-      ["目的の駅へ向かいたいです。どのホームで待てばよいですか。", "I want to go toward my destination station. Which platform should I wait at?"],
+      ["Googleマップの{transportDestinationLabel}へ向かいたいです。どのホームで待てばよいですか。", "I want to go toward {transportDestinationLabel} shown in Google Maps. Which platform should I wait at?"],
       ["この電車は目的地の駅に止まりますか。急行・快速でも大丈夫ですか。", "Does this train stop at my destination station? Is a rapid or express train okay?"]
     ],
     actions: [
@@ -367,13 +367,13 @@ const screens = {
       { timing: "Before entering ticket gate", text: "Prepare the basic fare ticket" },
       { timing: "Before entering ticket gate", text: "Prepare the limited express ticket" },
       { timing: "After entering ticket gate", text: "Confirm reserved or non-reserved seat" },
-      { timing: "After entering ticket gate", text: "Confirm train name, car number, and seat" },
+      { timing: "After entering ticket gate", text: "Show the train destination in Google Maps" },
       { timing: "After on Board", text: "Check luggage space if needed" }
     ],
     guidance: [
       { text: "If you are unsure which ticket to put through the gate, show the ticket request in JP.", helpIndex: 0 },
       { text: "If you are unsure whether this is reserved or non-reserved, show the seat request in JP.", helpIndex: 2 },
-      { text: "If the train name or number is unclear, show the display board request in JP.", helpIndex: 3 },
+      { text: "Show the Google Maps screen to confirm this train goes toward the transport destination.", helpIndex: 3 },
       { text: "If you have large luggage, show the luggage request after boarding.", helpIndex: 4 }
     ],
     noteHelp: {
@@ -385,7 +385,7 @@ const screens = {
       ["この切符でこの列車に乗りたいです。改札に通す切符はどれですか。", "I want to take this train with this ticket. Which ticket should I put through the gate?"],
       ["この特急券で乗りたいです。乗車券も必要ですか。", "I want to ride with this limited express ticket. Do I also need a basic fare ticket?"],
       ["この切符は指定席ですか、自由席ですか。座る場所を知りたいです。", "Is this ticket for a reserved seat or non-reserved seat? I want to know where to sit."],
-      ["この列車名・号数の列車に乗りたいです。案内表示(LED掲示)板に表示されていますか。", "I want to take the train with this name and number. Is it shown on the information display / LED board?"],
+      ["Googleマップの{transportDestinationLabel}へ向かいたいです。この列車で合っていますか。", "I want to go toward {transportDestinationLabel} shown in Google Maps. Is this the correct train?"],
       ["大きな荷物があります。置き場所はありますか？", "I have large luggage. Is there a place to put it?"]
     ],
     actions: [
@@ -417,13 +417,13 @@ const screens = {
     summary: "Confirm booking and boarding place.",
     checklist: [
       { timing: "Before going to the boarding place", text: "Prepare ticket, QR, email, or booking number", helpIndex: 0 },
-      { timing: "Before going to the boarding place", text: "Confirm boarding place and meeting time", helpIndex: 2 },
+      { timing: "Before going to the boarding place", text: "Show the boarding place in Google Maps", helpIndex: 2 },
       { timing: "At the boarding place", text: "Confirm bus company and service name", helpIndex: 1 },
       { timing: "At the boarding place", text: "Check departure time and destination", helpIndex: 3 },
       { timing: "At the boarding place", text: "Check luggage drop-off if needed", helpIndex: 4 }
     ],
     guidance: [
-      { text: "If the boarding place is unclear, ask for the building, floor, or number.", helpIndex: 2 },
+      { text: "Show the Google Maps screen to confirm the boarding place, building, floor, or number.", helpIndex: 2 },
       { text: "If the bus company or service name is unclear, show the company and service request.", helpIndex: 1 },
       { text: "If the booking screen may not be enough, show the booking request.", helpIndex: 0 },
       { text: "If you have large luggage, ask where and when to drop it off.", helpIndex: 4 }
@@ -431,7 +431,7 @@ const screens = {
     jpHelp: [
       ["この予約でこのバスに乗りたいです。予約画面だけで乗れますか。", "I want to take this bus with this booking. Can I board with only this booking screen?"],
       ["このバス会社と便名で合っていますか。", "Is this the correct bus company and service name?"],
-      ["乗り場へ行きたいです。建物・階・番号を教えてください。", "I want to go to the boarding area. Please tell me the building, floor, or number."],
+      ["Googleマップの{transportDestinationLabel}の乗り場へ行きたいです。建物・階・番号を教えてください。", "I want to go to the boarding area at {transportDestinationLabel} shown in Google Maps. Please tell me the building, floor, or number."],
       ["出発時刻と行き先を知りたいです。集合時刻も教えてください。", "I want to know the departure time and destination. Please also tell me the meeting time."],
       ["大きな荷物を預けたいです。どこで、いつ預けますか。", "I want to check in large luggage. Where and when should I leave it?"]
     ],
@@ -463,7 +463,7 @@ const screens = {
     title: "Other transport",
     summary: "Rules differ by company and location.",
     checklist: [
-      "Open Google Maps in the real product",
+      "Show this transport destination in Google Maps",
       "Check official information",
       "Ask the counter or staff"
     ],
@@ -472,7 +472,7 @@ const screens = {
       "Use official information, the service app, counter staff, or local staff."
     ],
     jpHelp: [
-      ["この場所へ行きたいです。公式の乗り場や入口はどこですか。", "I want to go to this place. Where is the official boarding area or entrance?"],
+      ["Googleマップの{transportDestinationLabel}へ行きたいです。公式の乗り場や入口はどこですか。", "I want to go to {transportDestinationLabel} shown in Google Maps. Where is the official boarding area or entrance?"],
       ["公式情報を見たいです。運休や最終便はありますか。", "I want to see official information. Is there any suspension or last service?"],
       ["窓口か係員に聞きたいです。どこへ行けばよいですか。", "I want to ask the counter or staff. Where should I go?"]
     ],
@@ -552,10 +552,18 @@ function buildTaxiDestinationLabel() {
     .join(" / ");
 }
 
+function buildTransportDestinationLabel() {
+  return [state.nextPlace, state.area]
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .join(" / ");
+}
+
 function fillTemplate(text) {
   return text
     .replaceAll("{finalDestinationLabel}", buildFinalDestinationLabel() || state.destination)
-    .replaceAll("{taxiDestinationLabel}", buildTaxiDestinationLabel() || state.nextPlace || state.destination);
+    .replaceAll("{taxiDestinationLabel}", buildTaxiDestinationLabel() || state.nextPlace || state.destination)
+    .replaceAll("{transportDestinationLabel}", buildTransportDestinationLabel() || state.nextPlace || state.destination);
 }
 
 function maybeOpenGoogleMaps() {
