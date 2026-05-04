@@ -42,8 +42,8 @@ const screens = {
     status: "UAT-02",
     title: "Public transportation",
     transportChoices: [
-      ["Train", "train-prep"],
       ["Taxi", "taxi-prep"],
+      ["Train", "train-prep"],
       ["Shinkansen", "limited-prep"],
       ["Highway Bus", "coach-prep"],
       ["Local Bus", "bus-prep"],
