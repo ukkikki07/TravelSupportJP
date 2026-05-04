@@ -38,32 +38,21 @@ const screens = {
   },
   "transport": {
     status: "UAT-02",
-    title: "Choose next transport",
-    summary: "Pick the transport you will use now.",
-    checklist: [
-      "Choose before you start moving",
-      "Use Google Maps for route and location",
-      "Use this tool for local confirmation"
+    title: "Public transportation",
+    summary: "Choose the transport for this section.",
+    transportChoices: [
+      ["Local Bus", "bus-prep"],
+      ["Train", "train-prep"],
+      ["Taxi", "taxi-prep"],
+      ["Shinkansen", "limited-prep"],
+      ["Highway Bus", "coach-prep"],
+      ["Other", "other-prep"]
     ],
     guidance: [
       "Choose the transport for the next leg shown in Google Maps, not the whole trip.",
       "If the next leg feels too complicated or short, choose taxi."
-    ],
-    jpHelp: [
-      ["次の場所へ行きたいです。どの移動手段がよいですか。", "I want to go to the next place. Which transport should I use?"],
-      ["Google Mapsでこの場所へ行きたいです。ここからの行き方を見たいです。", "I want to go to this place with Google Maps. I want to see how to get there from here."],
-      ["タクシーで行きたいです。近くで乗れる場所はありますか。", "I want to go by taxi. Is there a nearby place to take one?"]
-    ],
-    actions: [
-      ["Local Bus", "bus-prep", "secondary"],
-      ["Train", "train-prep", "secondary"],
-      ["Taxi", "taxi-prep", "secondary"],
-      ["Shinkansen", "limited-prep", "secondary"],
-      ["Highway Bus", "coach-prep", "secondary"],
-      ["Other", "other-prep", "secondary"]
     ]
-  },
-  "maps-return": {
+  },  "maps-return": {
     status: "UAT-02",
     title: "Back from Google Maps",
     summary: "Now confirm the next action.",
@@ -584,6 +573,16 @@ function render() {
       </ul>
     </section>
   ` : "";
+  const transportChoices = data.transportChoices ? `
+    <section class="transport-choice-page" aria-label="Public transportation choices">
+      <h3>Choose public transportation</h3>
+      <div class="transport-choice-grid">
+        ${data.transportChoices.map(([label, target]) => `
+          <button type="button" class="secondary" data-target="${target}">${label}</button>
+        `).join("")}
+      </div>
+    </section>
+  ` : "";
   const jpHelp = data.jpHelp ? `
     <section class="jp-help" aria-label="Japanese phrases to show if stuck">
       <h3>Show this in JP</h3>
@@ -612,7 +611,7 @@ function render() {
     </aside>
   ` : "";
   const actions = data.actions ? `
-    <div class="actions ${state.screen === "transport" ? "transport-menu" : ""}">
+    <div class="actions">
       ${data.actions.map(([label, target, kind]) => `<button type="button" class="${kind || "secondary"}" data-target="${target}">${label}</button>`).join("")}
     </div>
   ` : "";
@@ -625,6 +624,7 @@ function render() {
     ${fields}
     ${warning}
     ${show}
+    ${transportChoices}
     ${checklist}
     ${jpHelp}
     ${guidance}
