@@ -549,6 +549,25 @@ input {
   margin-top: 12px;
 }
 
+.timeline-notes {
+  margin-top: 12px;
+}
+
+.timeline-notes h3 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+}
+
+.timeline-note-list {
+  display: grid;
+  gap: 8px;
+}
+
+.timeline-note-item {
+  border-top: 1px solid var(--border);
+  padding-top: 6px;
+}
+
 .note-help-button {
   min-height: 34px;
   border: 0;

@@ -2246,15 +2246,30 @@ Check the walking route to your destination in Google Maps.
 
 モノレールは普通電車・地下鉄の簡易フローで扱う。駅、改札、ホーム、方向、降りる駅を確認し、空港や施設へ向かう場合はターミナル・入口が合っているかも確認する。
 
-Google Mapsで、乗る路線、乗る駅、降りる駅、乗り換え駅を確認したうえで、現場では「このホーム・この電車で合っているか」を確認する。
+Google Mapsで、乗る路線、乗る駅、降りる駅、乗り換え駅を確認したうえで、駅付近に着いた後は「この電車の改札」「ホーム」「この電車で合っているか」を時系列に確認する。
+
+普通電車準備は、出発前のホテルで聞く導線ではなく、駅付近にたどり着いた後の導線として扱う。複数の鉄道会社・路線が入る駅では、駅名よりも「Google Mapsに表示されたこの電車」の改札を確認することを優先する。利用者に鉄道会社名・路線名を入力させすぎず、Google Maps画面を一緒に見せる前提で短い日本語を出す。
 
 ### 普通電車利用開始
 ```text
 普通電車・地下鉄・モノレールを確認。
+駅付近に着いた後、改札に入る前から順番に確認。
 
-[駅員に聞く]
-[ホームで確認]
-[切符・ICを確認]
+1. Google Mapsのこの電車に乗りたいです。改札はどこですか？
+I want to take this train shown in Google Maps. Where is the ticket gate?
+
+2. 切符の購入、またはICカードをチャージしたいです。どこでできますか。
+I want to buy a ticket or charge my IC card. Where can I do this?
+
+3. 目的地の駅へ行きたいです。どのホームですか。
+I want to go to my destination station. Which platform should I use?
+
+4. この電車は目的地の駅に止まりますか。急行・快速でも大丈夫ですか。
+Does this train stop at my destination station? Is a rapid or express train okay?
+
+[Google Mapsを開く]
+[人に見せる]
+[タクシーに切り替える]
 ```
 
 ### 普通電車の混雑注意
