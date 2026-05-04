@@ -514,9 +514,9 @@ Google Mapsで正しい目的地を確認。
 - `Where you are` は入力用フォームではなく、現在地確認のための表示Boxにする。ラベルは不要で、Box内に黒単色Boldで表示する。Google Mapsで開く場合は、出発地をアプリから渡さず、Google Maps側の現在地を利用者自身に確認してもらう。Google Mapsから現在地名や駅名を自動で受け取る前提にはしない。
 - `Destination name`、`Area of the place`、`Type of the place` は横並びまたは縦積みで近接させ、3つが目的地の選別情報だと分かるようにする。
 - `Destination name` だけを必須にする。地域と種別は、同名施設を避けるための補足情報として見せる。
-- Set Destination以外の交通手段ページでは、`Where you are`、交通手段、`Next Transit point` の順に視線が流れる配置にする。
+- Set Destination以外の交通手段ページでは、`Where you are`、交通手段、`Final Destination`、`Area of the place` の順に視線が流れる配置にする。`Final Destination` と `Area of the place` はSet Destinationで入力した値を引き継いで表示する。
 - 入力が必要なフォーム、押せるボタン、読むだけの表示Boxは、全ページで視覚的に区別できるようにする。入力欄は入力面として強い枠と背景を持たせ、ボタンは押せる面として影・ホバー・押下感を持たせ、表示Boxは操作できない情報として単色の静的表示にする。
-- 交通手段ページの主文脈は `Next Transit point` とその地域に置く。最終目的地は補助表示にし、今向かう場所と最終目的地を混同させない。
+- 交通手段ページの上部文脈は、通過ポイントではなくFinal DestinationとAreaを表示する。各交通手段の具体的な停留所・駅・乗り場は、必要なActionやGoogle Maps画面で確認する。
 - 交通手段メニューは常時画面上部に固定しない。最初の起点は必ずSet Destinationにし、下向き矢印の `public transportation` をボタン化して交通手段メニューへ進ませる。
 - Set Destination画面では、下向き矢印の `public transportation` に加えて、画面最下段の左端にも `Select transportation` ボタンを置く。目的地入力後の次の主行動として迷わず進めるようにする。
 - 各交通手段ページでも、同じ `public transportation` ボタンから交通手段メニューへ戻れるようにする。
@@ -1296,7 +1296,7 @@ I want to go to △△△△.
 | この駅の場所を知りたい。 | Where is this station? | 周囲の人 |
 | このバス停の場所を知りたい。 | Where is this bus stop? | 周囲の人 |
 | △△△△へ行きたいです。 | I want to go to △△△△. | 周囲の人 |
-| この場所へ行きたいです。 | I want to go to this place. | 周囲の人 |
+| 私はこの場所に向かっています。 | I am heading to this place. | 周囲の人 |
 
 ## 7. バス利用画面案（MVP対象: 路線バスの利用前準備）
 このセクションのうち、路線バスの注意、現金・小銭準備、Google Mapsバスルート確認、バス系統番号入力、バス停確認、バスが来ない時、バスが満員で乗れない時、バス乗車直前確認、バス支払い確認、高速・空港・夜行バスの利用前準備はMVP対象とする。路線バスの乗車中、降車準備、乗り過ごし、降車後確認は後続拡張とする。

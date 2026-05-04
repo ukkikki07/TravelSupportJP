@@ -121,8 +121,8 @@ const screens = {
       "Use this when you cannot explain the destination in Japanese."
     ],
     show: {
-      ja: "この場所へ行きたいです。",
-      en: "I want to go to this place."
+      ja: "私はこの場所に向かっています。",
+      en: "I am heading to this place."
     },
     actions: [
       ["Back", "start", "secondary"],
@@ -555,14 +555,15 @@ function render() {
         <span>public<br>transportation</span>
       </button>
       <div class="transit-row">
-        <label>Next Transit point
-          <input value="${state.nextPlace}" data-field="nextPlace" placeholder="Enter place name">
-        </label>
-        <label>Area of the place
-          <input value="${state.area}" data-field="area" placeholder="city / town / pref.">
-        </label>
+        <div class="readonly-field">
+          <span>Final Destination</span>
+          <strong>${state.destination}</strong>
+        </div>
+        <div class="readonly-field">
+          <span>Area of the place</span>
+          <strong>${state.area || "Area not set"}</strong>
+        </div>
       </div>
-      <p class="final-destination-note">Final destination: <strong>${state.destination}</strong></p>
     </section>
   `;
   const fields = data.fields ? `
@@ -672,6 +673,9 @@ function render() {
   ` : "";
   const show = data.show ? `
     <div class="show-card" data-no-monetized="true">
+      ${state.screen === "show-place" ? `
+        <p class="show-meta">Final Destination: <strong>${state.destination}</strong>${state.area ? ` / ${state.area}` : ""}</p>
+      ` : ""}
       <p class="ja">${data.show.ja}</p>
       <p class="en">${data.show.en}</p>
     </div>

@@ -300,12 +300,14 @@ h3 {
 }
 
 .destination-row label,
-.transit-row label {
+.transit-row label,
+.readonly-field {
   position: relative;
 }
 
 .destination-row label + label::before,
-.transit-row label + label::before {
+.transit-row label + label::before,
+.readonly-field + .readonly-field::before {
   content: "";
   position: absolute;
   top: 50%;
@@ -330,10 +332,29 @@ h3 {
   color: #9aa1aa;
 }
 
-.final-destination-note {
-  margin: 10px 0 0;
+.readonly-field {
+  display: grid;
+  gap: 6px;
+  min-height: 70px;
+}
+
+.readonly-field span {
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.readonly-field strong {
+  display: flex;
+  align-items: center;
+  min-height: 70px;
+  padding: 10px;
+  border: 1px solid #8a93a3;
+  border-radius: 6px;
+  background: var(--readonly-bg);
+  color: var(--ink);
+  font-size: 1rem;
+  overflow-wrap: anywhere;
 }
 
 label {
@@ -591,6 +612,16 @@ input:focus {
   font-size: 1rem;
 }
 
+.show-meta {
+  margin-bottom: 12px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.show-meta strong {
+  color: var(--ink);
+}
+
 .monetized {
   margin-top: 16px;
   padding: 12px;
@@ -673,7 +704,8 @@ input:focus {
   }
 
   .destination-row label + label::before,
-  .transit-row label + label::before {
+  .transit-row label + label::before,
+  .readonly-field + .readonly-field::before {
     display: none;
   }
 
