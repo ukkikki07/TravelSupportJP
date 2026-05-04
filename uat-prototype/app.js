@@ -15,18 +15,19 @@ const screens = {
   "start": {
     status: "UAT-01",
     title: "Set destination",
-    summary: "Use Google Maps for live routes. Use this tool to show, confirm, and recover when you are unsure.",
+    summary: "Set the exact final destination first. Take time, ask someone, or prepare it before travel if needed.",
     fields: true,
     checklist: [
-      "Destination name is required",
-      "Add area / city / prefecture to avoid same-name mistakes",
-      "Add place type if it helps, like temple, hotel, station, or park",
-      "Type in the place shown in Google Maps",
-      "Save a screenshot only as a place backup"
+      "Check the exact final destination in Google Maps first",
+      "Ask staff or prepare the destination before travel if unsure",
+      "Type the exact place name shown in Google Maps",
+      "Add area / city / prefecture and place type",
+      "Confirm the pin, address, and same-name places before choosing transport"
     ],
     guidance: [
-      { text: "If Google Maps shows multiple results, ask someone to check the area or address.", helpIndex: 1 },
-      { text: "If you are unsure what type of place it is, ask for the place type.", helpIndex: 2 },
+      { text: "If Google Maps shows multiple results, do not guess. Ask someone to check the area or address.", helpIndex: 1 },
+      { text: "If you are at a hotel, station, or shop, ask staff to help identify the exact place.", helpIndex: 1 },
+      { text: "If you are planning tomorrow's trip, set and check the destination before leaving.", helpIndex: 3 },
       { text: "If the place looks wrong, check it is not a same-name place before choosing transport.", helpIndex: 3 }
     ],
     jpHelp: [
@@ -40,7 +41,7 @@ const screens = {
       ["Show Final Destination in JP", "show-place", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ],
-    note: "Use live Google Maps for routes, transport times, and the next bus or train. A screenshot is only a backup for the destination name/place. In rural areas, one missed bus or train can change the whole route."
+    note: "The final destination is the base for every Google Maps handoff. Spend extra time here if needed. Use live Google Maps for routes, transport times, and the next bus or train. A screenshot is only a backup for the destination name/place."
   },
   "transport": {
     status: "UAT-02",

@@ -19,12 +19,13 @@
 - Google Mapsは経路検索・地図表示・現在地確認に使い、本アプリはGoogle Mapsで見ている情報を現場で人に伝える補助レイヤーとして使う。
 - MVPでは、自サイト内・アプリ内にGoogle Mapsを埋め込まない。`Open Google Maps` は外部のGoogle MapsアプリまたはGoogle Maps Webを開く導線にする。
 - Google Mapsへ渡すパラメータは原則Destinationに限定する。`Open Google Maps` を押すたびに、その時点のFinal DestinationをGoogle Mapsへ渡す。出発地、ルート、交通手段、乗換、時刻、徒歩ナビは渡さず、Google Maps側の現在地と最新案内を利用者が見て判断する。
-- Final destination入力前に、利用者はGoogle Mapsで目的地を調べ、場所名と地域情報を確認する。
-- Set destination画面では、Google Mapsで表示された場所名を入力するDOとして `Type in the place shown in Google Maps` を表示する。
+- Final destinationは、Google Mapsへ渡す基準点であり、以降の全交通手段選択の起点になる。ここが間違うと、その後の交通手段選択・人に見せる文・Google Maps再表示もずれるため、Set destinationは急がせない。
+- Final destination入力前に、利用者はGoogle Mapsで目的地を調べ、場所名、地域情報、住所の一部、目的地種別、ピン位置を確認する。本人だけで不安な場合は、ホテルスタッフ、駅員、観光案内所、周囲の人に確認してもらう。前日や出発前に調査して入力してもよい。
+- Set destination画面では、Google Mapsで表示された正確な場所名を入力するDOとして `Type the exact place name shown in Google Maps` を表示する。
 - Set destination段階のDO Listでは、スクショは「目的地名・場所を後で確認するための保険」としてだけ扱う。ルート、交通手段、時刻、次の便はライブのGoogle Mapsを優先する。地方・過疎地・本数が少ない地域では、1本逃すだけで案内全体が変わるため、スクショ時点の交通手段に沿って進ませない。
 - スクショを撮る場合は、撮影直前にGoogle Maps上の目的地が正しいことを確認させる。バス停到着後に「撮ったスクショが正しいか」を確認させる導線にはしない。
 - Final destination入力は、`Destination name` だけに必須ラベルを付ける。`Area / city / prefecture` は推奨ラベルを付ける。`Place type` と `Next place` にはOptionalラベルを付けず、`Add place type`、`Set next place to go now` のようにDOを含むラベルで入力を促す。
-- Google Mapsへ渡す検索文字列は、原則 `Destination name + Area / city / prefecture + Place type` とする。必須は `Destination name` のみだが、同名地点の誤指定を避けるため、地域と種別が入力されていれば一緒に渡す。
+- Google Mapsへ渡す検索文字列は、原則 `Destination name + Area / city / prefecture + Place type` とする。必須は `Destination name` のみだが、同名地点の誤指定を避けるため、地域と種別が入力されていれば一緒に渡す。入力に時間がかかってもよいので、交通手段選択へ進む前に正しい目的地へ絞り込む。
 - Google Mapsで表示された場所が、実際に行きたい場所と一致しているかをユーザーが必ず目視確認する。同名の別施設、別支店、別地域、入口違いがあり得るため。
 - 本アプリ側ではGoogle Mapsの経路結果を解析しない。
 - 必要な場面では、Google Mapsの画面と本アプリの日本語文を組み合わせて見せる。
@@ -475,12 +476,14 @@ Choose your next transportation before going to the boarding place.
 - 人に見せる日本語文
 - 本人確認用英語訳
 
-住所の正確入力は求めない。利用者はこのアプリを使う前にGoogle Mapsで目的地を調べ、場所名と大まかな地域を確認する。アプリは、シンボル名と大まかな地域でGoogle Maps検索を開く。ユーザーはGoogle Maps上で目的地が正しいかを目視確認してから進む。
+住所の完全入力は求めない。ただし、Final Destinationは以降のGoogle Maps handoffと人に見せる文の基準になるため、ここだけは時間をかけて正確にする。利用者はこのアプリを使う前にGoogle Mapsで目的地を調べ、場所名、大まかな地域、住所の一部、目的地種別、ピン位置を確認する。本人だけで不安な場合は、ホテルスタッフ、駅員、観光案内所、周囲の人に見てもらう。前日や出発前に調べて入力しておく使い方も許容する。アプリは、入力された目的地情報でGoogle Mapsを開く。ユーザーはGoogle Maps上で目的地が正しいかを目視確認してから交通手段選択へ進む。
 
 ```text
-Check your destination in Google Maps first.
+Set the exact final destination first.
 
 Many places in Japan have the same name.
+
+Take time here. Ask someone or prepare it before travel if needed.
 
 Where you are.
 現在地を示す表示Box。入力欄にはしない。
@@ -497,9 +500,9 @@ Recommended
 
 Type of the place: temple, shrine, castle, park, beach, etc.
 
-Google Mapsで目的地を確認。
+Google Mapsで正しい目的地を確認。
 
-表示中の場所が目的地か確認。
+表示中の場所名・地域・ピンが目的地か確認。
 
 [合っている]
 [目的地名を直す]
