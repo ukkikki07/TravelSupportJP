@@ -364,7 +364,7 @@ const screens = {
       ["この切符でこの列車に乗りたいです。改札に通す切符はどれですか。", "I want to take this train with this ticket. Which ticket should I put through the gate?"],
       ["この特急券で乗りたいです。乗車券も必要ですか。", "I want to ride with this limited express ticket. Do I also need a basic fare ticket?"],
       ["この切符は指定席ですか、自由席ですか。座る場所を知りたいです。", "Is this ticket for a reserved seat or non-reserved seat? I want to know where to sit."],
-      ["この列車名・号数の列車に乗りたいです。電光掲示板のどれですか。", "I want to take the train with this name and number. Which one is it on the departure board?"],
+      ["この列車名・号数の列車に乗りたいです。案内表示(LED掲示)板に表示されていますか。", "I want to take the train with this name and number. Is it shown on the information display / LED board?"],
       ["大きな荷物があります。置き場所や予約が必要ですか。", "I have large luggage. Do I need a luggage space or reservation?"]
     ],
     actions: [

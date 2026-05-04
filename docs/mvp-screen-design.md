@@ -2808,8 +2808,8 @@ Will I make my connection?
 
 ### 遅延時に乗る列車の確認
 ```text
-電光掲示板の乗る列車を確認したい。
-Which train on the departure board should I take?
+この列車名・号数の列車に乗りたいです。案内表示(LED掲示)板に表示されていますか。
+I want to take the train with this name and number. Is it shown on the information display / LED board?
 
 次に来る列車に乗るか確認したい。
 Should I take the next train that arrives?
@@ -3057,7 +3057,7 @@ I do not have a limited express ticket. What should I do?
 | 次に来る列車ではなく、〇〇号を待つ必要があるか確認したい。 | Do I need to wait for train No. 〇〇 instead of taking the next train? | 駅員 / 係員 |
 | 〇〇行きの次の列車はどれか確認したい。 | Which is the next train going to 〇〇? | 駅員 / 係員 |
 | この切符で、次に来る自由席の列車に乗りたいです。 | I want to take the next non-reserved train that arrives with this ticket. | 駅員 / 係員 |
-| 電光掲示板の乗る列車を確認したい。 | Which train on the departure board should I take? | 駅員 / 係員 |
+| この列車名・号数の列車に乗りたいです。案内表示(LED掲示)板に表示されていますか。 | I want to take the train with this name and number. Is it shown on the information display / LED board? | 駅員 / 係員 |
 | 〇〇号が遅れている。乗る列車を確認したい。 | Train No. 〇〇 is delayed. Which train should I take? | 駅員 / 係員 |
 | この自由席特急券で、別の列車に乗りたいです。 | I want to take a different train with this non-reserved limited express ticket. | 駅員 / 係員 |
 | この後の乗り継ぎに間に合わない場合、次の行動を確認したい。 | What should I do if I cannot make my next connection? | 駅員 / 係員 |
