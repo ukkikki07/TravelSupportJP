@@ -502,7 +502,8 @@ Google Mapsで目的地を確認。
 - Set Destination画面では、交通手段選択へ進む導線を `public transportation` ボタンに集約する。別の `Choose transport` ボタンを重複して置かない。
 - 各交通手段ページでも、同じ `public transportation` ボタンから交通手段メニューへ戻れるようにする。
 - `public transportation` ボタンを押した後は、下段の汎用アクション列ではなく、単独の交通手段選択ページを表示する。
-- 交通手段選択ページでは、Local Bus、Train、Taxi、Shinkansen、Highway Bus、Otherを主コンテンツとして並べる。
+- 交通手段選択ページでは、Train、Taxi、Shinkansen、Highway Bus、Local Bus、Otherを主コンテンツとして縦並びにする。スマホで押しやすく、サイト表示でも選択肢として読みやすい形を優先する。
+- Local Busは交通手段として難度が高いため、Otherの手前に置く。Local Busを選んだ後は、初回旅行者には難しい交通手段であり、経路・方向・現金・降車停留所を慎重に確認する必要があることを警告する。
 - 交通手段選択ページには、文脈バー、長い説明、If unsure、日本語ヘルプを置かない。基本的に交通手段を選ぶリンク/ボタンだけを表示する。
 - 各交通手段ページの最下段には、`Arrived at next point` と `Change transport` を置く。
 - `Arrived at next point` は、次の駅・バス停・乗り場・入口などに着いた後、次の交通手段選択へ進むボタンとする。

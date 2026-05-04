@@ -40,11 +40,11 @@ const screens = {
     status: "UAT-02",
     title: "Public transportation",
     transportChoices: [
-      ["Local Bus", "bus-prep"],
       ["Train", "train-prep"],
       ["Taxi", "taxi-prep"],
       ["Shinkansen", "limited-prep"],
       ["Highway Bus", "coach-prep"],
+      ["Local Bus", "bus-prep"],
       ["Other", "other-prep"]
     ]
   },
@@ -127,7 +127,7 @@ const screens = {
     status: "UAT-04",
     title: "Local bus preparation",
     summary: "Prepare before going to the bus stop.",
-    warning: "Prepare cash and coins first.",
+    warning: "Local buses are difficult for first-time travelers. Use this only if you can carefully check the route, direction, cash, and stop. If unsure, choose taxi or train.",
     checklist: [
       "Prepare cash and coins",
       "Check the bus route number or destination",
