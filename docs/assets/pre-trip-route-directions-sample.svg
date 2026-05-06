@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Route directions screenshot sample</title>
+  <desc id="desc">Illustrative sample showing what to capture from a route directions screen before travel.</desc>
+  <rect width="720" height="420" fill="#f7f8fb"/>
+  <rect x="24" y="24" width="672" height="372" rx="18" fill="#ffffff" stroke="#c9d3e0" stroke-width="2"/>
+  <rect x="48" y="52" width="624" height="54" rx="8" fill="#eef3fb" stroke="#c9d3e0"/>
+  <text x="68" y="86" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#24324a">Route directions screen</text>
+  <rect x="48" y="126" width="270" height="242" rx="8" fill="#ffffff" stroke="#d4dce8"/>
+  <text x="70" y="160" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#24324a">Route option</text>
+  <rect x="70" y="182" width="226" height="42" rx="8" fill="#e8f0fe"/>
+  <text x="88" y="209" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#1f4fbf">Transit / 42 min</text>
+  <circle cx="90" cy="257" r="10" fill="#1f6feb"/>
+  <line x1="90" y1="267" x2="90" y2="326" stroke="#1f6feb" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="90" cy="336" r="10" fill="#d93025"/>
+  <text x="118" y="263" font-family="Arial, sans-serif" font-size="15" fill="#24324a">Current location</text>
+  <text x="118" y="303" font-family="Arial, sans-serif" font-size="15" fill="#24324a">Train / Bus / Walk</text>
+  <text x="118" y="342" font-family="Arial, sans-serif" font-size="15" fill="#24324a">Final destination</text>
+  <rect x="342" y="126" width="330" height="242" rx="8" fill="#ffffff" stroke="#d4dce8"/>
+  <text x="364" y="160" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#24324a">Capture these:</text>
+  <circle cx="372" cy="192" r="5" fill="#1f6feb"/>
+  <text x="390" y="198" font-family="Arial, sans-serif" font-size="15" fill="#24324a">Departure time or current time</text>
+  <circle cx="372" cy="228" r="5" fill="#1f6feb"/>
+  <text x="390" y="234" font-family="Arial, sans-serif" font-size="15" fill="#24324a">Transport mode shown</text>
+  <circle cx="372" cy="264" r="5" fill="#1f6feb"/>
+  <text x="390" y="270" font-family="Arial, sans-serif" font-size="15" fill="#24324a">Boarding place / platform / stop</text>
+  <circle cx="372" cy="300" r="5" fill="#1f6feb"/>
+  <text x="390" y="306" font-family="Arial, sans-serif" font-size="15" fill="#24324a">Transfer and final destination</text>
+  <text x="364" y="344" font-family="Arial, sans-serif" font-size="13" fill="#61708a">Use as backup only. Recheck live route.</text>
+</svg>

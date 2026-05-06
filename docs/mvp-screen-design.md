@@ -3,38 +3,52 @@
 ## 前提
 - 初期リリースは、英語Webサイト + スマホ対応Webツールを優先する。PWA化は初期候補、iOS/Androidネイティブアプリ化は後続検討とする。
 - 対象範囲は、主要交通手段の利用前準備と、PRDのStep4〜6: 駅・バス停到着後の確認、支払い・切符・乗車券準備、ホーム・乗り場・乗車確認。路面電車は路線バス簡易フローで扱う。
-- MVP対象の交通手段は、徒歩、タクシー、路線バス、路面電車、高速バス・空港バス・夜行バス、普通電車・地下鉄・モノレール、新幹線・特急（自由席・指定席）。
+- MVP対象の交通手段は、タクシー、路線バス、路面電車、高速バス・空港バス・夜行バス、普通電車・地下鉄・モノレール、新幹線・特急（自由席・指定席）。
+- 徒歩はMVP交通手段として専用画面を作らない。徒歩ルート、徒歩ナビ、現在地から入口までの案内はGoogle Mapsに任せる。本アプリは、徒歩中に迷った場合でも `Show Final Destination in JP` とGoogle Maps画面を見せられる補助に留める。
 - レンタカー、レンタサイクル、シェアサイクル、ホテル送迎バス、シャトルバス、フェリー、水上バス、ロープウェイ、ケーブルカーは移動手段として導線だけ用意する。レンタル手続き、料金、返却、保険、送迎条件、予約、時刻表、乗船手続き、運航条件、点検運休、サービス別操作は扱わない。
 - Step1〜3のうち、交通手段を使い始める前の準備・確認はMVPに含める。
-- Step7以降の乗車中・降車後・目的地到着は原則後続。ただし、利用前準備に必要な降車停留所、降車駅、次に向かう場所の確認はMVPに含める。
+- Step7以降の乗車中・降車後・目的地到着は原則後続。ただし、利用前準備に必要な降車停留所、降車駅、乗り場、方向などをGoogle Maps画面で確認してもらう補助はMVPに含める。
 - 観光系交通、券売機の詳細操作支援は後続拡張として扱う。
 - 路面電車はバス種別選択に含め、路線バス簡易フローで扱う。
 - 電車一本・バス一本で最終目的地まで到着するとは限らない。
-- 最終目的地と、現在の区間で次に向かう場所を分けて扱う。
+- アプリ側で確定情報として扱う目的地はFinal Destinationのみとする。中間地点、乗り換え駅、降車停留所、乗り場などはアプリに入力・保存・自動表示して誘導しない。
 - 乗り換えがある場合は「現在の状況を選ぶ」へ戻り、必要な確認を繰り返す。
 - 最終目的地に着いたら「目的地に着いた」を選び、確認ループを終了する。
 - ユーザー本人が操作するUIは英語を主表示にする。日本語は「人に見せる文」として大きく表示し、その下に本人確認用の英語訳を併記する。
+- 人に画面を見せる可能性があるため、全ページ共通の文脈ラベルには短い日本語補足を付ける。例: `Where you are / 今自分はここ`、`Final Destination / 目的地`、`Area of the place / 地域`。交通手段選択ボタンにも、`Taxi / タクシー`、`Local Bus / 路線バス` のような補足を付け、画面を見た日本人が意図を推測しやすくする。
 - すべての見せる日本語には、本人確認用の英語訳を併記する。
 - 本アプリ・サイトは、目的地までたどり着くために、それぞれの交通手段に合った質問や日本独自のルールを明示する補完ツールとする。常に次の正解を自動判定するのではなく、利用者がGoogle Mapsで確認した内容を、現場で人に見せる・確認する・迷った時に戻るための補助レイヤーとして機能する。
 - Google Mapsは経路検索・地図表示・現在地確認に使い、本アプリはGoogle Mapsで見ている情報を現場で人に伝える補助レイヤーとして使う。
 - MVPでは、自サイト内・アプリ内にGoogle Mapsを埋め込まない。`Open Google Maps` は外部のGoogle MapsアプリまたはGoogle Maps Webを開く導線にする。
-- Google Mapsへ渡すパラメータは原則Destinationに限定する。`Open Google Maps` を押すたびに、その時点のFinal DestinationをGoogle Mapsへ渡す。出発地、ルート、交通手段、乗換、時刻、徒歩ナビは渡さず、Google Maps側の現在地と最新案内を利用者が見て判断する。
+- Google Mapsへ渡すパラメータは原則Destinationに限定する。`Open Google Maps` を押すたびに、その時点のFinal DestinationをGoogle Mapsへ渡す。出発地、乗換、時刻、徒歩ナビは渡さず、Google Maps側の現在地と最新案内を利用者が見て判断する。
+- `Open Google Maps` は、Google Mapsの表示言語を可能な範囲で英語にするため、URLに `hl=en` を付ける。ただし、Google Mapsアプリ側の設定、端末言語、ログイン状態によって完全に英語表示にならない場合がある。
+- 車・自転車ナビは本サービスの主対象ではないため、Google Maps URLには `travelmode=transit` を付け、最初に公共交通ルートを開く。Google Maps側のUIタブ自体は消せないため、必要なら利用者がGoogle Maps側で切り替える。
 - Final destinationは、Google Mapsへ渡す基準点であり、以降の全交通手段選択の起点になる。ここが間違うと、その後の交通手段選択・人に見せる文・Google Maps再表示もずれるため、Set destinationは急がせない。
+- Set destination画面では、Final Destinationの重要性を画面上部に目立つ警告として英語で表示する。文言例: `This app depends on the correct Final Destination. Set it carefully before travel, or when you have enough time and help. Do not rush this step while moving.`
 - Final destination入力前に、利用者はGoogle Mapsで目的地を調べ、場所名、地域情報、住所の一部、目的地種別、ピン位置を確認する。本人だけで不安な場合は、ホテルスタッフ、駅員、観光案内所、周囲の人に確認してもらう。前日や出発前に調査して入力してもよい。
-- Set destination画面では、Google Mapsで表示された正確な場所名を入力するDOとして `Type the exact place name shown in Google Maps` を表示する。
+- Set destination画面では、場所名・地域に加えて、同名地点の取り違えを減らすために場所の種類を確認するDOとして `What is the type of the place?` を表示する。
+- Set destination画面のDO List末尾には、移動中に迷った場合の補助として `Show When you are lost` のタイミングラベル付きで `Open Google Maps, and ask if you think you are lost.` を表示する。押した場合は既存のルート確認文 `私の目的地は{Final Destination / Area}です。ルート・交通手段はこれで正しいですか。` を表示する。
 - Set destination段階のDO Listでは、スクショは「目的地名・場所を後で確認するための保険」としてだけ扱う。ルート、交通手段、時刻、次の便はライブのGoogle Mapsを優先する。地方・過疎地・本数が少ない地域では、1本逃すだけで案内全体が変わるため、スクショ時点の交通手段に沿って進ませない。
 - スクショを撮る場合は、撮影直前にGoogle Maps上の目的地が正しいことを確認させる。バス停到着後に「撮ったスクショが正しいか」を確認させる導線にはしない。
-- Final destination入力は、`Destination name` だけに必須ラベルを付ける。`Area / city / prefecture` は推奨ラベルを付ける。`Place type` と `Next place` にはOptionalラベルを付けず、`Add place type`、`Set next place to go now` のようにDOを含むラベルで入力を促す。
+- 旅行前にGoogle Mapsの印刷、スクショ、メモを用意する使い方は補足資料 [旅行前のGoogle Maps控え・印刷利用ガイド](pre-trip-map-printout-guide.md) に整理する。これは目的地説明用の控えであり、移動中の最新ルートはライブのGoogle Mapsで再確認する。
+- Set Destination画面には、補足リンク `Before travel: confirm destination` を置き、[旅行前のGoogle Maps控え・印刷利用ガイド](pre-trip-map-printout-guide.md) へ遷移できるようにする。これはアプリの主目的を使い始める前、旅行前・出発前にFinal Destinationを確定するためのWEBコンテンツ導線とし、移動中の主導線にはしない。印刷・スクショは主目的ではなく、必要に応じたバックアップとして扱う。
+- PRE-TRAVELページでは、Google Mapsの見え方に幅があるため、サンプルを1枚に絞らない。目的地の場所ページ、ルート候補、引いた全体ルート、拡大した駅・バス停・入口周辺など、用途の違うスクショ例を示す。
+- 縮尺違いのスクショを用意する理由は、リアルタイムでGoogle Mapsを利用できない場合に、他人へ見せて目的地・ルート全体・駅/バス停/入口周辺を理解してもらうためである。古いスクショを固定ルート指示として使うためではない。
+- Final destination入力は、`Destination name` だけに必須ラベルを付ける。`Area / city / prefecture` は推奨ラベルを付ける。`Place type` は同名地点の取り違えを減らす補助として扱う。`Next place` や中間地点は入力させない。
 - Google Mapsへ渡す検索文字列は、原則 `Destination name + Area / city / prefecture + Place type` とする。必須は `Destination name` のみだが、同名地点の誤指定を避けるため、地域と種別が入力されていれば一緒に渡す。入力に時間がかかってもよいので、交通手段選択へ進む前に正しい目的地へ絞り込む。
 - Google Mapsで表示された場所が、実際に行きたい場所と一致しているかをユーザーが必ず目視確認する。同名の別施設、別支店、別地域、入口違いがあり得るため。
 - 本アプリ側ではGoogle Mapsの経路結果を解析しない。
 - 必要な場面では、Google Mapsの画面と本アプリの日本語文を組み合わせて見せる。
-- 各交通手段ページでは、その交通手段で向かう場所を `This transport destination` として扱う。タクシーの降車地点、バスの降車停留所、電車で向かう駅、高速バスの乗り場、その他交通の公式乗り場・入口などは、利用者がGoogle Mapsを開き、その画面を他人に見せて確認してもらう導線にする。アプリはその確認用の英語Actionと見せる日本語文を出す。
+- 各交通手段ページでは、中間地点名や区間目的地名をアプリ側で持たない。タクシーの降車地点、バスの降車停留所、電車で向かう駅、高速バスの乗り場、その他交通の公式乗り場・入口などは、利用者がGoogle Mapsを開き、その画面を他人に見せて確認してもらう導線にする。アプリは `Google Mapsで表示しているこの場所 / このバス / この電車 / この乗り場` を確認するための英語Actionと見せる日本語文を出す。
+- 各交通手段で一区切りの地点に着いたら、利用者は再度 `Open Google Maps` でFinal Destinationまでの最新ルートを確認する。アプリは前回の経路や中間地点を引き継いで次の正解を出さず、Google Mapsの現在地・時刻ベースの案内を見て、利用者が次の交通手段を選び直す使い方を基本にする。
+- 旅程全体を事前にアプリへ細かく入力し、順番に追跡する方式はMVPでは採用しない。Google Mapsなど外部情報を見ながら中間地点、乗換駅、降車停留所、時刻を手入力する必要があり、入力ミスや時刻変更が起きた時に修正しにくいため、初回旅行者には使いにくい。
+- タクシーを最終目的地ではなく一部区間だけに使う場合、アプリ側で隠れた途中地点名を埋め込まない。利用者がGoogle Mapsで表示している降車地点を運転手に見せ、見せる日本語は `Google Mapsで表示している場所までタクシーで行きたいです。最終目的地ではありません。` とする。
+- 交通手段ごとの確認文では、別交通手段の途中地点を流用しない。例: 路線バスの降車停留所を、普通電車のホーム確認文に入れない。普通電車では「Google Mapsのこの電車」、高速バスでは「Google Mapsのこの乗り場」のように、その画面で見せている対象を限定する。
 - 券売機対応は交通手段別ではなく、切符・乗車券・ICカード・チャージにまたがる横断機能として扱う。MVPでは詳細操作や券売機撮影補助を再現せず、「この券売機で買えるか」「窓口へ行くべきか」を係員へ確認する補助にする。券売機撮影補助は後続拡張とする。
 - 次に利用する交通手段は、乗る直前ではなく、前の交通手段が終わった直後または次の区間へ向かう前に選ばせる。
 - 交通手段を選んだら、Google Mapsで移動を始める前に、その交通手段に必要な事前準備を表示する。
 - UI文言は、丁寧な説明文よりも目的が先に伝わる短文にする。
-- 「〜してください」「〜お願いします」はできるだけ使わず、「目的地: 〇〇」「次に行く場所: △△」「Google Mapsを開く」のようなラベル・行動文を優先する。
+- 「〜してください」「〜お願いします」はできるだけ使わず、「目的地: 〇〇」「Google Mapsを開く」「Google Mapsのこの場所」のようなラベル・行動文を優先する。
 - 人に見せる日本語は、原則「〇〇へ行きたいです」「〇〇で降りたいです」「〇〇を使いたいです」のように目的を直接伝える。「確認したいです」は支払い可否、券種、返金、変更など、目的だけでは判断できない場面に限る。
 - チェックリストや入力ラベルも、名詞だけにしない。`Ticket`、`Train name`、`Boarding place` ではなく、`Prepare ticket`、`Confirm train name`、`Check boarding place` のように、何をする項目か分かるDOを入れる。
 - 人に見せる画面へ進むボタンは、`Show Japanese` のような内部名にしない。基本は `Show Final Destination in JP` に統一し、予約・乗車券など目的地以外のものを見せる時だけ `Show booking in JP` のように対象を明記する。`Show` は他人に見せる行為を含むため、通常は `to someone` を付けない。
@@ -60,6 +74,10 @@
 - Destinationを渡した後は、Google Maps上の場所名・住所・ピンが意図した目的地かを確認する画面または文言を必ず挟む。
 - SEO記事やキーワード設計は、MVPのFlowと最小画面セットが固まった後に行う。
 - 初期段階では、集客ページより現場で使えるWebツールの骨子を優先する。
+- 後続ToDo: Webサイト化・SEO展開時は、説明、SEO、収益導線用の入口ページをアプリ本体とは別に作る。ただしUAT/アプリ本体の最初の画面は引き続きSet Destinationとし、入口ページから `Start using the tool` などでSet Destinationへ流す。
+- 後続ToDo: サイト構成を考える際は、現在Set Destination内に置いている旅行前準備要素も含め、どのタイミングでどのようにユーザーへ見せるかを再検討する。特にGoogle Mapsの印刷・スクショ・メモ案内は、移動中ではなくアプリの主目的を利用する前に見せる情報として扱う。
+- 入口ページの役割分担: PRE-TRAVELページは、旅行前にFinal DestinationをGoogle Mapsで確定し、必要なら印刷・スクショ・メモを準備するための説明ページにする。Set Destinationページは、実際にツールを使い始める操作画面として、Final Destination入力、Google Maps起動、交通手段選択へ進む導線に絞る。交通手段ページには旅行前準備リンクを置かない。
+- 入口導線は `Site entry -> Before travel guide -> Set Destination -> Transport support` を基本にする。ただし、移動中または急いでいるユーザーは `Site entry -> Set Destination` へ直接進める。UATでは入口導線確認用にSite entryリンクを用意するが、アプリ本体の主画面はSet Destinationから始まる。
 
 後続でネイティブアプリ化を検討する条件:
 - Web/PWAで実利用が確認できる。
@@ -74,7 +92,7 @@
 
 MVPに含める機能範囲:
 - 初回オンボーディング、目的地確認、現在の状況選択、次の交通手段選択
-- 徒歩準備、タクシー準備、路線バス準備、路面電車準備、普通電車・地下鉄・モノレール準備
+- タクシー準備、路線バス準備、路面電車準備、普通電車・地下鉄・モノレール準備
 - 高速バス・空港バス・夜行バス準備
 - 新幹線・特急準備（自由席/指定席で表示内容を切り替える）
 - 駅・バス停到着後の確認
@@ -100,13 +118,12 @@ MVPに含める機能範囲:
 | グループ | 最小画面 | 役割 |
 |---|---|---|
 | 共通 | 初回オンボーディング | Google Mapsと本アプリの役割分担を説明する |
-| 共通 | 目的地確認 | 最終目的地、次に向かう場所、人に見せる固定文を作る |
+| 共通 | 目的地確認 | 最終目的地と、人に見せる固定文を作る |
 | 共通 | 現在の状況を選ぶ | 確認ループの起点にする |
 | 共通 | Google Mapsから戻った後 | Google Maps後に次の確認へ戻す |
-| 共通 | 次の交通手段を選ぶ | 徒歩、タクシー、バス・電車、その他へ分岐する |
+| 共通 | 次の交通手段を選ぶ | タクシー、バス・電車、その他へ分岐する |
 | 共通 | バス・電車の種別選択 | 路線バス、路面電車、高速/空港/夜行バス、普通電車、モノレール、新幹線/特急を分ける |
-| 徒歩 | 徒歩準備 | Google Mapsを開く、人に見せる文を出す |
-| タクシー | タクシー準備 | 最終目的地まで行くか、途中地点まで行くかを分ける |
+| タクシー | タクシー準備 | 最終目的地まで行くか、Google Mapsで表示している場所まで行くかを分ける |
 | タクシー | タクシー表示先選択 | ホテルスタッフ向けとドライバー向けを分ける |
 | 路線バス・路面電車 | 路線バス準備 | 現金・小銭、Google Maps、降りる停留所、方向確認をまとめる |
 | 路線バス・路面電車 | バス停確認 | バス停名だけでなく方向と降りる停留所を確認する |
@@ -182,7 +199,7 @@ MVPに含める機能範囲:
 
 | コンポーネント | 使う場面 |
 |---|---|
-| `PreparationScreen` | 徒歩、タクシー、バス、電車、新幹線、高速バスの準備 |
+| `PreparationScreen` | タクシー、バス、電車、新幹線、高速バスの準備 |
 | `ChecklistBlock` | 現金、小銭、乗車券、便名、ホーム、荷物などの確認 |
 | `ShowJapaneseScreen` | 人に見せる日本語と英語訳 |
 | `BackFromMapsScreen` | Google Mapsから戻った後 |
@@ -201,10 +218,9 @@ MVPに含める機能範囲:
 主な項目:
 - `title`: 画面タイトル。
 - `destination`: 最終目的地。
-- `nextPlace`: 次に向かう駅、バス停、乗り場、入口。
-- `transportType`: 徒歩、タクシー、路線バス、路面電車、高速バス、普通電車、新幹線など。
+- `mapTargetLabel`: アプリ内に保存しない一時的な概念。Google Mapsで利用者が今見せている場所・乗り物・乗り場を指す表示上の対象。
+- `transportType`: タクシー、路線バス、路面電車、高速バス、普通電車、新幹線など。
 - `checklist`: 3〜5個までの確認項目。
-- `guidance`: 迷った時に何をするか、なぜその確認が必要かを短く示す。
 - `jpHelp`: `What you should do now` の各行動に対応して、詰まった時に見せる短い日本語文と英語訳。
 - `primaryAction`: 次に押す主ボタン。
 - `secondaryActions`: Google Maps、人に見せる、戻るなど。
@@ -213,18 +229,24 @@ MVPに含める機能範囲:
 表示ルール:
 - チェックリストは最大5個。
 - チェックリスト項目はDOを含める。例: `Prepare cash and coins`、`Confirm train name`、`Check boarding place`。
-- `guidance` は `If unsure` として表示し、Self質問だけで終わらせず、Google Mapsを開く、人に見せる、タクシーに切り替える、待たないなどの具体行動を含める。
-- `If unsure` の各ケースは、必要に応じてタップ可能にする。タップした時は新しい文を増やさず、上部の `Show this in JP` にある既存の日本語文へ切り替えてよい。この考え方はSet destination、普通電車、バス、タクシー、新幹線・特急、高速/空港/夜行バスに適用する。
-- `What you should do now` は原則ボタン化する。各行動を押すと、対応する `Show this in JP` の文面が切り替わるようにする。
+- `What you should do now` は、利用者本人が取るActionだけを表示する。自分の身体動作、Google Mapsを開く、現金を用意する、切符を買うなどはここに置く。
+- `Show this in JP` は、人に見せる日本語文だけを表示する。自分の身体動作やアプリ操作説明は入れない。
+- `What you should do now` と `Show this in JP` は画面上で分ける。Actionを押した後に自分用Actionと見せる日本語が混ざって出る構造にしない。
+- `What you should do now` の項目をタップした場合は、そのActionに最も近い `Show this in JP` の日本語文を自動で選択・表示する。一致する文がない場合は何も表示しない。画面を開いた直後も、利用者がActionまたはShow this in JP候補を選ぶまで日本語本文は表示しない。
+- `Show this in JP` の候補は、対応する `What you should do now` の表示順に並べる。内部の `helpIndex` の番号順ではなく、利用者が見ているDoListの時系列に合わせる。
+- `Show this in JP` の英語文は、表示する日本語文の本人確認用訳に限る。DoList側の背景説明、操作説明、相手に見せない補足、アプリ側の指示を英語訳へ混ぜない。
+- `Show this in JP` は、英語候補をタップしたら、その候補の直下に日本語文を展開する。選択後カードで同じ英語訳を再表示しない。英語候補が本人確認用訳、日本語展開が相手に見せる文として機能する。
+- 独立した迷った時セクションはMVP UATでは使わない。迷った時の行動は `What you should do now` に置き、人に見せる文は `Show this in JP` に置く。判断基準や注意は、必要な箇所だけ `Warning` または `Note` として短く表示する。
+- Google Mapsから戻った後の画面は、`Google Maps opened` と同じく現在地と最新ルート・交通手段の確認に絞る。古い `次の場所`、`タクシーへ切り替え` などの独自判断導線を増やさず、必要なら `Select transportation` または `Show Final Destination in JP` へ戻す。
 - `jpHelp` は `Show this in JP` として `What you should do now` の近くに表示する。行動で詰まった瞬間に、別画面へ探しに行かなくても見せられるようにする。
-- `jpHelp` の日本語文は、`What you should do now` の直訳に限定しない。英語訳を必ず併記した上で、相手が助けやすくなる補足や具体的な依頼を短く加えてよい。例: `現金と小銭を用意したいです。近くにコンビニやお店はありますか。`
+- `jpHelp` の日本語文は、`What you should do now` の直訳に限定しない。英語訳を必ず併記した上で、相手が助けやすくなる補足や具体的な依頼を短く加えてよい。例: `現金と小銭を用意したいです。近くのコンビニやお店を教えてください。`
 - `jpHelp` には、現場の相手が判断しやすい手がかりを短く足す。例: Google Mapsで表示された場所、地域・住所、道路のこちら側、乗り場の建物・階・番号、最終便、荷物、タクシーで行く範囲。
-- `jpHelp` は「目的 + 相手にしてほしいこと」の順にする。例: `このバス停から清水寺方面へ行きたいです。道路のこちら側で合っていますか。`
-- 各交通手段のゴール確認では、英語Actionに `Show ... in Google Maps` を含め、日本語文にも `Googleマップの〇〇〇〇...` を入れる。利用者がGoogle Maps画面を他人に見せ、その交通手段で向かう場所が合っているか確認してもらうため。
+- `jpHelp` は「目的 + 相手にしてほしいこと」の順にする。例: `Google Mapsのこのバスに乗りたいです。このバス停で合っていますか。`
+- 各交通手段のゴール確認では、英語Actionに `Show ... in Google Maps` を含め、日本語文にも `Google Mapsで表示しているこの場所 / このバス / この電車 / この乗り場` を入れる。利用者がGoogle Maps画面を他人に見せ、その交通手段で向かう対象が合っているか確認してもらうため。
 - 人に見せる日本語では、旅行者本人の意思表示と、アプリ側の推奨・操作指示を混ぜない。例: `タクシーで〇〇〇〇まで行きたいです。` はよいが、同じ文内に `ここを目的地として伝えてください。` のようなアプリからの指示を足さない。〇〇〇〇には、Set Destinationから引き継いだFinal DestinationとAreaを入れる。
-- タクシー準備の `If unsure` では、最終目的地までタクシーで行く選択肢を `Take a taxi to the final destination.` と表記する。ドライバーへの命令文ではなく、利用者自身の行動選択として読める表現にする。
-- タクシーを区間利用する場合の文言は、駅・バス停に限定しない。`Show the next station or bus stop if using taxi only for this section` ではなく、短く `Show only the taxi destination.` と表記する。見せる日本語も `タクシーでは〇〇〇〇まで行きたいです。最終目的地ではありません。` とし、〇〇〇〇には次にタクシーで行く場所を入れる。
-- 相手に見せる文は、相手が答える・案内するための確認に絞る。アプリ上の説明、注意、推奨、次に押すボタンの案内は英語UI側や `If unsure` に置く。
+- タクシー準備では、最終目的地まで行くか、Google Mapsで表示している場所まで区間利用するかを、画面内の行動ボタンで選ばせる。荷物・乗る場所・行き先確認は `What you should do now` と `Show this in JP` の連動で扱い、同じ内容を別セクションに重複表示しない。
+- タクシーを区間利用する場合の文言は、駅・バス停に限定しない。`Show the next station or bus stop if using taxi only for this section` ではなく、短く `Show the taxi destination in Google Maps.` と表記する。見せる日本語は `Google Mapsで表示している場所までタクシーで行きたいです。最終目的地ではありません。` とし、アプリ側で途中地点名を埋め込まない。
+- 相手に見せる文は、相手が答える・案内するための確認に絞る。アプリ上の説明、注意、推奨、次に押すボタンの案内は英語UI側、`Warning`、`Note` に置く。
 - 控えめな注意が必要な場合は、主文に混ぜず `Note` として分ける。Noteをタップした時だけ、対応する見せる日本語を表示してよい。例: 新幹線の大きな荷物置き場予約。
 - 理由説明は1文まで。
 - 交通手段固有の長い説明は補足へ送る。
@@ -252,7 +274,7 @@ MVPに含める機能範囲:
 - `japaneseText`: 相手に見せる日本語。
 - `englishText`: 本人確認用の英語訳。
 - `showTarget`: 駅員、運転手、係員、周囲の人、ホテルスタッフなど。
-- `contextLine`: 目的地、次に行く場所、乗車券ありなどの短い補足。
+- `contextLine`: 最終目的地、Google Mapsで表示している対象、乗車券ありなどの短い補足。
 
 表示ルール:
 - 日本語は1文中心にする。
@@ -285,7 +307,7 @@ Google Mapsから戻った後の復帰画面。
 
 表示ルール:
 - 補足に隠さない。
-- `Switch to taxi` を常時の下段ナビには置かず、警告本文、If unsure、または例外条件の案内として出す。
+- `Switch to taxi` を常時の下段ナビには置かず、警告本文または例外条件の案内として出す。
 - 「1本逃すと、次が数時間後、または今日中に移動できないことがある」を必要時に表示する。
 
 #### `FallbackActions`
@@ -307,7 +329,7 @@ Google Mapsから戻った後の復帰画面。
 - `Show Final Destination in JP`
 - `Open Google Maps`
 
-画面下段ナビは、基本的に上記3つに統一する。タクシー切り替え、予約表示、乗車券表示、係員向けの細かな確認は、必要な画面内の `What you should do now`、`If unsure`、または例外画面に置き、常時表示の下段ボタンにはしない。
+画面下段ナビは、基本的に上記3つに統一する。タクシー切り替え、予約表示、乗車券表示、係員向けの細かな確認は、必要な画面内の `What you should do now`、`Show this in JP`、`Warning`、`Note`、または例外画面に置き、常時表示の下段ボタンにはしない。
 
 #### `TaxiProviderResolver`
 
@@ -415,7 +437,25 @@ Google Mapsの画面 + アプリの日本語文を見せる
 アプリに戻って「現在の状況を選ぶ」へ進む
 ```
 
-Google Mapsを開いた後は、確認が終わったらこのアプリに戻り、`現在の状況を選ぶ` から次の行動を選ぶ。
+Google Mapsを開いた直後は、現在地、Final Destination、最新ルート、交通手段を確認する。各交通手段で一区切りの地点に着いた後も、古いルートやスクショを前提に進まず、現在地と時刻が反映されたGoogle Mapsの案内を見直す。
+
+```text
+Google Maps opened
+
+Warning:
+Google Maps routes and transportation can change by time and location. It may differ from what you saw before.
+
+Check your current location in Google Maps
+Check the route and transportation to the final destination
+```
+
+見せる日本語:
+- Google Maps上の私の現在地はここで合っていますか。
+- 私の目的地は〇〇〇〇です。ルート・交通手段はこれで正しいですか。
+
+Google Maps openedでは、画面の目的を現在地と最新ルート・交通手段の2点確認に絞る。入口確認は最終目的地付近の到着確認で扱う。Google Maps上の目的地自体が間違っている場合は、Set Destinationへ戻って目的地を直す。
+
+Google Mapsを開いた後は、確認が終わったらこのアプリに戻り、`Select transportation` から次の交通手段と前準備を選ぶ。最終目的地付近にいる場合だけ、入口・受付・集合場所の確認へ進む。
 
 ### Google Mapsから戻った後
 Google Mapsを開いた後にアプリへ戻った時、利用者が次に押すボタンで迷わないように表示する。
@@ -424,12 +464,12 @@ Google Mapsを開いた後にアプリへ戻った時、利用者が次に押す
 Back from Google Maps
 Google Mapsから戻った後。
 
-What do you need to check now?
-今、確認すること。
+Use the current location and latest route in Google Maps.
+Google Mapsの現在地と最新ルートを使う。
 
-[I arrived at a station or bus stop]
-[Check before boarding]
-[Choose next transportation]
+[Select transportation]
+[Show Final Destination in JP]
+[Open Google Maps]
 ```
 
 バス・普通電車でGoogle Mapsから戻った後は、必要に応じて次の確認を挟む。地方路線・過疎地・観光地帰り・夜間など、本数が少ない可能性がある時は、乗り場へ向かう前に次の便と最終便を確認させる。
@@ -525,22 +565,24 @@ Google Mapsで正しい目的地を確認。
 - Set Destination画面では、下向き矢印の `public transportation` に加えて、画面最下段の左端にも `Select transportation` ボタンを置く。目的地入力後の次の主行動として迷わず進めるようにする。
 - 各交通手段ページでも、同じ `public transportation` ボタンから交通手段メニューへ戻れるようにする。
 - `public transportation` ボタンを押した後は、下段の汎用アクション列ではなく、単独の交通手段選択ページを表示する。
-- 交通手段選択ページでは、Taxi、Train、Shinkansen、Highway Bus、Local Bus、Otherを主コンテンツとして縦並びにする。ホテル・駅・荷物がある場面ではTaxiを使う確率が高いため、最初に置く。スマホで押しやすく、サイト表示でも選択肢として読みやすい形を優先する。
+- 交通手段選択ページでは、Taxi、Train、Shinkansen / LTD Express、Highway Bus、Local Bus、Otherを主コンテンツとして縦並びにする。ホテル・駅・荷物がある場面ではTaxiを使う確率が高いため、最初に置く。スマホで押しやすく、サイト表示でも選択肢として読みやすい形を優先する。
+- 交通手段選択ページには、短い前提文として `Choose the transport shown in Google Maps. This app helps you prepare and ask people in Japanese.` を表示する。Google Mapsで表示された交通手段を利用者が選び、このアプリはその交通手段の準備と日本語確認を補助する、という役割分担を明確にする。
 - Local Busは交通手段として難度が高いため、Otherの手前に置く。Local Busを選んだ後は、初回旅行者には難しい交通手段であり、経路・方向・現金・降車停留所を慎重に確認する必要があることを警告する。
-- 交通手段選択ページには、文脈バー、長い説明、If unsure、日本語ヘルプを置かない。基本的に交通手段を選ぶリンク/ボタンだけを表示する。
-- 各ページの最下段ボタンは、原則 `Select transportation`、`Show Final Destination in JP`、`Open Google Maps` の3つに統一する。
-- `Select transportation` は、次の交通手段を選ぶ場合、または今の交通手段選択を変えたい場合に、交通手段選択へ戻るボタンとする。
-- `Show Final Destination in JP` の `If unsure` はタップ可能にする。`Use this when you cannot explain the destination in Japanese.` は、Set Destinationから引き継いだFinal DestinationとAreaを文中に入れて `私は〇〇〇〇に向かっています。` を展開する。例: `私はKiyomizu-dera / Kyotoに向かっています。`。`Show Google Maps to make sure you are on the route.` は `Googleマップのガイドは正しいですか。` を展開する。
+- 交通手段選択ページには、文脈バー、長い説明、日本語ヘルプを置かない。基本的に交通手段を選ぶリンク/ボタンだけを表示する。
+- 各ページの最下段ボタンは、Set Destinationと同じ並びで、原則 `Select transportation`、`Show Final Destination in JP`、`Open Google Maps` の3つに統一する。
+- 各交通手段で一区切りの地点に着いた後は、まずGoogle Mapsで現在地とFinal Destinationまでの最新ルートを確認し、その後に `Select transportation` で次の交通手段と前準備を選ぶ。ただし、下段ボタンの並びは全ページで統一し、画面ごとに順番を変えない。
+- `Select transportation` は、Google Mapsで最新ルートを確認した後に次の交通手段を選ぶ場合、または今の交通手段選択を変えたい場合に、交通手段選択へ戻るボタンとする。
+- `Show Final Destination in JP` では、タップ可能な `Show this in JP` 候補として2文を表示する。1つ目は、Set Destinationから引き継いだFinal DestinationとAreaを文中に入れて `私は〇〇〇〇に向かっています。` を展開する。例: `私はKiyomizu-dera / Kyotoに向かっています。`。2つ目は、Google Maps画面を見せながら確認するために `私の目的地は〇〇〇〇です。ルート・交通手段はこれで正しいですか。` を展開する。
 - `Show Final Destination in JP` 画面では、見せる日本語文だけでなく、Set Destinationから引き継いだFinal DestinationとAreaを大きく表示する。見てもらう相手が確認すべき対象は「この場所」ではなく、実際の場所名と地域であるため、場所名は日本語文より先に目に入る大きさにする。
 
-### 各区間で保存する情報
-- 次に向かう場所
-- 次に向かう場所の種類: 駅、バス停、乗り場、降車停留所、施設入口など
+### アプリで保存しない情報
+MVPでは、中間地点、次に向かう駅・バス停、タクシーの区間降車地点、降りるバス停・駅をアプリ側の確定データとして保存しない。これらは場所・時刻・Google Mapsの再検索で変わりやすく、誤った値を表示すると利用者を逆に迷わせるため。
+
+Google Maps画面で確認する情報:
 - Google Mapsで表示している場所名・住所・ピン
-- 降りるバス停・駅
-- タクシーで行く場所
-- 現在の区間で使う交通手段: 徒歩、タクシー、バス、電車
-- 次の区間で使う交通手段: 徒歩、タクシー、バス、電車
+- Google Mapsで表示しているバス・電車・乗り場
+- Google Mapsで表示している降車停留所・降車駅
+- 現在の状況で使う交通手段
 - 次の交通手段に入る前に必要な準備
 - 人に見せる日本語文
 - 本人確認用英語訳
@@ -555,9 +597,6 @@ Saved information
 Destination: 〇〇〇〇
 目的地: 〇〇〇〇
 
-Next place: △△△△
-次に行く場所: △△△△
-
 Show this Japanese
 この日本語を見せる。
 ```
@@ -565,9 +604,8 @@ Show this Japanese
 保存対象:
 - 最終目的地名
 - 最終目的地住所
-- 次に行く場所
-- タクシーで行く場所
-- 降りるバス停・駅
+- 最終目的地の地域ヒント
+- 最終目的地の種別
 - 人に見せる日本語文
 - 本人確認用英語訳
 
@@ -591,11 +629,11 @@ I am going from here to 〇〇〇〇.
 見せる日本語画面では、固定文の下に状況別の確認文を表示する。
 
 ```text
-△△△△へ行きたいです。
-I want to go to △△△△.
+Google Mapsで表示している場所へ行きたいです。
+I want to go to the place shown in Google Maps.
 ```
 
-〇〇〇〇は最終目的地、△△△△は次に向かう駅・バス停・乗り換え地点を入れる。
+〇〇〇〇は最終目的地を入れる。MVPでは、△△△△のような中間地点名をアプリ側で埋め込まない。
 
 ## 1. 画面一覧
 | 画面名 | 役割 |
@@ -604,8 +642,7 @@ I want to go to △△△△.
 | 目的地確認 | 最終目的地をGoogle Mapsで目視確認し、固定表示する目的文を作る |
 | 現在の状況を選ぶ | MVP確認ループの起点。次の交通手段選択、到着確認、乗る前確認へ進む |
 | Google Mapsから戻った後 | Google Maps確認後に、次の確認へ迷わず戻す |
-| 次の交通手段を選ぶ | 徒歩、タクシー、路線バス、路面電車、高速・空港・夜行バス、普通電車・地下鉄・モノレール、新幹線・特急、その他へ分岐する |
-| 徒歩準備 | Google Mapsで徒歩ルートを開き、次に向かう場所を人に見せられるようにする |
+| 次の交通手段を選ぶ | タクシー、路線バス、路面電車、高速・空港・夜行バス、普通電車・地下鉄・モノレール、新幹線・特急、その他へ分岐する |
 | タクシー準備 | 最終目的地まで行くか途中地点まで行くかを分け、表示先を選ぶ |
 | 路線バス準備 | 現金・小銭、降りるバス停、系統番号、Google Mapsバスルートを再表示できる状態を確認する |
 | 路面電車準備 | 路線バス簡易フローで、方向、降りる停留所、支払い方法を確認する |
@@ -621,7 +658,7 @@ I want to go to △△△△.
 | 切符・乗車券ありの種類選択 | 指定席・時刻ありか、自由席・ICかを選ぶ |
 | 支払い・切符・乗車券の日本語表示 | 購入、チャージ、乗車可否の確認文を表示する |
 | 乗車対象選択 | 電車かバスかを選ぶ |
-| 乗車確認の日本語表示 | この電車・バスで次に向かう場所へ行けるか確認する文を表示する |
+| 乗車確認の日本語表示 | Google Mapsで表示しているこの電車・バスで合っているか確認する文を表示する |
 | 最後の徒歩区間確認 | 目的地付近で入口・受付・集合場所・ランドマークを確認する |
 | 到着完了 | 目的地到着後に確認ループを終了する |
 
@@ -634,7 +671,6 @@ I want to go to △△△△.
 [現在の状況を選ぶ]
   ├─ 次の交通手段を選ぶ
   │   → [次の交通手段を選ぶ]
-  │      ├─ 徒歩 → [徒歩準備] → [Google Mapsを開く] → [Google Mapsから戻った後]
   │      ├─ タクシー → [タクシー準備] → [タクシー表示先選択] → [現在の状況を選ぶ]
   │      ├─ 路線バス → [路線バス準備] → [Google Mapsを開く] → [Google Mapsから戻った後] → [バス停確認 / バス乗車直前確認]
   │      ├─ 高速・空港・夜行バス → [高速・空港・夜行バス準備] → [Google Mapsを開く] → [Google Mapsから戻った後] → [高速・空港・夜行バス乗車直前確認]
@@ -764,6 +800,8 @@ Which seat type will you use?
 
 `自由席` と `指定席` は、どちらも最小画面セット上は `新幹線・特急準備` へ進む。自由席では自由席車両、乗車位置、停車駅を優先表示する。指定席では列車名・号数、出発時刻、号車、座席番号を優先表示する。`分からない` は駅員・係員に見せる文を出し、どの券と席を使うべきか確認する。
 
+新幹線・特急準備では、普通電車と同じく改札通過前の段階を必ず置く。最初に乗車券と特急券を購入または準備し、次にGoogle Mapsで表示された新幹線・特急の改札を探してから改札へ進む。改札通過後は、まず乗車券・特急券を見せて案内表示板上の列車名・号数を確認し、次にその新幹線・特急に乗るホームと号車に合う待機位置を確認する。必要に応じて遅延有無も確認する。指定席・自由席と座る場所の確認は乗車後に置き、荷物置き場の確認より前に表示する。
+
 以降の `新幹線・特急（自由席）画面案` と `新幹線・特急（指定席）画面案` は、最小画面セットの `新幹線・特急準備` 内で出し分ける表示文・補助説明・確認項目の材料として扱う。
 
 ```text
@@ -787,26 +825,11 @@ Check the next service and the last service before going to the stop or station.
 [Continue]
 ```
 
-### 徒歩準備
+### 徒歩の扱い
 ```text
-目的地: 〇〇〇〇
-I am going from here to 〇〇〇〇.
-
-次に行く場所: △△△△
-Next, I am walking to △△△△.
-
-Google Mapsで徒歩ルートを開く。
-Open the walking route in Google Maps.
-
-△△△△へ行きたいです。
-I want to go to △△△△.
-
-駅・バス停では、入口・改札・バス停標識まで進む。
-If you are going to a station or bus stop, continue to the entrance, ticket gate, or bus stop sign.
-
-[Google Mapsを開く]
-[人に見せる]
-[状況選択へ]
+徒歩は専用画面を作らない。
+Google Mapsの徒歩ナビを見ながら歩く。
+迷った場合は、Google Maps画面とShow Final Destination in JPを見せる。
 ```
 
 ### タクシー準備
@@ -815,11 +838,11 @@ If you are going to a station or bus stop, continue to the entrance, ticket gate
 Where will you go by taxi?
 
 [最終目的地まで行く]
-[駅・バス停まで行く]
+[Google Mapsの表示場所まで行く]
 [まだ分からない]
 ```
 
-タクシー準備はMVP対象。ホテルスタッフ向け表示とタクシードライバー向け表示を分け、ドライバーにはタクシーで実際に行く場所だけを表示する。
+タクシー準備はMVP対象。ホテルスタッフには最終目的地とGoogle Maps画面を見せて相談し、ドライバーには最終目的地まで行くのか、Google Mapsで表示している場所まで区間利用するのかを誤解なく見せる。
 
 ### 路線バス準備
 ```text
@@ -1006,11 +1029,10 @@ Where is the entrance to this place?
 |---|---|
 | 目的地確認 | 合っている / 目的地名を直す / 地域を追加する |
 | 現在の状況を選ぶ | 次の交通手段を選ぶ / 駅・バス停に着いた / 乗る前に確認したい |
-| 次の交通手段を選ぶ | 徒歩 / タクシー / バス・電車 / その他 |
+| 次の交通手段を選ぶ | タクシー / バス・電車 / その他 |
 | その他の移動手段 | Google Mapsを開く / 窓口・サービスアプリ・係員で確認 / 現在の状況に戻る |
 | バス・電車の種別選択 | 路線バス / 路面電車 / 高速・空港・夜行バス / 普通電車・地下鉄・モノレール / 新幹線・特急 |
-| 徒歩準備 | Google Mapsを開く / 人に見せる / 状況選択へ |
-| タクシー準備 | 最終目的地まで行く / 駅・バス停まで行く / まだ分からない |
+| タクシー準備 | 最終目的地まで行く / Google Mapsの表示場所まで行く / まだ分からない |
 | 路線バス準備 | 現金・小銭準備 / Google Mapsを確認 / バス停を確認 |
 | 普通電車準備 | 切符・ICを確認 / ホームを確認 / 停車駅を確認 |
 | 到着確認の対象選択 | 駅にいる / バス停にいる / 人に聞く |
@@ -1034,7 +1056,6 @@ Where is the entrance to this place?
 | △△△△へ行きたいです。 | I want to go to △△△△. | 乗車確認の日本語表示 |
 | △△△△へ行きたいです。 | I want to go to △△△△. | 乗車確認の日本語表示 |
 | この入口から入りたいです。 | I want to enter from this entrance. | 到着確認の日本語表示 |
-| 次に行く場所: △△△△ | Next, I am walking to △△△△. | 徒歩準備 |
 | タクシーで行く場所: △△△△ | Taxi destination: △△△△. | タクシー準備 |
 | このバス停から△△△△へ行きたいです。 | I want to go to △△△△ from this bus stop. | 路線バス準備 / 到着確認の日本語表示 |
 | Google Mapsのこのバス停で降りたいです。 | I want to get off at this bus stop shown on Google Maps. | 路線バス準備 / 乗車確認の日本語表示 |
@@ -1054,20 +1075,20 @@ Where is the entrance to this place?
 ## 6. タクシー利用画面案（MVP対象: 利用前準備）
 このセクションのうち、タクシーを呼ぶ前、表示先選択、ホテルスタッフ向け表示、タクシードライバー向け表示、タクシー目的地確認はMVP対象とする。降車時確認、降車後の徒歩接続は後続拡張とする。
 
-タクシー利用時は、表示する相手によって目的が異なる。ホテルスタッフには旅程全体を理解してもらうため、最終目的地とタクシーで向かう場所の両方を見せる。タクシードライバーには誤解を避けるため、タクシーで実際に向かう場所だけを大きく見せる。
+タクシー利用時は、表示する相手によって目的が異なる。ホテルスタッフには最終目的地とGoogle Maps画面を見せ、タクシーで行く範囲を相談する。タクシードライバーには誤解を避けるため、最終目的地まで行く場合はFinal Destinationを、区間利用の場合はGoogle Mapsで表示している降車地点だけを見せる。アプリ側で途中地点名は保存しない。
 
 タクシー準備では、荷物転送サービスや空港送迎サービスの詳細支援は扱わない。大きな荷物がある場合は、タクシーを呼ぶことと乗る場所を確認する導線に絞る。
 
-降車地点は、住所・施設名・駅名だけでは曖昧になる場合がある。ただし、旅行者が正確な出口名や降車希望場所を自力で指定できるとは限らないため、Google Mapsと併用しながら「タクシーで行く場所」を確認・保存する導線を検討する。
+降車地点は、住所・施設名・駅名だけでは曖昧になる場合がある。ただし、旅行者が正確な出口名や降車希望場所を自力で指定できるとは限らないため、Google Maps画面を見せて確認する。MVPでは「タクシーで行く場所」をアプリ内に入力・保存しない。
 
-タクシー利用開始時には、最初に「最終目的地までタクシーで行く」か「駅・バス停など途中地点までタクシーで行く」かを分ける。直行の場合はドライバー向けにも最終目的地を表示してよい。途中までの場合は、ドライバー向けにはタクシーで行く場所だけを表示する。
+タクシー利用開始時には、最初に「最終目的地までタクシーで行く」か「Google Mapsで表示している場所まで区間利用する」かを分ける。直行の場合はドライバー向けにも最終目的地を表示してよい。区間利用の場合は、ドライバー向けにはGoogle Maps画面と区間利用の日本語文を見せる。
 
 ### タクシー利用種別選択
 ```text
 タクシーで行く場所。
 
 [最終目的地まで行く]
-[駅・バス停まで行く]
+[Google Mapsの表示場所まで行く]
 [まだ分からない]
 ```
 
@@ -1140,8 +1161,8 @@ This is the taxi destination.
 タクシードライバー向け画面では、最終目的地の固定ヘッダーを表示しない。最終目的地を表示する必要がある場合は、次のようにタクシーの到着地ではないことを明記する。
 
 ```text
-最終目的地: 〇〇〇〇。タクシーは△△△△まで。
-My final destination is 〇〇〇〇, but by taxi I am only going to △△△△.
+最終目的地: 〇〇〇〇。タクシーはGoogle Mapsで表示している場所まで。
+My final destination is 〇〇〇〇, but by taxi I am only going to the place shown in Google Maps.
 ```
 
 ### タクシー目的地の指定方法
@@ -1176,17 +1197,17 @@ Google Mapsの場所名・住所・ピンを確認。
 - バス停に近い場所
 - 入口の近く
 
-タクシー目的地の日本語名・住所・補足情報は、オフラインでも表示できるように事前保存する。
+MVPでは、タクシーの区間降車地点名や住所をアプリ側で事前保存しない。区間利用ではGoogle Maps画面を運転手に見せる。
 
 ### タクシー目的地確認
 ```text
 最終目的地:
 〇〇〇〇
 
-タクシーで行く場所:
-△△△△
+Google Mapsで表示している場所:
+画面を運転手に見せる
 
-2つが違う場合、運転手には「タクシーで行く場所」だけを見せる。
+最終目的地まで行かない場合、運転手にはGoogle Maps画面と「Google Mapsで表示している場所までタクシーで行きたいです。最終目的地ではありません。」だけを見せる。
 
 [運転手向け画面を表示]
 [ホテルスタッフ向け画面を表示]
@@ -1236,29 +1257,26 @@ Can I pay by credit card?
 ### 降車後の徒歩接続
 この画面は後続拡張とする。
 
-タクシー降車後に駅・バス停などへ徒歩で向かう場合は、Google Mapsで徒歩移動する。その間も、周囲の人に次の目的地へ向かっていることを見せられる画面を用意する。
+タクシー降車後に駅・バス停などへ徒歩で向かう場合は、Google Mapsで徒歩移動する。その間は、Google Maps画面とShow Final Destination in JPを見せて確認する。
 
 ```text
 目的地: 〇〇〇〇
 I am going from here to 〇〇〇〇.
 
-次に行く場所: △△△△
-Next, I am walking to △△△△.
-
-△△△△へ行きたいです。
-I want to go to △△△△.
+Google Mapsで表示している場所へ向かっています。
+I am heading to the place shown in Google Maps.
 
 [Google Mapsを開く]
 [人に見せる]
 [状況選択へ]
 ```
 
-〇〇〇〇は最終目的地、△△△△は次に向かう駅・バス停・乗り換え地点を入れる。
+〇〇〇〇は最終目的地を入れる。MVPでは、△△△△のような中間地点名をアプリ側で埋め込まない。
 
 ### タクシー用のボタン構成（MVP対象）
 | 画面 | ボタン |
 |---|---|
-| タクシー利用種別選択 | 最終目的地まで行く / 駅・バス停まで行く / まだ分からない |
+| タクシー利用種別選択 | 最終目的地まで行く / Google Mapsの表示場所まで行く / まだ分からない |
 | タクシー事前確認 | 人数・荷物 / 乗車場所 / 配車アプリ |
 | タクシー表示先選択 | ホテルスタッフに見せる / タクシードライバーに見せる / 戻る |
 | ホテルスタッフ向け表示 | 別の文を見る / 戻る / ドライバー向け表示 |
@@ -1298,7 +1316,7 @@ I want to go to △△△△.
 | クレジットカードで払いたいです。 | I want to pay by credit card. | タクシードライバー |
 | 高速道路を使いますか。 | Will you use the expressway? | タクシードライバー |
 | 有料道路を使いますか。 | Will you use a toll road? | タクシードライバー |
-| 次に行く場所: △△△△ | Next, I am walking to △△△△. | 周囲の人 |
+| Google Mapsで表示している場所へ向かっています。 | I am heading to the place shown in Google Maps. | 周囲の人 |
 | この駅の場所を知りたい。 | Where is this station? | 周囲の人 |
 | このバス停の場所を知りたい。 | Where is this bus stop? | 周囲の人 |
 | △△△△へ行きたいです。 | I want to go to △△△△. | 周囲の人 |
@@ -1315,9 +1333,9 @@ I want to go to △△△△.
 
 バスは他の交通手段より確認事項が多いため、利用前準備では説明を厚めに表示してよい。一方で、運転手に見せる画面は乗車口で読める1文、乗車中の画面は揺れる車内で見られる短いチェックリストに絞る。
 
-バスでは、最終目的地ではなく「次に降りる停留所」または「次に向かう場所」を使って確認する。
+バスでは、アプリに保存した中間地点名ではなく、Google Mapsで表示しているバス・停留所・降車場所を使って確認する。
 
-MVPの路線バスは、自由に細かく選ばせず、次の固定順ガイドとして進める。各画面から戻る場合も、この順序の前後に戻す。
+MVPの路線バスは、自由に細かく選ばせず、同じ画面内の時系列DoListとして進める。`Before bus stop`、`At bus stop` などは別ページへ進むリンクではなく、各項目のタイミングラベルとして表示する。これにより、他の交通手段と同じ操作モデルのまま、バス特有の確認量だけを増やす。
 
 1. 路線バスの注意
 2. 現金・小銭準備
@@ -1477,7 +1495,7 @@ Does this bus stop at the bus stop shown on Google Maps?
 Google Mapsの画面を見せる前提で確認する。スクショを使う場合も、Set destination段階で正しい目的地を確認した後のバックアップに限る。
 
 ### 高速・空港・夜行バス利用
-この画面はMVP対象とする。路線バスとは分け、予約、乗車券、便名、乗り場、集合時刻、出発時刻、到着地、荷物預けを先に確認する。
+この画面はMVP対象とする。路線バスとは分け、予約、乗車券、チケットカウンターでの空席確認、便名、乗り場、集合時刻、出発時刻、到着地、荷物預けを先に確認する。
 
 ```text
 高速・空港・夜行バスを確認。
@@ -1487,7 +1505,7 @@ Google Mapsの画面を見せる前提で確認する。スクショを使う場
 [夜行バス]
 ```
 
-高速・空港・夜行バスでは、予約、乗車券、チケットカウンター、乗り場、出発時刻、荷物預けを優先する。
+高速・空港・夜行バスでは、予約、乗車券、チケットカウンターでの空席確認、乗り場、出発時刻、荷物預けを優先する。
 
 ### 高速・空港・夜行バス種別選択
 この画面はMVP対象とする。
@@ -1529,6 +1547,16 @@ Check name, number of people, service name, bus company, departure time, and arr
 [乗車券あり]
 [乗車券がない]
 [時刻を確認]
+```
+
+### 高速・空港・夜行バス空席確認
+```text
+At the ticket counter
+
+Show Google Maps and ask if there is any bus available to the destination.
+
+目的の場所まで行くバスで空席はありますか？
+Is there any available bus seat to my destination?
 ```
 
 ### 乗車券がない場合
@@ -1788,11 +1816,11 @@ Best first: people waiting in line.
 目的地: 〇〇〇〇
 I am going from here to 〇〇〇〇.
 
-次に行く場所: △△△△行きのバス。
-Next, I will take a bus to △△△△.
+Google Mapsで表示しているこのバスに乗りたいです。
+I want to take this bus shown in Google Maps.
 
-この列が△△△△へ行くバスの列か確認したい。
-Is this the line for the bus to △△△△?
+この列で合っていますか。
+Is this the correct line?
 
 [別の文を見る]
 [バス停確認]
@@ -1837,11 +1865,11 @@ There are 〇 people. I have large luggage.
 目的地: 〇〇〇〇
 I am going from here to 〇〇〇〇.
 
-次に行く場所: △△△△行きのバス。
-Next, I will take a bus to △△△△.
+Google Mapsで表示しているこのバスに乗りたいです。
+I want to take this bus shown in Google Maps.
 
-このバス停で、△△△△へ向かうバスを待つか確認したい。
-Should I wait at this bus stop for the bus to △△△△?
+このバス停で待てばよいですか。
+Should I wait at this bus stop?
 
 降りる停留所が分かっている場合:
 このバス停で、□□バス停に止まるバスを待つか確認したい。
@@ -1889,15 +1917,21 @@ Reason: The next bus may also be full or very crowded.
 [人に聞く]
 ```
 
-### バス乗車直前確認
-運転手に見せる画面は短くする。乗車口で長いやり取りをしないため、行き先・降車停留所確認の1文だけを大きく表示する。支払い方式は別の「バス支払い確認」画面に分ける。
+### バス乗車直前・乗車直後確認
+運転手に見せる文は短くする。乗車口や乗車直後に長いやり取りをしないため、主ページの `After boarding` に置く運転手向け確認は次の2文に絞る。支払い方式は別の「バス支払い確認」画面に分ける。
 
 ```text
-運転手に見せる画面
-Show this screen to the bus driver.
+Show this in JP
 
-このバスがGoogle Mapsの降車バス停に止まるか確認したい。
-Does this bus stop at the bus stop shown on Google Maps?
+このバスで合っていますか。
+Is this the correct bus?
+
+このバスはGoogle Mapsで表示している停留所に停まりますか。
+Will this bus stop at the bus stop shown in Google Maps?
+
+必要な時だけ乗客に見せる補助文:
+Google Mapsで表示している停留所で降りたいです。その停留所に着く少し前に教えてもらえますか。
+I want to get off at the stop shown in Google Maps. Could you tell me shortly before we arrive at that stop?
 
 [Google Mapsを開く]
 [支払いを確認]
@@ -2181,8 +2215,8 @@ Check the walking route to your destination in Google Maps.
 ### バス用の見せる日本語（MVP対象）
 | 表示文 | 英語訳 | 表示対象 |
 |---|---|---|
-| 次に行く場所: △△△△行きのバス。 | Next, I will take a bus to △△△△. | 周囲の人 |
-| 小銭を用意したいです。近くにコンビニやお店はありますか。 | I want to prepare coins. Is there a convenience store or any shop nearby? | 周囲の人 |
+| Google Mapsで表示しているこのバスに乗りたいです。 | I want to take this bus shown in Google Maps. | 周囲の人 |
+| 小銭を用意したいです。近くのコンビニやお店を教えてください。 | I want to prepare coins. Please tell me where a nearby convenience store or shop is. | 周囲の人 |
 | 現金で払いたいですが、小銭がありません。 | I want to pay by cash, but I do not have coins. | 周囲の人 / 係員 |
 | このバスで両替したいです。 | I want to exchange money on this bus. | 周囲の人 / バス運転手 |
 | △△△△へ行きたいです。この列で合っていますか。 | I want to go to △△△△. Is this the correct line? | 並んでいる乗客 |

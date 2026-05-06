@@ -222,13 +222,26 @@ h3 {
 
 .where-display {
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 70px;
   padding: 10px;
   border: 1px solid #000000;
   background: var(--readonly-bg);
   color: #000000;
   font-size: 1rem;
+  font-weight: 800;
+}
+
+.where-display span {
+  color: #000000;
+  font-weight: 800;
+}
+
+.where-display small {
+  margin-top: 3px;
+  font-size: 0.78rem;
   font-weight: 800;
 }
 
@@ -274,6 +287,18 @@ h3 {
   z-index: 1;
   display: block;
   padding-top: 4px;
+  pointer-events: none;
+}
+
+.transport-arrow em {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 2px;
+  color: #5f2b13;
+  font-size: 0.72rem;
+  font-style: normal;
+  font-weight: 800;
   pointer-events: none;
 }
 
@@ -339,8 +364,19 @@ h3 {
 }
 
 .readonly-field span {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: baseline;
   color: var(--muted);
   font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.readonly-field span small,
+.show-destination-block span small {
+  color: var(--muted);
+  font-size: 0.78rem;
   font-weight: 700;
 }
 
@@ -362,6 +398,20 @@ label {
   gap: 6px;
   color: var(--muted);
   font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.label-line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: baseline;
+  color: var(--ink);
+}
+
+.label-line small {
+  color: var(--muted);
+  font-size: 0.78rem;
   font-weight: 700;
 }
 
@@ -403,21 +453,24 @@ input:focus {
 }
 
 .section-block,
-.guidance,
 .jp-help {
   margin: 14px 0;
 }
 
 .section-block h3,
-.guidance h3,
 .jp-help h3 {
   margin-bottom: 8px;
   color: var(--ink);
 }
 
+.section-hint {
+  margin: -2px 0 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
 .checklist,
-.action-checklist,
-.guidance ul {
+.action-checklist {
   display: grid;
   gap: 8px;
   margin: 0;
@@ -425,8 +478,7 @@ input:focus {
   list-style: none;
 }
 
-.checklist li,
-.guidance li {
+.checklist li {
   display: flex;
   gap: 8px;
   align-items: flex-start;
@@ -437,8 +489,9 @@ input:focus {
 }
 
 .action-checklist button {
+  position: relative;
   min-height: 48px;
-  padding: 10px;
+  padding: 10px 34px 10px 10px;
   border: 1px solid #cfd8e3;
   border-radius: var(--radius);
   background: var(--button-bg);
@@ -448,6 +501,16 @@ input:focus {
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
 }
 
+.action-checklist button::after {
+  content: "✓";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  color: var(--primary);
+  font-weight: 800;
+  transform: translateY(-50%);
+}
+
 .action-checklist button.selected {
   border-color: var(--primary);
   background: var(--soft);
@@ -455,8 +518,7 @@ input:focus {
   font-weight: 700;
 }
 
-.checklist li::before,
-.guidance li::before {
+.checklist li::before {
   content: "";
   flex: 0 0 10px;
   width: 10px;
@@ -466,30 +528,6 @@ input:focus {
   background: var(--primary);
 }
 
-.guidance {
-  padding: 12px;
-  border: 1px solid #c6d7ff;
-  border-radius: var(--radius);
-  background: #f4f8ff;
-}
-
-.guidance li {
-  border-color: #d9e6ff;
-  background: #ffffff;
-}
-
-.guidance-button {
-  min-height: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 .jp-help {
   padding: 12px;
   border: 1px solid #cfd8e3;
@@ -497,9 +535,46 @@ input:focus {
   background: #fffdf7;
 }
 
-.phrase-list {
+.phrase-choice-list {
   display: grid;
   gap: 8px;
+  margin-bottom: 10px;
+}
+
+.phrase-choice-row {
+  display: grid;
+  gap: 6px;
+}
+
+.phrase-choice {
+  position: relative;
+  min-height: 46px;
+  padding: 10px 34px 10px 10px;
+  border: 1px solid #eadfbf;
+  border-radius: var(--radius);
+  background: #ffffff;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.phrase-choice::after {
+  content: "JP";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  transform: translateY(-50%);
+}
+
+.phrase-choice.selected {
+  border-color: var(--primary);
+  background: #fff8df;
+  color: var(--primary-dark);
+  font-weight: 700;
 }
 
 .phrase-card {
@@ -534,7 +609,16 @@ input:focus {
 }
 
 .transport-choice-grid button {
+  display: grid;
+  gap: 4px;
+  align-content: center;
   min-height: 54px;
+}
+
+.transport-choice-grid button small {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
 }
 
 .actions {
@@ -544,6 +628,22 @@ input:focus {
   margin-top: 18px;
 }
 
+.stage-actions {
+  grid-template-columns: 1fr;
+  gap: 8px;
+  max-width: 520px;
+  margin: 12px 0 18px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f8fafc;
+}
+
+.stage-actions button {
+  min-height: 40px;
+  box-shadow: none;
+}
+
 .journey-footer {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -551,6 +651,14 @@ input:focus {
   margin-top: 20px;
   padding-top: 14px;
   border-top: 1px solid var(--line);
+}
+
+.journey-footer-hint {
+  grid-column: 1 / -1;
+  margin: 0 0 2px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.35;
 }
 
 .actions button,
@@ -662,29 +770,151 @@ input:focus {
   font-size: 0.9rem;
 }
 
-.note-help {
-  margin-top: 12px;
+.resource-link {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
 }
 
-.note-help-button {
-  min-height: 34px;
-  border: 0;
-  background: transparent;
-  color: var(--muted);
-  font-size: 0.86rem;
-  text-align: left;
+.resource-link a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.resource-link a:hover {
   text-decoration: underline;
-  cursor: pointer;
+}
+
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  text-decoration: none;
+}
+
+.topbar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pretrip-shell {
+  max-width: 1100px;
+}
+
+.pretrip-page h3 {
+  margin: 8px 0;
+  font-size: 1.08rem;
+}
+
+.pretrip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.pretrip-step,
+.pretrip-checklist,
+.pretrip-show {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.pretrip-step p,
+.pretrip-checklist li {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.pretrip-step img {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #f8fafc;
+}
+
+.pretrip-checklist ul {
+  margin: 8px 0 0;
+  padding-left: 20px;
+}
+
+.pretrip-actions {
+  margin-top: 18px;
+}
+
+.entry-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.entry-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.entry-flow span,
+.entry-flow strong {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+  font-size: 0.92rem;
+  text-align: center;
+}
+
+.entry-flow span {
+  background: #eef3fb;
+}
+
+.entry-choice {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.entry-choice.primary-choice {
+  border-color: #f3bd55;
+  background: #fff8e8;
+}
+
+.entry-choice p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.55;
 }
 
 .action-timing {
   margin: 6px 0 -2px;
-  color: var(--muted);
-  font-size: 0.9rem;
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
-.note-help-card {
-  margin-top: 8px;
+.action-timing-soft {
+  font-weight: 400;
+  text-transform: none;
 }
 
 @media (max-width: 640px) {
@@ -706,6 +936,9 @@ input:focus {
   .destination-row,
   .transit-row,
   .transport-choice-grid,
+  .pretrip-grid,
+  .entry-choice-grid,
+  .entry-flow,
   .actions,
   .journey-footer {
     grid-template-columns: 1fr;

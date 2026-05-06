@@ -3,36 +3,30 @@ const state = {
   destination: "Kiyomizu-dera",
   area: "Kyoto",
   placeType: "Temple",
-  nextPlace: "Gojozaka bus stop",
   scenario: "bus",
   screen: "start",
   guideByScreen: {},
-  helpByScreen: {},
-  noteByScreen: {}
+  helpByScreen: {}
 };
 
 const screens = {
   "start": {
     status: "UAT-01",
     title: "Set destination",
-    summary: "Set the exact final destination first. Take time, ask someone, or prepare it before travel if needed.",
+    summary: "Set the exact final destination. Check with your travel companion or hotel staff ahead of your travel to make sure <strong>Google Maps points to the correct place.</strong>",
     fields: true,
+    warning: "This app depends on the correct Final Destination. Set it carefully before travel, or when you have enough time and help. Do not rush this step while moving.",
     checklist: [
-      "Check the exact final destination in Google Maps first",
-      "Ask staff or prepare the destination before travel if unsure",
-      "Type the exact place name shown in Google Maps",
-      "Add area / city / prefecture and place type",
-      "Confirm the pin, address, and same-name places before choosing transport"
-    ],
-    guidance: [
-      { text: "If Google Maps shows multiple results, do not guess. Ask someone to check the area or address.", helpIndex: 1 },
-      { text: "If you are at a hotel, station, or shop, ask staff to help identify the exact place.", helpIndex: 1 },
-      { text: "If you are planning tomorrow's trip, set and check the destination before leaving.", helpIndex: 3 },
-      { text: "If the place looks wrong, check it is not a same-name place before choosing transport.", helpIndex: 3 }
+      { timing: "CHECK Before Travel", text: "Check the exact final destination in Google Maps first", helpIndex: 0 },
+      { text: "Open Google Maps, and ask staff if the destination and route are correct", helpIndex: 1 },
+      { text: "If Google Maps points to the wrong place, explain or show your destination clearly.", helpIndex: 2 },
+      { text: "What is the type of the place?", helpIndex: 3 },
+      { timing: "Show When you are lost", text: "Open Google Maps, and ask if you think you are lost.", helpIndex: 1 }
     ],
     jpHelp: [
-      ["この場所へ行きたいです。Google Mapsではこの名前で表示されています。", "I want to go to this place. Google Maps shows this name."],
-      ["この場所で合っていますか。地域や住所も見てもらえますか。", "Is this the correct place? Can you also check the area or address?"],
+      ["私の目的地は{finalDestinationLabel}です。Google Maps上、正しく表示されていますか。", "My destination is {finalDestinationLabel}. Is it shown correctly on Google Maps?"],
+      ["私の目的地は{finalDestinationLabel}です。ルート・交通手段はこれで正しいですか。", "My destination is {finalDestinationLabel}. Is this route and transportation correct?"],
+      ["私が向かうべき場所を入力してもらえますか。あるいはGoogle Maps上で教えてもらえますか。", "Could you type the place I should go to, or show it to me on Google Maps?"],
       ["これは寺・ホテル・駅など、どの種類の場所ですか。", "What type of place is this, such as temple, hotel, or station?"],
       ["Google Mapsのこの場所へ行きたいです。同じ名前の別の場所ではないか見てもらえますか。", "I want to go to this place shown on Google Maps. Can you check it is not a different place with the same name?"]
     ],
@@ -41,88 +35,61 @@ const screens = {
       ["Show Final Destination in JP", "show-place", "secondary"],
       ["Open Google Maps", "maps-opened", "secondary"]
     ],
-    note: "The final destination is the base for every Google Maps handoff. Spend extra time here if needed. Use live Google Maps for routes, transport times, and the next bus or train. A screenshot is only a backup for the destination name/place."
+    note: "The final destination is the base for every Google Maps handoff. Spend extra time here if needed. Use live Google Maps for routes, transport times, and the next bus or train. A screenshot is only a backup for the destination name/place.",
+    resourceLink: ["Before travel: confirm destination", "/pre-trip-guide.html"]
   },
   "transport": {
     status: "UAT-02",
     title: "Public transportation",
+    summary: "Choose the transport shown in Google Maps. This app helps you prepare and ask people in Japanese.",
     transportChoices: [
       ["Taxi", "taxi-prep"],
       ["Train", "train-prep"],
-      ["Shinkansen", "limited-prep"],
+      ["Shinkansen / LTD Express", "limited-prep"],
       ["Highway Bus", "coach-prep"],
-      ["Local Bus", "bus-prep"],
+      ["Local Bus", "bus-start"],
       ["Other", "other-prep"]
     ]
   },
   "maps-return": {
     status: "UAT-02",
     title: "Back from Google Maps",
-    summary: "Now confirm the next action.",
+    summary: "Use the latest Google Maps result. Then choose transport.",
     checklist: [
-      "Check the next place",
-      "Confirm the stop, station, or entrance",
-      "Ask someone if you are unsure"
-    ],
-    guidance: [
-      "If you reached a station, bus stop, or entrance, continue with arrival confirmation.",
-      "If you are still unsure where you are, open Google Maps or show the destination in JP."
+      { text: "Check your current location in Google Maps", helpIndex: 0 },
+      { text: "Check the latest route and transportation", helpIndex: 1 }
     ],
     jpHelp: [
-      ["この場所へ行きたいです。ここから次にどこへ向かえばよいですか。", "I want to go to this place. Where should I go next from here?"],
-      ["この駅・バス停・入口で合っていますか。Google Mapsではここです。", "Is this the correct station, bus stop, or entrance? Google Maps shows this place."],
-      ["入口へ行きたいです。近くまで来ています。", "I want to go to the entrance. I am nearby."]
+      ["Google Maps上の私の現在地はここで合っていますか。", "Is my current location here on Google Maps?"],
+      ["私の目的地は{finalDestinationLabel}です。ルート・交通手段はこれで正しいですか。", "My destination is {finalDestinationLabel}. Is this route and transportation correct?"]
     ],
     actions: [
-      ["I arrived here", "arrival-check", "primary"],
-      ["Show Final Destination in JP", "show-place", "secondary"],
-      ["Switch to taxi", "taxi-prep", "secondary"]
-    ],
-    monetized: {
-      title: "Need internet for Google Maps?",
-      body: "Prepare eSIM or pocket Wi-Fi before travel."
-    }
+      ["Open Google Maps", "maps-opened", "primary"],
+      ["Select transportation", "transport", "secondary"],
+      ["Show Final Destination in JP", "show-place", "secondary"]
+    ]
   },
   "maps-opened": {
     status: "UAT-02",
     title: "Google Maps opened",
-    summary: "Prototype screen. In the real product, Google Maps opens here.",
-    warning: "Confirm this is the exact place you want. Same-name places can point to the wrong location.",
+    summary: "Check Google Maps. Then choose transport.",
+    warning: "Google Maps routes and transportation can change by time and location. It may differ from what you saw before.",
     checklist: [
-      "Check the place name",
-      "Check the area or address",
-      "Check the place type",
-      "Check the pin or entrance",
-      "If it is wrong, edit the destination"
-    ],
-    guidance: [
-      "Do not continue if the pin points to a same-name place in another area.",
-      "If the entrance is unclear, keep Google Maps open and confirm again near the place."
+      { text: "Check your current location in Google Maps", helpIndex: 0 },
+      { text: "Check the route and transportation to the final destination", helpIndex: 1 }
     ],
     jpHelp: [
-      ["Google Mapsのこの場所へ行きたいです。同じ名前の別の場所ではないですか。", "I want to go to this place shown on Google Maps. Is it not a different place with the same name?"],
-      ["この住所の場所へ行きたいです。地域は合っていますか。", "I want to go to the place at this address. Is the area correct?"],
-      ["これは寺・ホテル・駅など、どの種類の場所ですか。", "What type of place is this, such as temple, hotel, or station?"],
-      ["入口へ行きたいです。ピンではなく入口を知りたいです。", "I want to go to the entrance. I need the entrance, not only the map pin."],
-      ["この場所で合っていますか。違う場合は教えてください。", "Is this the correct place? Please tell me if it is wrong."]
-    ],
-    actions: [
-      ["This is correct", "maps-return", "primary"],
-      ["Edit destination", "start", "secondary"],
-      ["Back", "transport", "secondary"]
+      ["Google Maps上の私の現在地はここで合っていますか。", "Is my current location here on Google Maps?"],
+      ["私の目的地は{finalDestinationLabel}です。ルート・交通手段はこれで正しいですか。", "My destination is {finalDestinationLabel}. Is this route and transportation correct?"]
     ]
   },
   "show-place": {
     status: "UAT-03",
     title: "Show Final Destination in JP",
     summary: "Show this screen to staff or someone nearby when you need help.",
-    guidance: [
-      { text: "Use this when you cannot explain the destination in Japanese.", helpIndex: 0 },
-      { text: "Show Google Maps to make sure you are on the route.", helpIndex: 1 }
-    ],
     jpHelp: [
       ["私は{finalDestinationLabel}に向かっています。", "I am heading to {finalDestinationLabel}."],
-      ["Googleマップのガイドは正しいですか。", "Show Google Maps to make sure you are on the route."]
+      ["私の目的地は{finalDestinationLabel}です。ルート・交通手段はこれで正しいですか。", "My destination is {finalDestinationLabel}. Is this route and transportation correct?"]
     ],
     show: {
       ja: "私は{finalDestinationLabel}に向かっています。",
@@ -134,48 +101,74 @@ const screens = {
       ["Switch to taxi", "taxi-prep", "secondary"]
     ]
   },
+  "bus-start": {
+    status: "UAT-04",
+    title: "Local bus preparation",
+    summary: "Follow the bus checks in order. Some tasks are before the bus stop, and some are at the bus stop.",
+    warning: "Local buses are difficult for first-time travelers. If you cannot check the route, direction, cash, and stop, choose taxi or train.",
+    checklist: [
+      { timing: "Before bus stop", text: "Prepare cash and coins", helpIndex: 0 },
+      { timing: "Before bus stop", text: "Check the latest route and departure time in Google Maps" },
+      { timing: "At bus stop", text: "Confirm the direction of this bus stop", helpIndex: 1 },
+      { timing: "At bus stop", text: "Check the bus route number or destination", helpIndex: 2 },
+      { timing: "Before boarding", text: "Check the stop to get off", helpIndex: 4 },
+      { timing: "After boarding", text: "Show Google Maps and ask the driver if this is the correct bus", helpIndex: 3 },
+      { timing: "After boarding", text: "Ask the driver if this bus stops at the bus stop shown in Google Maps", helpIndex: 4 },
+      { timing: "After boarding / Ask passenger if allowed", text: "Ask a passenger only if you need help getting off", helpIndex: 5 }
+    ],
+    jpHelp: [
+      ["現金と小銭を用意したいです。近くのコンビニやお店を教えてください。", "I want to prepare cash and coins. Please tell me where a nearby convenience store or shop is."],
+      ["このバス停から{finalDestinationLabel}方面へ行きたいです。道路のこちら側で合っていますか。", "I want to go toward {finalDestinationLabel} from this bus stop. Is this the correct side of the road?"],
+      ["このバスの番号か行き先を知りたいです。Google Mapsではこのバスです。", "I want to know this bus route number or destination. Google Maps shows this bus."],
+      ["このバスで合っていますか。", "Is this the correct bus?"],
+      ["このバスはGoogle Mapsで表示している停留所に停まりますか。", "Will this bus stop at the bus stop shown in Google Maps?"],
+      ["Google Mapsで表示している停留所で降りたいです。その停留所に着く少し前に教えてもらえますか。", "I want to get off at the stop shown in Google Maps. Could you tell me shortly before we arrive at that stop?"]
+    ],
+    note: "Note: Some bus companies may accept transit IC cards."
+  },
+  "bus-before-stop": {
+    status: "UAT-04-A",
+    title: "Before going to the bus stop",
+    summary: "Prepare money and confirm the bus destination before you walk to the stop.",
+    warning: "In rural areas, missing one bus can mean a long wait. Use live Google Maps for the latest route and time.",
+    checklist: [
+      { timing: "Before bus stop", text: "Prepare cash and coins", helpIndex: 0 },
+      { timing: "Before bus stop", text: "Show the bus destination in Google Maps", helpIndex: 1 },
+      { timing: "Before bus stop", text: "Check the latest route and departure time in Google Maps" }
+    ],
+    jpHelp: [
+      ["現金と小銭を用意したいです。近くのコンビニやお店を教えてください。", "I want to prepare cash and coins. Please tell me where a nearby convenience store or shop is."],
+      ["Google Mapsで表示している停留所で降りたいです。このバスで合っていますか。", "I want to get off at the stop shown in Google Maps. Is this the correct bus?"]
+    ],
+    note: "A screenshot can help you remember the place name, but use live Google Maps for current routes and times."
+  },
   "bus-prep": {
     status: "UAT-04",
     title: "Local bus preparation",
-    summary: "Prepare before going to the bus stop.",
-    warning: "Local buses are difficult for first-time travelers. Use this only if you can carefully check the route, direction, cash, and stop. If unsure, choose taxi or train.",
+    summary: "Use this at the bus stop, before the bus arrives.",
+    warning: "Local buses are difficult for first-time travelers. Use this only if you can carefully check the route, direction, cash, and stop. Choose taxi or train when you cannot check them.",
     checklist: [
-      { timing: "Before going to the bus stop", text: "Prepare cash and coins", helpIndex: 0 },
-      { timing: "Before going to the bus stop", text: "Show the bus destination in Google Maps", helpIndex: 3 },
-      { timing: "At the bus stop, before the bus arrives", text: "Confirm the direction of this bus stop", helpIndex: 4 },
+      { timing: "At the bus stop, before the bus arrives", text: "Confirm the direction of this bus stop", helpIndex: 0 },
       { timing: "At the bus stop, before the bus arrives", text: "Check the bus route number or destination", helpIndex: 1 },
-      { timing: "At the bus stop, before the bus arrives", text: "Check the stop to get off", helpIndex: 2 }
-    ],
-    guidance: [
-      { text: "If the bus stop direction is unclear, ask before the bus arrives.", helpIndex: 4 },
-      { text: "If the route number or destination is unclear, show the Google Maps bus screen.", helpIndex: 1 },
-      { text: "Show the Google Maps screen to confirm where this bus should go.", helpIndex: 3 }
+      { timing: "At the bus stop, before the bus arrives", text: "Show the bus destination in Google Maps", helpIndex: 2 },
+      { timing: "At the bus stop, before the bus arrives", text: "Check the stop to get off", helpIndex: 3 }
     ],
     jpHelp: [
-      ["現金と小銭を用意したいです。近くにコンビニやお店はありますか。", "I want to prepare cash and coins. Is there a convenience store or any shop nearby?"],
+      ["このバス停から{finalDestinationLabel}方面へ行きたいです。道路のこちら側で合っていますか。", "I want to go toward {finalDestinationLabel} from this bus stop. Is this the correct side of the road?"],
       ["このバスの番号か行き先を知りたいです。Google Mapsではこのバスです。", "I want to know this bus route number or destination. Google Maps shows this bus."],
+      ["Google Mapsで表示している停留所で降りたいです。このバスで合っていますか。", "I want to get off at the stop shown in Google Maps. Is this the correct bus?"],
       ["このバス停で降りたいです。近づいたら教えてもらえますか。", "I want to get off at this bus stop. Can you tell me when it is close?"],
-      ["Googleマップの{transportDestinationLabel}で降りたいです。このバスで合っていますか。", "I want to get off at {transportDestinationLabel} shown in Google Maps. Is this the correct bus?"],
-      ["このバス停から清水寺方面へ行きたいです。道路のこちら側で合っていますか。", "I want to go toward Kiyomizu-dera from this bus stop. Is this the correct side of the road?"]
+      ["現金と小銭を用意したいです。近くのコンビニやお店を教えてください。", "I want to prepare cash and coins. Please tell me where a nearby convenience store or shop is."]
     ],
-    note: "Note: Some bus companies may accept transit IC cards.",
-    actions: [
-      ["Check bus stop direction", "bus-direction", "primary"],
-      ["Open Google Maps", "maps-opened", "secondary"],
-      ["Switch to taxi", "taxi-prep", "secondary"]
-    ]
+    note: "Note: Some bus companies may accept transit IC cards."
   },
   "bus-direction": {
     status: "UAT-05",
     title: "Check bus stop direction",
     summary: "The stop name can be correct, but the direction can be wrong.",
-    guidance: [
-      "Show this to someone already waiting at the stop. They can usually tell if this side of the road is correct.",
-      "If they say no or look unsure, do not keep waiting here. Recheck Google Maps or move to the opposite stop."
-    ],
     show: {
-      ja: "このバス停から清水寺方面へ行きたいです。",
-      en: "I want to go toward Kiyomizu-dera from this bus stop."
+      ja: "このバス停から{finalDestinationLabel}方面へ行きたいです。",
+      en: "I want to go toward {finalDestinationLabel} from this bus stop."
     },
     actions: [
       ["This is correct", "bus-before-boarding", "primary"],
@@ -187,13 +180,9 @@ const screens = {
     status: "UAT-04",
     title: "Before boarding",
     summary: "Show this quickly to the driver.",
-    guidance: [
-      "Keep this short. The driver has little time at the door.",
-      "If the driver or passengers indicate this is wrong, do not board. Open Google Maps again or switch to taxi."
-    ],
     show: {
-      ja: "清水寺方面へ行きたいです。",
-      en: "I want to go toward Kiyomizu-dera."
+      ja: "{finalDestinationLabel}方面へ行きたいです。",
+      en: "I want to go toward {finalDestinationLabel}."
     },
     actions: [
       ["I can board", "arrival-check", "primary"],
@@ -207,13 +196,9 @@ const screens = {
     summary: "If the destination is not far, taxi is recommended.",
     warning: "The next bus may also be crowded. Waiting can take time.",
     checklist: [
-      "Wait for the next same route or destination",
-      "Switch to taxi if the place is not far",
-      "Check the last bus if it is late"
-    ],
-    guidance: [
-      "Waiting is possible, but the next bus may also be full or crowded.",
-      "If the destination is not far, taxi is usually safer than waiting."
+      { text: "Wait for the next same route or destination", helpIndex: 0 },
+      { text: "Switch to taxi if the place is not far", helpIndex: 1 },
+      { text: "Check the last bus if it is late", helpIndex: 2 }
     ],
     jpHelp: [
       ["次の同じ行き先のバスに乗りたいです。ここで待てばよいですか。", "I want to take the next bus with the same destination. Should I wait here?"],
@@ -232,13 +217,9 @@ const screens = {
     summary: "Check before you keep waiting.",
     warning: "In rural areas, missing one bus or train can mean waiting for hours or losing the last option today.",
     checklist: [
-      "Check the next service",
-      "Check the last service",
-      "Switch to taxi if uncertain"
-    ],
-    guidance: [
-      "Do not wait without checking. In rural areas, one missed service can mean hours of waiting.",
-      "If there may be no later service today, switch to taxi or ask staff immediately."
+      { text: "Check the next service", helpIndex: 0 },
+      { text: "Check the last service", helpIndex: 1 },
+      { text: "Switch to taxi if uncertain", helpIndex: 2 }
     ],
     jpHelp: [
       ["次の便はまだありますか。長く待つ必要がありますか。", "Is there another service? Will I need to wait a long time?"],
@@ -256,25 +237,19 @@ const screens = {
     title: "Taxi preparation",
     summary: "Choose where this taxi should go.",
     checklist: [
-      { timing: "Before getting in taxi", text: "Tell staff if you have large luggage and need to call a taxi", helpIndex: 2 },
-      { timing: "Before getting in taxi", text: "Raise one arm straight up toward an available taxi", helpIndex: 3 },
-      { timing: "After taxi stops, ask driver before it starts", text: "Show the final destination if taking taxi all the way", helpIndex: 0 },
-      { timing: "After taxi stops, ask driver before it starts", text: "Show the taxi destination in Google Maps", helpIndex: 1 }
-    ],
-    guidance: [
-      { text: "Show the taxi destination in Google Maps.", helpIndex: 1 },
-      { text: "If you have large luggage or do not know where to board, ask staff before getting in.", helpIndex: 2 },
-      { text: "Take a taxi to the final destination.", helpIndex: 0 }
+      { timing: "Before getting in taxi", text: "Tell staff if you have large luggage and need to call a taxi", helpIndex: 0 },
+      { timing: "Before getting in taxi", text: "Raise your hand and wait until the taxi stops at the roadside" },
+      { timing: "After taxi stops, ask driver before it starts", text: "Show the final destination if taking taxi all the way", helpIndex: 1 },
+      { timing: "After taxi stops, ask driver before it starts", text: "Show the taxi destination in Google Maps.", helpIndex: 2 }
     ],
     jpHelp: [
-      ["タクシーで{finalDestinationLabel}まで行きたいです。", "I want to go to {finalDestinationLabel} by taxi."],
-      ["Googleマップの{taxiDestinationLabel}までタクシーで行きたいです。最終目的地ではありません。", "I want to go only to {taxiDestinationLabel} shown in Google Maps by taxi. It is not my final destination."],
       ["大きな荷物があります。タクシーを呼びたいです。乗る場所も知りたいです。", "I have large luggage. I want to call a taxi and know where to board."],
-      ["タクシーを拾いたいです。タクシーに向かって片手をまっすぐ上に挙げます。", "I want to hail a taxi. I will raise one arm straight up toward the taxi."]
+      ["タクシーで{finalDestinationLabel}まで行きたいです。", "I want to go to {finalDestinationLabel} by taxi."],
+      ["Google Mapsで表示している場所までタクシーで行きたいです。最終目的地ではありません。", "I want to go only to the place shown in Google Maps by taxi. It is not my final destination."]
     ],
     actions: [
       ["Go to final destination", "taxi-driver", "primary"],
-      ["Go to next place only", "taxi-driver", "secondary"],
+      ["Go to Maps place only", "taxi-driver-section", "secondary"],
       ["Ask hotel staff", "taxi-staff", "secondary"]
     ],
     monetized: {
@@ -285,10 +260,6 @@ const screens = {
   "taxi-staff": {
     status: "UAT-10",
     title: "Show hotel staff",
-    guidance: [
-      "Use this when asking hotel staff to call a taxi or choose the best drop-off point.",
-      "Hotel staff can understand both the final destination and the taxi destination."
-    ],
     show: {
       ja: "タクシーで{finalDestinationLabel}まで行きたいです。",
       en: "I want to go to {finalDestinationLabel} by taxi."
@@ -302,13 +273,22 @@ const screens = {
   "taxi-driver": {
     status: "UAT-10",
     title: "Show taxi driver",
-    guidance: [
-      "Show only where the taxi should go now.",
-      "If the taxi is only for part of the trip, do not show the final tourist destination as the taxi destination."
-    ],
     show: {
-      ja: "清水寺まで行きたいです。",
-      en: "Please take me to Kiyomizu-dera."
+      ja: "タクシーで{finalDestinationLabel}まで行きたいです。",
+      en: "I want to go to {finalDestinationLabel} by taxi."
+    },
+    actions: [
+      ["I arrived", "arrival-check", "primary"],
+      ["Back", "taxi-prep", "secondary"],
+      ["Open Google Maps", "maps-opened", "secondary"]
+    ]
+  },
+  "taxi-driver-section": {
+    status: "UAT-10",
+    title: "Show taxi driver",
+    show: {
+      ja: "Google Mapsで表示している場所までタクシーで行きたいです。最終目的地ではありません。",
+      en: "I want to go only to the place shown in Google Maps by taxi. It is not my final destination."
     },
     actions: [
       ["I arrived", "arrival-check", "primary"],
@@ -321,37 +301,24 @@ const screens = {
     title: "Train preparation",
     summary: "Use this after you reach the station area. Check the gate before entering.",
     checklist: [
-      { timing: "Before entering ticket gate", text: "Find the ticket gate for the train shown in Google Maps" },
-      { timing: "Before entering ticket gate", text: "Buy a ticket or charge an IC card before entering" },
-      { timing: "After entering ticket gate", text: "Show the train destination in Google Maps" },
-      { timing: "After entering ticket gate", text: "Confirm the train stops at your station" }
-    ],
-    guidance: [
-      { text: "Ask station staff or gate staff before entering the wrong railway gate or platform.", helpIndex: 0 },
-      { text: "Show the Google Maps screen to confirm which station this train should go toward.", helpIndex: 2 },
-      { text: "If you are unsure about rapid or express trains, show the train stop request in JP.", helpIndex: 3 }
+      { timing: "Before entering ticket gate", text: "Buy a ticket for the train shown in Google Maps or charge an IC card before entering", helpIndex: 1 },
+      { timing: "Before entering ticket gate", text: "Find the ticket gate for the train shown in Google Maps", helpIndex: 0 },
+      { timing: "After entering ticket gate", text: "Ask which platform to wait at for the train shown in Google Maps", helpIndex: 2 },
+      { timing: "After entering ticket gate", text: "Confirm the train stops at your station", helpIndex: 3 }
     ],
     jpHelp: [
       ["Google Mapsのこの電車に乗りたいです。改札はどこですか？", "I want to take this train shown in Google Maps. Where is the ticket gate?"],
-      ["切符の購入、またはICカードをチャージしたいです。どこでできますか。", "I want to buy a ticket or charge my IC card. Where can I do this?"],
-      ["Googleマップの{transportDestinationLabel}へ向かいたいです。どのホームで待てばよいですか。", "I want to go toward {transportDestinationLabel} shown in Google Maps. Which platform should I wait at?"],
+      ["Google Maps上の電車の切符の購入、またはICカードをチャージしたいです。どこでできますか。", "I want to buy a ticket for the train shown in Google Maps or charge my IC card. Where can I do this?"],
+      ["Googleマップのこの電車で目的地の駅へ向かいたいです。どのホームで待てばよいですか。", "I want to go toward my destination station using the train shown in Google Maps. Which platform should I wait at?"],
       ["この電車は目的地の駅に止まりますか。急行・快速でも大丈夫ですか。", "Does this train stop at my destination station? Is a rapid or express train okay?"]
-    ],
-    actions: [
-      ["Show Final Destination in JP", "show-place", "primary"],
-      ["Open Google Maps", "maps-opened", "secondary"]
     ]
   },
   "train-show": {
     status: "UAT-11",
     title: "Ask station staff",
-    guidance: [
-      "Show this to station staff or someone on the platform.",
-      "Use it before boarding if you are unsure about platform, direction, or train type."
-    ],
     show: {
-      ja: "目的地の駅へ行きたいです。",
-      en: "I want to go to my destination station."
+      ja: "Googleマップのこの電車で目的地の駅へ向かいたいです。どのホームで待てばよいですか。",
+      en: "I want to go toward my destination station using the train shown in Google Maps. Which platform should I wait at?"
     },
     actions: [
       ["I checked", "arrival-check", "primary"],
@@ -364,43 +331,60 @@ const screens = {
     title: "Shinkansen / limited express",
     summary: "Confirm ticket type and seat before boarding.",
     checklist: [
-      { timing: "Before entering ticket gate", text: "Prepare the basic fare ticket" },
-      { timing: "Before entering ticket gate", text: "Prepare the limited express ticket" },
-      { timing: "After entering ticket gate", text: "Confirm reserved or non-reserved seat" },
-      { timing: "After entering ticket gate", text: "Show the train destination in Google Maps" },
-      { timing: "After on Board", text: "Check luggage space if needed" }
+      { timing: "Before entering ticket gate", text: "Show Google Maps and ask where to buy the fare and limited express tickets for this train", helpIndex: 1 },
+      { timing: "Before entering ticket gate", text: "Find the ticket gate for the Shinkansen or limited express shown in Google Maps", helpIndex: 0 },
+      { timing: "After entering ticket gate", text: "Show ticket and check the train name and number on the departure board", helpIndex: 4 },
+      { timing: "After entering ticket gate", text: "Show ticket to conductor to check the platform for the train", helpIndex: 3 },
+      { timing: "After entering ticket gate", text: "Ask staff if the train is delayed", helpIndex: 5 },
+      { timing: "After on Board", text: "Confirm reserved or non-reserved seat", helpIndex: 2 },
+      { timing: "After on Board", text: "Check luggage space if needed", helpIndex: 6 },
+      { timing: "After on Board", text: "Ask the conductor about paid or reserved luggage space if needed", helpIndex: 7 }
     ],
-    guidance: [
-      { text: "If you are unsure which ticket to put through the gate, show the ticket request in JP.", helpIndex: 0 },
-      { text: "If you are unsure whether this is reserved or non-reserved, show the seat request in JP.", helpIndex: 2 },
-      { text: "Show the Google Maps screen to confirm this train goes toward the transport destination.", helpIndex: 3 },
-      { text: "If you have large luggage, show the luggage request after boarding.", helpIndex: 4 }
-    ],
-    noteHelp: {
-      note: "Note: Some Shinkansen luggage spaces may require advance reservation.",
-      ja: "車掌さんへ: 予約が必要な荷物スペースは空いていますか？料金はいくらですか？",
-      en: "For the conductor: Is there any available luggage space that requires reservation? How much is the fee?"
-    },
     jpHelp: [
-      ["この切符でこの列車に乗りたいです。改札に通す切符はどれですか。", "I want to take this train with this ticket. Which ticket should I put through the gate?"],
-      ["この特急券で乗りたいです。乗車券も必要ですか。", "I want to ride with this limited express ticket. Do I also need a basic fare ticket?"],
+      ["Google Mapsのこの列車に乗りたいです。新幹線・特急の改札はどこですか。", "I want to take this train shown in Google Maps. Where is the Shinkansen / limited express ticket gate?"],
+      ["Google Maps上の新幹線・特急の乗車券と特急券はどこで買えますか。", "Where can I buy the fare ticket and limited express ticket for the Shinkansen / limited express shown in Google Maps?"],
       ["この切符は指定席ですか、自由席ですか。座る場所を知りたいです。", "Is this ticket for a reserved seat or non-reserved seat? I want to know where to sit."],
-      ["Googleマップの{transportDestinationLabel}へ向かいたいです。この列車で合っていますか。", "I want to go toward {transportDestinationLabel} shown in Google Maps. Is this the correct train?"],
-      ["大きな荷物があります。置き場所はありますか？", "I have large luggage. Is there a place to put it?"]
+      ["この特急・新幹線のこの号車に乗るにはどこのホームのどの辺りで待てばいいですか。", "Which platform and area should I wait at for this car of this limited express or Shinkansen?"],
+      ["この列車名・号数の列車に乗りたいです。案内表示板に表示されていますか。", "I want to take the train with this name and number. Is it shown on the departure board?"],
+      ["この列車は遅れていますか。どの列車に乗ればいいですか。", "Is this train delayed? Which train should I take?"],
+      ["大きな荷物があります。置き場所はありますか？", "I have large luggage. Is there a place to put it?"],
+      ["車掌さんへ: 予約が必要な荷物スペースは空いていますか？料金はいくらですか？", "For the conductor: Is there any available luggage space that requires reservation? How much is the fee?"]
     ],
     actions: [
-      ["Reserved seat", "limited-show", "primary"],
-      ["Non-reserved seat", "limited-show", "secondary"],
+      ["Reserved seat", "limited-reserved", "primary"],
+      ["Non-reserved seat", "limited-nonreserved", "secondary"],
       ["Show ticket in JP", "limited-show", "secondary"]
+    ]
+  },
+  "limited-reserved": {
+    status: "UAT-13-A",
+    title: "Reserved seat",
+    show: {
+      ja: "指定席です。この号車・座席へ行きたいです。",
+      en: "I have a reserved seat. I want to find this car and seat."
+    },
+    actions: [
+      ["I checked", "arrival-check", "primary"],
+      ["Back", "limited-prep", "secondary"],
+      ["Open Google Maps", "maps-opened", "secondary"]
+    ]
+  },
+  "limited-nonreserved": {
+    status: "UAT-13-B",
+    title: "Non-reserved seat",
+    show: {
+      ja: "自由席に座りたいです。自由席の車両はどこですか。",
+      en: "I want to sit in a non-reserved seat. Which cars are non-reserved?"
+    },
+    actions: [
+      ["I checked", "arrival-check", "primary"],
+      ["Back", "limited-prep", "secondary"],
+      ["Open Google Maps", "maps-opened", "secondary"]
     ]
   },
   "limited-show": {
     status: "UAT-12 / UAT-13",
     title: "Show station staff",
-    guidance: [
-      "Show this with your ticket or booking screen.",
-      "If staff says the ticket is not enough, ask where to buy or change the missing ticket."
-    ],
     show: {
       ja: "この切符でこの列車に乗りたいです。",
       en: "I want to take this train with this ticket."
@@ -416,24 +400,22 @@ const screens = {
     title: "Highway / airport / night bus",
     summary: "Confirm booking and boarding place.",
     checklist: [
-      { timing: "Before going to the boarding place", text: "Prepare ticket, QR, email, or booking number", helpIndex: 0 },
+      { timing: "At the ticket counter", text: "Show Google Maps and ask if there is any bus available to the destination", helpIndex: 0 },
+      { timing: "Before going to the boarding place", text: "Prepare ticket, QR, email, or booking number", helpIndex: 1 },
       { timing: "Before going to the boarding place", text: "Show the boarding place in Google Maps", helpIndex: 2 },
-      { timing: "At the boarding place", text: "Confirm bus company and service name", helpIndex: 1 },
-      { timing: "At the boarding place", text: "Check departure time and destination", helpIndex: 3 },
-      { timing: "At the boarding place", text: "Check luggage drop-off if needed", helpIndex: 4 }
-    ],
-    guidance: [
-      { text: "Show the Google Maps screen to confirm the boarding place, building, floor, or number.", helpIndex: 2 },
-      { text: "If the bus company or service name is unclear, show the company and service request.", helpIndex: 1 },
-      { text: "If the booking screen may not be enough, show the booking request.", helpIndex: 0 },
-      { text: "If you have large luggage, ask where and when to drop it off.", helpIndex: 4 }
+      { timing: "Before going to the boarding place", text: "Check departure time and destination", helpIndex: 3 },
+      { timing: "At the boarding place", text: "Show ticket and confirm if you should wait at this boarding place", helpIndex: 4 },
+      { timing: "At the boarding place", text: "Check luggage drop-off if needed", helpIndex: 5 },
+      { timing: "Just before boarding", text: "Show ticket and confirm this is the correct bus", helpIndex: 6 }
     ],
     jpHelp: [
+      ["目的の場所まで行くバスで空席はありますか？", "Is there any available bus seat to my destination?"],
       ["この予約でこのバスに乗りたいです。予約画面だけで乗れますか。", "I want to take this bus with this booking. Can I board with only this booking screen?"],
-      ["このバス会社と便名で合っていますか。", "Is this the correct bus company and service name?"],
-      ["Googleマップの{transportDestinationLabel}の乗り場へ行きたいです。建物・階・番号を教えてください。", "I want to go to the boarding area at {transportDestinationLabel} shown in Google Maps. Please tell me the building, floor, or number."],
+      ["Google Maps上のバスの乗り場はどこですか？", "I want to go to the boarding area for the bus shown in Google Maps."],
       ["出発時刻と行き先を知りたいです。集合時刻も教えてください。", "I want to know the departure time and destination. Please also tell me the meeting time."],
-      ["大きな荷物を預けたいです。どこで、いつ預けますか。", "I want to check in large luggage. Where and when should I leave it?"]
+      ["このバスに乗るにはここで待てばいいですか。", "Should I wait here to take this bus?"],
+      ["大きな荷物を預けたいです。いつどこに預けられますか。", "I want to check in large luggage. When and where can I leave it?"],
+      ["このバスで正しいですか。", "Is this the correct bus?"]
     ],
     actions: [
       ["Show booking in JP", "coach-show", "primary"],
@@ -444,10 +426,6 @@ const screens = {
   "coach-show": {
     status: "UAT-14",
     title: "Show bus staff",
-    guidance: [
-      "Show this with the QR code, email, ticket, or booking number.",
-      "Use it to confirm the exact bus, boarding place, and whether this screen is enough to board."
-    ],
     show: {
       ja: "この予約でこのバスに乗りたいです。",
       en: "I want to take this bus with this booking."
@@ -463,16 +441,12 @@ const screens = {
     title: "Other transport",
     summary: "Rules differ by company and location.",
     checklist: [
-      "Show this transport destination in Google Maps",
-      "Check official information",
-      "Ask the counter or staff"
-    ],
-    guidance: [
-      "Rules differ by company and place. Do not guess from bus or train rules.",
-      "Use official information, the service app, counter staff, or local staff."
+      { text: "Show the place in Google Maps", helpIndex: 0 },
+      { text: "Check official information", helpIndex: 1 },
+      { text: "Ask the counter or staff", helpIndex: 2 }
     ],
     jpHelp: [
-      ["Googleマップの{transportDestinationLabel}へ行きたいです。公式の乗り場や入口はどこですか。", "I want to go to {transportDestinationLabel} shown in Google Maps. Where is the official boarding area or entrance?"],
+      ["Googleマップのこの乗り場・入口へ行きたいです。公式の乗り場や入口はどこですか。", "I want to go to this boarding area or entrance shown in Google Maps. Where is the official boarding area or entrance?"],
       ["公式情報を見たいです。運休や最終便はありますか。", "I want to see official information. Is there any suspension or last service?"],
       ["窓口か係員に聞きたいです。どこへ行けばよいですか。", "I want to ask the counter or staff. Where should I go?"]
     ],
@@ -488,38 +462,26 @@ const screens = {
   },
   "arrival-check": {
     status: "UAT-18",
-    title: "Final walking section",
-    summary: "Confirm the entrance, reception, or meeting place.",
+    title: "After this transport",
+    summary: "Open Google Maps again from your current location. Then choose the next transport, or finish only at the final destination.",
     checklist: [
-      "Find the entrance",
-      "Find the reception",
-      "Find the meeting place",
-      "Use a nearby landmark if the entrance is unclear"
+      { text: "Open Google Maps and check where you are now" },
+      { text: "Check the latest route to the final destination" },
+      { text: "Select the next transport after checking Google Maps" },
+      { text: "Finish only after you reach the entrance, reception, or meeting place" }
     ],
-    guidance: [
-      "Do not finish only because Google Maps says you arrived.",
-      "If the entrance or meeting point is unclear, show the destination in JP or open Google Maps again."
-    ],
-    jpHelp: [
-      ["入口へ行きたいです。Google Mapsのピンではなく入口を知りたいです。", "I want to go to the entrance. I need the entrance, not only the Google Maps pin."],
-      ["受付へ行きたいです。この建物で合っていますか。", "I want to go to the reception. Is this the correct building?"],
-      ["集合場所へ行きたいです。ここで合っていますか。", "I want to go to the meeting place. Is this the correct place?"],
-      ["近くの目印から入口へ行きたいです。道を教えてください。", "I want to go to the entrance from a nearby landmark. Please tell me the way."]
-    ],
+    inlineActions: true,
+    inlineActionStyle: "stage",
     actions: [
-      ["I arrived", "done", "primary"],
-      ["Show Final Destination in JP", "show-place", "secondary"],
-      ["Open Google Maps", "maps-opened", "secondary"]
+      ["Open Google Maps", "maps-opened", "primary"],
+      ["Select transportation", "transport", "secondary"],
+      ["Arrived at final destination", "done", "secondary"]
     ]
   },
   "done": {
     status: "Complete",
     title: "Arrived",
-    summary: "The guidance loop is complete.",
-    guidance: [
-      "Start a new destination only after you have found the entrance, reception, or meeting place.",
-      "If you are only near the area, go back and confirm the final walking section."
-    ],
+    summary: "The support flow is complete.",
     actions: [
       ["Start again", "start", "primary"]
     ]
@@ -535,7 +497,7 @@ function buildDestinationQuery() {
 
 function buildGoogleMapsUrl() {
   const destination = buildDestinationQuery() || state.destination;
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`;
+  return `https://www.google.com/maps/dir/?api=1&hl=en&travelmode=transit&destination=${encodeURIComponent(destination)}`;
 }
 
 function buildFinalDestinationLabel() {
@@ -545,25 +507,28 @@ function buildFinalDestinationLabel() {
     .join(" / ");
 }
 
-function buildTaxiDestinationLabel() {
-  return [state.nextPlace, state.area]
-    .map((part) => part.trim())
-    .filter(Boolean)
-    .join(" / ");
-}
-
-function buildTransportDestinationLabel() {
-  return [state.nextPlace, state.area]
-    .map((part) => part.trim())
-    .filter(Boolean)
-    .join(" / ");
-}
-
 function fillTemplate(text) {
   return text
-    .replaceAll("{finalDestinationLabel}", buildFinalDestinationLabel() || state.destination)
-    .replaceAll("{taxiDestinationLabel}", buildTaxiDestinationLabel() || state.nextPlace || state.destination)
-    .replaceAll("{transportDestinationLabel}", buildTransportDestinationLabel() || state.nextPlace || state.destination);
+    .replaceAll("{finalDestinationLabel}", buildFinalDestinationLabel() || state.destination);
+}
+
+function transportChoiceJp(label) {
+  const labels = {
+    Taxi: "タクシー",
+    Train: "電車",
+    "Shinkansen / LTD Express": "新幹線・特急",
+    "Highway Bus": "高速・空港・夜行バス",
+    "Local Bus": "路線バス",
+    Other: "その他"
+  };
+  return labels[label] || "";
+}
+
+function resolveChecklistHelpIndex(screenData, guideIndex) {
+  const item = screenData.checklist?.[guideIndex];
+  if (!screenData.jpHelp?.length) return null;
+  if (typeof item !== "object" || !Number.isInteger(item.helpIndex)) return null;
+  return item.helpIndex >= 0 && item.helpIndex < screenData.jpHelp.length ? item.helpIndex : null;
 }
 
 function maybeOpenGoogleMaps() {
@@ -581,18 +546,18 @@ function render() {
   const context = (data.fields || isTransportChoice) ? "" : `
     <section class="context-bar transit-flow" aria-label="Current trip context">
       <div class="origin-box context-origin">
-        <div class="where-display">Where you are</div>
+        <div class="where-display"><span>Where you are</span><small>今自分はここ</small></div>
       </div>
       <button type="button" class="transport-arrow" data-target="transport" aria-label="Choose public transportation">
         <span>public<br>transportation</span>
       </button>
       <div class="transit-row">
         <div class="readonly-field">
-          <span>Final Destination</span>
+          <span>Final Destination <small>目的地</small></span>
           <strong>${state.destination}</strong>
         </div>
         <div class="readonly-field">
-          <span>Area of the place</span>
+          <span>Area of the place <small>地域</small></span>
           <strong>${state.area || "Area not set"}</strong>
         </div>
       </div>
@@ -601,19 +566,24 @@ function render() {
   const fields = data.fields ? `
     <section class="destination-flow" aria-label="Set destination flow">
       <div class="origin-box">
-        <div class="where-display">Where you are</div>
+        <div class="where-display"><span>Where you are</span><small>今自分はここ</small></div>
       </div>
       <button type="button" class="transport-arrow" data-target="transport" aria-label="Choose public transportation">
-        <span>public<br>transportation</span>
+        <span>public<br>transportation</span><em>公共交通</em>
       </button>
       <div class="destination-row">
-        <label class="destination-name">Final Destination <span class="required">Required</span>
+        <label class="destination-name">
+          <span class="label-line">Final Destination <small>目的地</small></span>
+          <span class="required">Required / 必須</span>
           <input value="${state.destination}" data-field="destination" required placeholder="Enter place name">
         </label>
-        <label>Area of the place <span class="optional">Recommended</span>
+        <label>
+          <span class="label-line">Area of the place <small>地域</small></span>
+          <span class="optional">Recommended / 推奨</span>
           <input value="${state.area}" data-field="area" placeholder="city / town / pref.">
         </label>
-        <label>Type of the place
+        <label>
+          <span class="label-line">Type of the place <small>場所の種類</small></span>
           <input value="${state.placeType}" data-field="placeType" placeholder="temple, shrine, castle, park, beach, etc.">
         </label>
       </div>
@@ -624,13 +594,15 @@ function render() {
   const checklist = data.checklist ? `
     <section class="section-block">
       <h3>What you should do now</h3>
+      <p class="section-hint">Use this section for your own actions.</p>
       <div class="action-checklist">
         ${data.checklist.map((item, index, list) => {
           const text = typeof item === "string" ? item : item.text;
           const timing = typeof item === "string" ? "" : item.timing;
           const previousTiming = index > 0 && typeof list[index - 1] !== "string" ? list[index - 1].timing : "";
+          const timingClass = timing === "Show When you are lost" ? " action-timing-soft" : "";
           return `
-            ${timing && timing !== previousTiming ? `<p class="action-timing">${timing}</p>` : ""}
+            ${timing && timing !== previousTiming ? `<p class="action-timing${timingClass}">${timing}</p>` : ""}
             <button type="button" class="${index === selectedGuide ? "selected" : ""}" data-guide="${index}">
               ${text}
             </button>
@@ -639,75 +611,58 @@ function render() {
       </div>
     </section>
   ` : "";
-  const guidance = (data.guidance && !isTransportChoice) ? `
-    <section class="guidance" aria-label="What to do if unsure">
-      <h3>If unsure</h3>
-      <ul>
-        ${data.guidance.map((item) => {
-          const text = typeof item === "string" ? item : item.text;
-          return typeof item === "object" && Number.isInteger(item.helpIndex)
-            ? `<li><button type="button" class="guidance-button" data-help-index="${item.helpIndex}">${text}</button></li>`
-            : `<li>${text}</li>`;
-        }).join("")}
-      </ul>
-    </section>
-  ` : "";
   const transportChoices = data.transportChoices ? `
     <section class="transport-choice-page" aria-label="Public transportation choices">
       <div class="transport-choice-grid">
         ${data.transportChoices.map(([label, target]) => `
-          <button type="button" class="secondary" data-target="${target}">${label}</button>
+          <button type="button" class="secondary" data-target="${target}"><span>${label}</span>${transportChoiceJp(label) ? `<small>${transportChoiceJp(label)}</small>` : ""}</button>
         `).join("")}
       </div>
     </section>
   ` : "";
-  const selectedChecklistItem = data.checklist?.[selectedGuide];
-  const selectedHelpIndex = typeof selectedChecklistItem === "object" && Number.isInteger(selectedChecklistItem.helpIndex)
-    ? selectedChecklistItem.helpIndex
-    : selectedGuide;
   const explicitHelpIndex = state.helpByScreen[state.screen];
-  const activeHelpIndex = Number.isInteger(explicitHelpIndex) ? explicitHelpIndex : selectedHelpIndex;
-  const selectedPhrase = data.jpHelp?.[activeHelpIndex] || data.jpHelp?.[0];
-  const showInlineNoteHelp = Boolean(data.noteHelp && state.screen === "limited-prep" && activeHelpIndex === 4);
-  const inlineNoteHelp = showInlineNoteHelp ? `
-    <div class="phrase-card note-help-card">
-      <p class="phrase-ja">${data.noteHelp.ja}</p>
-      <p class="phrase-en">${data.noteHelp.en}</p>
-      <p class="note">${data.noteHelp.note}</p>
-    </div>
-  ` : "";
+  const activeHelpIndex = Number.isInteger(explicitHelpIndex) && explicitHelpIndex >= 0 && explicitHelpIndex < (data.jpHelp?.length || 0)
+    ? explicitHelpIndex
+    : null;
+  const selectedPhrase = Number.isInteger(activeHelpIndex) ? data.jpHelp?.[activeHelpIndex] : null;
+  const helpOrderFromChecklist = Array.isArray(data.checklist)
+    ? data.checklist
+      .map((item) => typeof item === "string" ? null : item.helpIndex)
+      .filter((index) => Number.isInteger(index) && index >= 0 && index < (data.jpHelp?.length || 0))
+    : [];
+  const orderedHelpIndices = data.jpHelp
+    ? [...new Set(helpOrderFromChecklist)]
+      .concat(data.jpHelp.map((_, index) => index).filter((index) => !helpOrderFromChecklist.includes(index)))
+    : [];
   const jpHelp = selectedPhrase ? `
     <section class="jp-help" aria-label="Japanese phrases to show if stuck">
       <h3>Show this in JP</h3>
-      <div class="phrase-list">
-        ${[selectedPhrase].map(([ja, en]) => `
-          <div class="phrase-card">
-            <p class="phrase-ja">${fillTemplate(ja)}</p>
-            <p class="phrase-en">${fillTemplate(en)}</p>
+      <p class="section-hint">Use this section only when you need to show Japanese to someone.</p>
+      <div class="phrase-choice-list">
+        ${orderedHelpIndices.map((index) => {
+          const [ja, en] = data.jpHelp[index];
+          const isSelected = index === activeHelpIndex;
+          return `
+          <div class="phrase-choice-row">
+            <button type="button" class="phrase-choice ${isSelected ? "selected" : ""}" data-help-index="${index}">
+              ${fillTemplate(en)}
+            </button>
+            ${isSelected ? `
+              <div class="phrase-card">
+                <p class="phrase-ja">${fillTemplate(ja)}</p>
+              </div>
+            ` : ""}
           </div>
-        `).join("")}
-        ${inlineNoteHelp}
+        `;
+        }).join("")}
       </div>
-    </section>
-  ` : "";
-  const noteHelp = data.noteHelp && !showInlineNoteHelp ? `
-    <section class="note-help" aria-label="Additional note">
-      <button type="button" class="note-help-button" data-note-help>
-        ${data.noteHelp.note}
-      </button>
-      ${state.noteByScreen[state.screen] ? `
-        <div class="phrase-card note-help-card">
-          <p class="phrase-ja">${data.noteHelp.ja}</p>
-          <p class="phrase-en">${data.noteHelp.en}</p>
-        </div>
-      ` : ""}
     </section>
   ` : "";
   const show = data.show ? `
     <div class="show-card" data-no-monetized="true">
       ${state.screen === "show-place" ? `
         <div class="show-destination-block">
-          <span>Final Destination</span>
+          <span>Final Destination <small>目的地</small></span>
           <strong>${state.destination}</strong>
           ${state.area ? `<em>${state.area}</em>` : ""}
         </div>
@@ -724,13 +679,14 @@ function render() {
   ` : "";
   const commonBottomActions = usesCommonBottomActions ? `
     <nav class="journey-footer" aria-label="Journey navigation">
+      <p class="journey-footer-hint">After each transport, open Google Maps again from where you are now.</p>
       <button type="button" class="primary" data-target="transport">Select transportation</button>
       <button type="button" class="secondary" data-target="show-place">Show Final Destination in JP</button>
       <button type="button" class="secondary" data-target="maps-opened" data-open-maps="true">Open Google Maps</button>
     </nav>
   ` : "";
-  const actions = (!usesCommonBottomActions && data.actions) ? `
-    <div class="actions">
+  const actions = ((data.inlineActions || !usesCommonBottomActions) && data.actions) ? `
+    <div class="actions${data.inlineActionStyle === "stage" ? " stage-actions" : ""}">
       ${data.actions.map(([label, target, kind]) => {
         const mapsAttr = target === "maps-opened" ? ' data-open-maps="true"' : "";
         return `<button type="button" class="${kind || "secondary"}" data-target="${target}"${mapsAttr}>${label}</button>`;
@@ -749,12 +705,11 @@ function render() {
     ${transportChoices}
     ${checklist}
     ${jpHelp}
-    ${guidance}
     ${actions}
     ${commonBottomActions}
     ${monetized}
-    ${noteHelp}
     ${data.note ? `<p class="note">${data.note}</p>` : ""}
+    ${data.resourceLink ? `<p class="resource-link"><a href="${data.resourceLink[1]}" target="_blank" rel="noopener">${data.resourceLink[0]}</a></p>` : ""}
     <p class="note">Prototype for PC and smartphone UAT. Not production UI.</p>
   `;
 }
@@ -766,13 +721,6 @@ document.addEventListener("click", (event) => {
     render();
     return;
   }
-  const noteHelp = event.target.closest("[data-note-help]");
-  if (noteHelp) {
-    state.noteByScreen[state.screen] = !state.noteByScreen[state.screen];
-    render();
-    return;
-  }
-
   const helpIndex = event.target.closest("[data-help-index]");
   if (helpIndex) {
     state.helpByScreen[state.screen] = Number(helpIndex.dataset.helpIndex);
@@ -792,8 +740,15 @@ document.addEventListener("click", (event) => {
 
   const guide = event.target.closest("[data-guide]");
   if (guide) {
-    state.guideByScreen[state.screen] = Number(guide.dataset.guide);
-    delete state.helpByScreen[state.screen];
+    const guideIndex = Number(guide.dataset.guide);
+    const data = screens[state.screen] || screens.start;
+    state.guideByScreen[state.screen] = guideIndex;
+    const resolvedHelpIndex = resolveChecklistHelpIndex(data, guideIndex);
+    if (Number.isInteger(resolvedHelpIndex)) {
+      state.helpByScreen[state.screen] = resolvedHelpIndex;
+    } else {
+      delete state.helpByScreen[state.screen];
+    }
     render();
   }
 });

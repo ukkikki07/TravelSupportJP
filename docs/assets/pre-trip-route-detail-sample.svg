@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Route detail screenshot sample</title>
+  <desc id="desc">Illustrative sample showing a zoomed-in transfer or destination area backup before travel.</desc>
+  <rect width="720" height="420" fill="#f7f8fb"/>
+  <rect x="24" y="24" width="672" height="372" rx="18" fill="#ffffff" stroke="#c9d3e0" stroke-width="2"/>
+  <rect x="48" y="52" width="624" height="54" rx="8" fill="#eef3fb" stroke="#c9d3e0"/>
+  <text x="68" y="86" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#24324a">Detailed stop / station / entrance view</text>
+  <rect x="48" y="126" width="420" height="242" rx="8" fill="#eef6ee" stroke="#b9c8b9"/>
+  <rect x="86" y="154" width="120" height="62" rx="6" fill="#ffffff" stroke="#c9d3e0"/>
+  <text x="104" y="190" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#24324a">Station</text>
+  <rect x="272" y="240" width="118" height="58" rx="6" fill="#ffffff" stroke="#c9d3e0"/>
+  <text x="294" y="274" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#24324a">Stop</text>
+  <path d="M64 248 H450" stroke="#ffffff" stroke-width="20" stroke-linecap="round"/>
+  <path d="M145 138 V354" stroke="#ffffff" stroke-width="18" stroke-linecap="round"/>
+  <path d="M110 320 C170 292 226 288 294 270" fill="none" stroke="#1f6feb" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="110" cy="320" r="11" fill="#1f6feb"/>
+  <path d="M294 218 C270 218 251 237 251 261 C251 293 294 340 294 340 C294 340 337 293 337 261 C337 237 318 218 294 218 Z" fill="#d93025"/>
+  <circle cx="294" cy="259" r="14" fill="#ffffff"/>
+  <circle cx="294" cy="259" r="7" fill="#d93025"/>
+  <rect x="492" y="126" width="180" height="242" rx="8" fill="#ffffff" stroke="#d4dce8"/>
+  <text x="512" y="160" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#24324a">Use for:</text>
+  <circle cx="520" cy="194" r="5" fill="#1f6feb"/>
+  <text x="538" y="200" font-family="Arial, sans-serif" font-size="15" fill="#24324a">Station exits</text>
+  <circle cx="520" cy="230" r="5" fill="#1f6feb"/>
+  <text x="538" y="236" font-family="Arial, sans-serif" font-size="15" fill="#24324a">Bus stop side</text>
+  <circle cx="520" cy="266" r="5" fill="#1f6feb"/>
+  <text x="538" y="272" font-family="Arial, sans-serif" font-size="15" fill="#24324a">Entrance hint</text>
+  <text x="512" y="330" font-family="Arial, sans-serif" font-size="13" fill="#61708a">Too zoomed in for</text>
+  <text x="512" y="350" font-family="Arial, sans-serif" font-size="13" fill="#61708a">the whole trip plan.</text>
+</svg>
